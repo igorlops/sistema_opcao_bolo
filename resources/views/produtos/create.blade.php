@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    <h1>Novo %%modelName%%</h1>
+    <h1>Novo produto</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/%%routeGroup%%%%viewName%%')}}">Listagem de %%modelName%%</a>
+        <a href="{{url('/produtos')}}">Listagem de Produto</a>
     </li>    
     <li class="breadcrumb-item">
-        <a href="{{url('/%%routeGroup%%%%viewName%%/create')}}">Novo %%modelName%%</a>
+        <a href="{{url('/produtos/create')}}">Novo Produto</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Novo %%modelName%%</div>
+                    <div class="card-header">Novo Produto</div>
                     <div class="card-body">
-                        <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/produtos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
                         <br />
                         <br />
 
@@ -32,10 +32,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/%%routeGroup%%%%viewName%%') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/produtos') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('%%viewTemplateDir%%.form', ['formMode' => 'create'])
+                            @include ('produtos.form', ['formMode' => 'create'])
 
                         </form>
 

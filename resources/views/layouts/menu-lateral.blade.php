@@ -98,15 +98,39 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="../../index.html" class="nav-link">
+                        <a href="{{route('movimentos-financeiros.create')}}" class="nav-link">
                             <i class="fas fa-dollar-sign nav-icon"></i>
                             <p>Novo lançamento</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../index2.html" class="nav-link">
+                        <a href="{{route('movimentos-financeiros.index')}}" class="nav-link">
                             <i class="fas fa-chart-pie nav-icon"></i>
                             <p>Relatório financeiro</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-box"></i>
+                    <p>
+                        Cadastros
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('produtos.index')}}" class="nav-link">
+                            <i class="fas fa-boxes dollar-sign nav-icon"></i>
+                            <p>Produtos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('users.index')}}" class="nav-link">
+                            <i class="fas fa-users dollar-sign nav-icon"></i>
+                            <p>Usuarios</p>
                         </a>
                     </li>
                 </ul>

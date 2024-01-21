@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    <h1>Editar %%modelName%%</h1>
+    <h1>Editar Produto</h1>
 @endsection
 
 @section('breadcrumb') 
     <li class="breadcrumb-item">
-        <a href="{{url('/%%routeGroup%%%%viewName%%')}}">Listagem de %%modelName%%</a>
+        <a href="{{url('/produtos')}}">Listagem de Produto</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/%%routeGroup%%%%viewName%%/' . $%%crudNameSingular%%->%%primaryKey%%. '/edit')}}">Editar %%modelName%%</a>
+        <a href="{{url('/produtos/' . $produto->id. '/edit')}}">Editar Produto</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit %%modelName%% #{{ $%%crudNameSingular%%->%%primaryKey%% }}</div>
+                    <div class="card-header">Edit Produto #{{ $produto->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/produtos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
                         <br />
                         <br />
 
@@ -32,11 +32,11 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/%%routeGroup%%%%viewName%%/' . $%%crudNameSingular%%->%%primaryKey%%) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/produtos/' . $produto->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
-                            @include ('%%viewTemplateDir%%.form', ['formMode' => 'edit'])
+                            @include ('produtos.form', ['formMode' => 'edit'])
 
                         </form>
 

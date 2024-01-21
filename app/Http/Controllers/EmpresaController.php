@@ -54,8 +54,9 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|Illuminate\Contracts\View\View 
      */
-    public function show(Empresa $empresa)
+    public function show(int $id)
     {
+        $empresa = Empresa::buscaPorId($id);
         return view('empresa.show',\compact('empresa'));
     }
 

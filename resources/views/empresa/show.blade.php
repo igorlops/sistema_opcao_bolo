@@ -62,6 +62,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            @include('empresa.parciais.movimentos_estoque')
+        </div>
+
         <div class="row">
             <div class="col-sm-12">
                 <form action="{{route('empresas.destroy',$empresa)}}?tipo={{$empresa->tipo}}" method="POST">

@@ -1,5 +1,5 @@
 import 'bootstrap';
-
+import 'jquery'
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -32,6 +32,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+import 'jquery'
 require('../AdminLTE/dist/js/adminlte')
+require('../AdminLTE/plugins/select2/js/select2')
+require('./selects')
 require('../AdminLTE/plugins/jquery-mask/jquery.mask')
-require('./mascaras.js')
+require('../js/mascaras')
