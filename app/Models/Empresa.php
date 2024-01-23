@@ -38,7 +38,7 @@ class Empresa extends Model
     {
         return self::with([
             'movimentosEstoque' => function($query){
-                $query->latest()->take(2);
+                $query->latest()->take(5);
             },
             'movimentosEstoque.produto'
         ])

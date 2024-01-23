@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        \App\Models\MovimentosEstoque::observe(\App\Observers\MovimentosEstoqueObserver::class);
     }
 }

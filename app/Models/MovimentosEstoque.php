@@ -15,4 +15,8 @@ class MovimentosEstoque extends Model
     {
         return $this->belongsTo('App\Models\Produto');
     }
+    public function saldo()
+    {
+        return $this->morphOne('App\Models\Saldo','movimento');
+    }
 }

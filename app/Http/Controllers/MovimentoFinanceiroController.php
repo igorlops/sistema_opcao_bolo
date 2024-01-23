@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\MovimentoFinanceiroRequest;
-use App\Models\Movimentos_Financeiro;
+use App\Models\MovimentosFinanceiro;
 use Illuminate\Http\Request;
 
 class MovimentoFinanceiroController extends Controller
@@ -25,7 +25,7 @@ class MovimentoFinanceiroController extends Controller
                 ->format('d/m/Y')
             ]);
         }
-        $movimentos_financeiros = Movimentos_Financeiro::buscaPorIntervalo(
+        $movimentos_financeiros = MovimentosFinanceiro::buscaPorIntervalo(
             data_br_to_iso($request->data_inicial),
             data_br_to_iso($request->data_final)
         );
@@ -53,9 +53,9 @@ class MovimentoFinanceiroController extends Controller
     {
         $requestData = $request->all();
         
-        Movimentos_Financeiro::create($requestData);
+        MovimentosFinanceiro::create($requestData);
 
-        return redirect('movimentos-financeiros')->with('flash_message', 'Movimentos_Financeiro added!');
+        return redirect('movimentos-financeiros')->with('flash_message', 'MovimentosFinanceiro added!');
     }
 
     /**
@@ -67,7 +67,7 @@ class MovimentoFinanceiroController extends Controller
      */
     public function show($id)
     {
-        $movimentos_financeiro = Movimentos_Financeiro::findOrFail($id);
+        $movimentos_financeiro = MovimentosFinanceiro::findOrFail($id);
 
         return view('movimentos-financeiros.show', compact('movimentos_financeiro'));
     }
@@ -81,7 +81,7 @@ class MovimentoFinanceiroController extends Controller
      */
     public function edit($id)
     {
-        $movimentos_financeiro = Movimentos_Financeiro::findOrFail($id);
+        $movimentos_financeiro = MovimentosFinanceiro::findOrFail($id);
 
         return view('movimentos-financeiros.edit', compact('movimentos_financeiro'));
     }
@@ -104,10 +104,10 @@ class MovimentoFinanceiroController extends Controller
 		]);
         $requestData = $request->all();
         
-        $movimentos_financeiro = Movimentos_Financeiro::findOrFail($id);
+        $movimentos_financeiro = MovimentosFinanceiro::findOrFail($id);
         $movimentos_financeiro->update($requestData);
 
-        return redirect('movimentos-financeiros')->with('flash_message', 'Movimentos_Financeiro updated!');
+        return redirect('movimentos-financeiros')->with('flash_message', 'MovimentosFinanceiro updated!');
     }
 
     /**
@@ -119,8 +119,8 @@ class MovimentoFinanceiroController extends Controller
      */
     public function destroy($id)
     {
-        Movimentos_Financeiro::destroy($id);
+        MovimentosFinanceiro::destroy($id);
 
-        return redirect('movimentos-financeiros')->with('flash_message', 'Movimentos_Financeiro deleted!');
+        return redirect('movimentos-financeiros')->with('flash_message', 'MovimentosFinanceiro deleted!');
     }
 }
