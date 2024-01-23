@@ -15,13 +15,15 @@ class CreateMovimentosFinanceirosTable extends Migration
     {
         Schema::create('movimentos__financeiros', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            
             $table->string('descricao');
             $table->decimal('valor',10,2);
-            $table->date('data');
             $table->string('tipo');
+
             $table->bigInteger('empresa_id')->unsigned();
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->timestamps();
             });
     }
 

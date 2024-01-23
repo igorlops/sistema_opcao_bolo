@@ -67,11 +67,10 @@
                                         <td>{{ $item->empresa->nome }} ({{$item->empresa->razao_social}})</td>
                                         <td>{{ $item->descricao }}</td>
                                         <td>{{ numero_iso_para_br($item->valor) }}</td>
-                                        <td>{{ data_iso_para_br($item->data) }}</td>
+                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
                                         <td>
                                             <a href="{{ url('/movimentos-financeiros/' . $item->id) }}" title="View Movimentos_Financeiro"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Detalhes</button></a>
-                                            <a href="{{ url('/movimentos-financeiros/' . $item->id . '/edit') }}" title="Edit Movimentos_Financeiro"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Atualizar</button></a>
-
+                                            
                                             <form method="POST" action="{{ url('/movimentos-financeiros' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}

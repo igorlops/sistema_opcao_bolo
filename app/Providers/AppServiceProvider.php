@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         \App\Models\MovimentosEstoque::observe(\App\Observers\MovimentosEstoqueObserver::class);
+        \App\Models\MovimentosFinanceiro::observe(\App\Observers\MovimentosFinanceiroObserver::class);
     }
 }

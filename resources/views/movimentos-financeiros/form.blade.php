@@ -10,12 +10,6 @@
         <input class="form-control money" name="valor" type="text" id="valor" value="{{ isset($movimentos_financeiro->valor) ? $movimentos_financeiro->valor : ''}}" >
         {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group row {{ $errors->has('data') ? 'has-error' : ''}}">
-    <label for="data" class="col-form-label col-sm-2 required">{{ 'Data*' }}</label>
-    <div class="col-sm-10">
-        <input class="form-control data" name="data" type="text" id="data" value="{{ isset($movimentos_financeiro->data) ? data_iso_para_br($movimentos_financeiro->data) : ''}}" required>
-        {!! $errors->first('data', '<p class="help-block">:message</p>') !!}
-    </div>
 </div><div class="form-group row {{ $errors->has('tipo') ? 'has-error' : ''}}">
     <label for="tipo" class="col-form-label col-sm-2 required">{{ 'Tipo*' }}</label>
     <div class="col-sm-10">

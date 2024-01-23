@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmpresaRequest;
 use App\Models\Empresa;
+use App\Models\Saldo;
 use Illuminate\Http\Request;
 
 
@@ -57,7 +58,10 @@ class EmpresaController extends Controller
     public function show(int $id)
     {
         $empresa = Empresa::buscaPorId($id);
-        return view('empresa.show',\compact('empresa'));
+        return view('empresa.show',[
+            'empresa'=>Empresa::buscaPorId($id),
+            'saldo'=>Saldo::ultimoSaldoPorEmpresa($id)
+        ]);
     }
 
     /**
