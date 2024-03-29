@@ -1,0 +1,85 @@
+{
+    "fields": [
+        {
+            "name": "total_vendas",
+            "type": "string"
+        },
+        {
+            "name": "total_pagamentos",
+            "type": "text"
+        },
+        {
+            "name": "saldo_ini",
+            "type": "integer"
+        },
+        {
+            "name": "saldo_fin",
+            "type": "integer"
+        },
+        {
+            "name": "diferenca_caixa",
+            "type": "integer"
+        },
+        {
+            "name": "observacao",
+            "type": "integer"
+        },
+        {
+            "name": "id_imagem",
+            "type": "string"
+        },
+        {
+            "name": "user_id",
+            "type": "bigint#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Models\\User"
+        }
+    ],
+    "validations": [
+        {
+            "field": "total_vendas",
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "total_pagamentos",
+            "rules": "required|text"
+        },
+        {
+            "name": "saldo_ini",
+            "rules": "required|numeric"
+        },
+        {
+            "name": "saldo_fin",
+            "rules": "required|numeric"
+        },
+        {
+            "name": "diferenca_caixa",
+            "rules": "required|numeric"
+        },
+        {
+            "name": "observacao",
+            "rules": "string"
+        },
+        {
+            "name": "id_imagem",
+            "rules": "string"
+        },
+        {
+            "name": "user_id",
+            "rules": "required"
+        }
+    ]
+}

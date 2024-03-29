@@ -1,0 +1,86 @@
+{
+    "fields": [
+        {
+            "name": "tipo_entrada",
+            "type": "select",
+            "options": {
+                "venda":"Venda"
+            }
+        },
+        {
+            "name": "observacao",
+            "type": "text"
+        },
+        {
+            "name": "id_tipo_pagamento",
+            "type": "bigint#unsigned"
+        },
+        {
+            "name": "user_id",
+            "type": "bigint#unsigned"
+        },
+        {
+            "name": "id_produto",
+            "type": "bigint#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "id_tipo_pagamento",
+            "references": "id",
+            "on": "tipo_pagamentos",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "id_produto",
+            "references": "id",
+            "on": "produtos",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "tipo_pagamento",
+            "type": "belongsTo",
+            "class": "App\\Models\\TipoPagamento"
+        },
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Models\\User"
+        },
+        {
+            "name": "produto",
+            "type": "belongsTo",
+            "class": "App\\Models\\Produto"
+        }
+    ],
+    "validations": [
+        {
+            "field": "tipo_entrada",
+            "rules": "required|string"
+        },
+        {
+            "field": "observacao",
+            "rules": "required|string"
+        },
+        {
+            "field": "id_tipo_pagamento",
+            "rules": "required"
+        },
+        {
+            "field": "user_id",
+            "rules": "required"
+        },
+        {
+            "field": "id_produto",
+            "rules": "required"
+        }
+    ]
+}

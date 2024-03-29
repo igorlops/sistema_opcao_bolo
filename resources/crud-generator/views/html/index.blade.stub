@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('titulo_site','Laravel')
 @section('title')
     <h1>Listagem de %%modelName%%</h1>
 @endsection

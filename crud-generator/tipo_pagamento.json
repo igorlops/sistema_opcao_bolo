@@ -3,16 +3,12 @@
         {
             "name": "nome",
             "type": "string"
-        },
-        {
-            "name": "descricao",
-            "type": "text"
         }
     ],
     "validations": [
         {
             "field": "nome",
-            "rules": "required|max:255"
+            "rules": "required|string|max:255"
         }
     ]
 }

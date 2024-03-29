@@ -55,11 +55,12 @@ class UsersController extends Controller
         $this->validate($request, [
 			'name' => 'required|string|max:255',
 			'email' => 'required|string|email|max:255|unique:users',
-			'password' => 'required|string|max:8|confirmed'
+			'password' => 'required|string|max:8|confirmed',
+            'type_user' => 'required'
 		]);
         $requestData = $request->all();
         $requestData['password'] = Hash::make($requestData['password']);
-        
+
         User::create($requestData);
 
         return redirect('users')->with('flash_message', 'User added!');
@@ -110,7 +111,7 @@ class UsersController extends Controller
 		]);
         $requestData = $request->all();
         $requestData['password'] = Hash::make($requestData['password']);
-        
+
         $user = User::findOrFail($id);
         $user->update($requestData);
 

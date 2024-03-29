@@ -1,0 +1,64 @@
+{
+    "fields": [
+        {
+            "name": "valor",
+            "type": "string"
+        },
+        {
+            "name": "observacao",
+            "type": "text"
+        },
+        {
+            "name": "user_id",
+            "type": "bigint#unsigned"
+        },
+        {
+            "name": "id_descricao",
+            "type": "bigint#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "id_descricao",
+            "references": "id",
+            "on": "tipo_saidas",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Models\\User"
+        },
+        {
+            "name": "tipo_saida",
+            "type": "belongsTo",
+            "class": "App\\Models\\TipoSaida"
+        }
+    ],
+    "validations": [
+        {
+            "field": "valor",
+            "rules": "required|string|max:100"
+        },
+        {
+            "field": "observacao",
+            "rules": "required|string|max:1000"
+        },
+        {
+            "field": "user_id",
+            "rules": "required"
+        },
+        {
+            "field": "id_descricao",
+            "rules": "required"
+        }
+    ]
+}

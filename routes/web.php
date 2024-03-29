@@ -5,6 +5,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\MovimentoEstoqueController;
 use App\Http\Controllers\MovimentoFinanceiroController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\Relatorios\SaldoEmpresa;
 use App\Http\Controllers\Selects\EmpresaNomeTipo;
 use App\Http\Controllers\Selects\ProdutoNome;
 use App\Http\Controllers\UsersController;
@@ -28,14 +29,7 @@ Auth::routes([
     'register'=>false
 ]);
 
-Route::middleware('auth')->group(function(){ 
+Route::middleware('auth')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('empresas',EmpresaController::class);
-    Route::resource('produtos', ProdutosController::class);
     Route::resource('users', UsersController::class);
-    Route::post('/empresas/buscar-por/nome',EmpresaNomeTipo::class);
-    Route::resource('movimentos-financeiros', MovimentoFinanceiroController::class)->except(['edit','update']);
-    Route::delete('/movimentos_estoque/{id}', [MovimentoEstoqueController::class, 'destroy'])->name('movimentos_estoque.destroy');
-    Route::post('/movimentos_estoque', [MovimentoEstoqueController::class, 'store'])->name('movimentos_estoque.store');
-    Route::post('/produtos/buscar-por/nome',ProdutoNome::class);
-}); 
+});

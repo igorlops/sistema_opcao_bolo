@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('titulo_site','Laravel')
 @section('title')
     <h1>Editar %%modelName%%</h1>
 @endsection

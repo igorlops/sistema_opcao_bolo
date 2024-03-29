@@ -1,0 +1,14 @@
+{
+    "fields": [
+        {
+            "name": "descricao",
+            "type": "text"
+        }
+    ],
+    "validations": [
+        {
+            "field": "descricao",
+            "rules": "required|string"
+        }
+    ]
+}
