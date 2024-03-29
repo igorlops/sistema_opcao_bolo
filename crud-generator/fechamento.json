@@ -10,19 +10,19 @@
         },
         {
             "name": "saldo_ini",
-            "type": "integer"
+            "type": "double"
         },
         {
             "name": "saldo_fin",
-            "type": "integer"
+            "type": "double"
         },
         {
             "name": "diferenca_caixa",
-            "type": "integer"
+            "type": "double"
         },
         {
             "name": "observacao",
-            "type": "integer"
+            "type": "double"
         },
         {
             "name": "id_imagem",
@@ -54,31 +54,31 @@
             "rules": "required|string|max:100"
         },
         {
-            "name": "total_pagamentos",
+            "field": "total_pagamentos",
             "rules": "required|text"
         },
         {
-            "name": "saldo_ini",
-            "rules": "required|numeric"
+            "field": "saldo_ini",
+            "rules": "required"
         },
         {
-            "name": "saldo_fin",
-            "rules": "required|numeric"
+            "field": "saldo_fin",
+            "rules": "required"
         },
         {
-            "name": "diferenca_caixa",
-            "rules": "required|numeric"
+            "field": "diferenca_caixa",
+            "rules": "required"
         },
         {
-            "name": "observacao",
+            "field": "observacao",
             "rules": "string"
         },
         {
-            "name": "id_imagem",
+            "field": "id_imagem",
             "rules": "string"
         },
         {
-            "name": "user_id",
+            "field": "user_id",
             "rules": "required"
         }
     ]

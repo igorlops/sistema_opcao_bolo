@@ -12,10 +12,10 @@
         </div>
         <div class="info d-flex justify-content-between w-100">
             <a href="#">{{auth()->user()->name}}</a>
-            <a 
-                href="{{route('logout')}}" 
+            <a
+                href="{{route('logout')}}"
                 onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();" 
+                            document.getElementById('logout-form').submit();"
                             class="btn btn-danger btn-sm">
                             Sair
                             <i class="fas fa-share-square"></i>
@@ -49,14 +49,14 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('empresas.create')}}?tipo=fornecedor" class="nav-link">
+                        <a href="{{route('home')}}?tipo=fornecedor" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Novo fornecedor</p>
                         </a>
                     </li>
-                    <li class="nav-item"> 
+                    <li class="nav-item">
 
-                        <a href="{{route('empresas.index')}}?tipo=fornecedor" class="nav-link">
+                        <a href="{{route('home')}}?tipo=fornecedor" class="nav-link">
                             <i class="fas fa-list-alt nav-icon"></i>
                             <p>Lista de fornecedores</p>
                         </a>
@@ -75,13 +75,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('empresas.create')}}?tipo=cliente" class="nav-link">
+                        <a href="{{route('home')}}?tipo=cliente" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Novo cliente</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('empresas.index')}}?tipo=cliente" class="nav-link">
+                        <a href="{{route('home')}}?tipo=cliente" class="nav-link">
                             <i class="fas fa-list-alt nav-icon"></i>
                             <p>Lista de clientes</p>
                         </a>
@@ -100,13 +100,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('movimentos-financeiros.create')}}" class="nav-link">
+                        <a href="{{route('home')}}" class="nav-link">
                             <i class="fas fa-dollar-sign nav-icon"></i>
                             <p>Novo lançamento</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('movimentos-financeiros.index')}}" class="nav-link">
+                        <a href="{{route('home')}}" class="nav-link">
                             <i class="fas fa-chart-pie nav-icon"></i>
                             <p>Relatório financeiro</p>
                         </a>
@@ -152,7 +152,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('empresas.create')}}?tipo=cliente" class="nav-link">
+                        <a href="{{route('home')}}?tipo=cliente" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Nova venda</p>
                         </a>
@@ -171,7 +171,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('movimentos-financeiros.create')}}" class="nav-link">
+                        <a href="{{route('home')}}" class="nav-link">
                             <i class="fas fa-dollar-sign nav-icon"></i>
                             <p>Novo lançamento</p>
                         </a>

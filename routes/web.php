@@ -1,13 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\MovimentoEstoqueController;
-use App\Http\Controllers\MovimentoFinanceiroController;
 use App\Http\Controllers\ProdutosController;
-use App\Http\Controllers\Relatorios\SaldoEmpresa;
-use App\Http\Controllers\Selects\EmpresaNomeTipo;
-use App\Http\Controllers\Selects\ProdutoNome;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +26,11 @@ Auth::routes([
 Route::middleware('auth')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', UsersController::class);
+    Route::resource('tipo-pagamentos', TipoPagamentosController::class);
+    Route::resource('tipo-saidas', App\Http\Controllers\TipoSaidasController::class);
+    Route::resource('produtos', App\Http\Controllers\ProdutosController::class);
+    Route::resource('entradas', App\Http\Controllers\EntradasController::class);
+    Route::resource('saidas', App\Http\Controllers\SaidasController::class);
+    Route::resource('fechamentos', App\Http\Controllers\FechamentosController::class);
+
 });
