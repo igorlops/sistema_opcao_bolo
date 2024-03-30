@@ -59,7 +59,7 @@ class SaidasController extends Controller
 			'id_descricao' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         Saida::create($requestData);
 
         return redirect('saidas')->with('flash_message', 'Saida added!');
@@ -110,7 +110,7 @@ class SaidasController extends Controller
 			'id_descricao' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $saida = Saida::findOrFail($id);
         $saida->update($requestData);
 

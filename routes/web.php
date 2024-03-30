@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,11 +25,11 @@ Auth::routes([
 Route::middleware('auth')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', UsersController::class);
-    Route::resource('tipo-pagamentos', TipoPagamentosController::class);
+    Route::resource('tipo-pagamentos', App\Http\Controllers\TipoPagamentosController::class);
     Route::resource('tipo-saidas', App\Http\Controllers\TipoSaidasController::class);
     Route::resource('produtos', App\Http\Controllers\ProdutosController::class);
     Route::resource('entradas', App\Http\Controllers\EntradasController::class);
     Route::resource('saidas', App\Http\Controllers\SaidasController::class);
     Route::resource('fechamentos', App\Http\Controllers\FechamentosController::class);
-
+    Route::get('relatorio-financeiro', App\Http\Controllers\RelatorioFinanceiro::class)->name('relatorios.index');
 });

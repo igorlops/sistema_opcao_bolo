@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSaidasTable extends Migration
 {
@@ -15,7 +16,7 @@ class CreateSaidasTable extends Migration
         Schema::create('saidas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('valor')->nullable();
+            $table->double('valor');
             $table->text('observacao')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('id_descricao')->unsigned();

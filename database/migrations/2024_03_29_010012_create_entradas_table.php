@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateEntradasTable extends Migration
 {
@@ -17,6 +18,7 @@ class CreateEntradasTable extends Migration
             $table->timestamps();
             $table->string('tipo_entrada');
             $table->text('observacao')->nullable();
+            $table->double('valor');
             $table->bigInteger('id_tipo_pagamento')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('id_produto')->unsigned();

@@ -35,5 +35,5 @@ class Saida extends Model
     {
         return $this->belongsTo('App\Models\TipoSaida');
     }
-    
+
 }

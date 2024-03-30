@@ -49,16 +49,16 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('home')}}?tipo=fornecedor" class="nav-link">
-                            <i class="fas fa-file nav-icon"></i>
-                            <p>Novo fornecedor</p>
+                        <a href="{{route('entradas.create')}}" class="nav-link">
+                            <i class="fas fa-dollar-sign nav-icon"></i>
+                            <p>Nova Entrada</p>
                         </a>
                     </li>
                     <li class="nav-item">
 
-                        <a href="{{route('home')}}?tipo=fornecedor" class="nav-link">
+                        <a href="{{route('entradas.index')}}" class="nav-link">
                             <i class="fas fa-list-alt nav-icon"></i>
-                            <p>Lista de fornecedores</p>
+                            <p>Lista de entradas</p>
                         </a>
                     </li>
                 </ul>
@@ -69,21 +69,21 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-arrow-circle-up"></i>
                     <p>
-                        Saída
+                        Saídas
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('home')}}?tipo=cliente" class="nav-link">
+                        <a href="{{route('saidas.create')}}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
-                            <p>Novo cliente</p>
+                            <p>Novo saída</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('home')}}?tipo=cliente" class="nav-link">
+                        <a href="{{route('saidas.index')}}?tipo=cliente" class="nav-link">
                             <i class="fas fa-list-alt nav-icon"></i>
-                            <p>Lista de clientes</p>
+                            <p>Lista de saídas</p>
                         </a>
                     </li>
                 </ul>
@@ -100,13 +100,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('home')}}" class="nav-link">
-                            <i class="fas fa-dollar-sign nav-icon"></i>
-                            <p>Novo lançamento</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('home')}}" class="nav-link">
+                        <a href="{{route('relatorios.index')}}" class="nav-link">
                             <i class="fas fa-chart-pie nav-icon"></i>
                             <p>Relatório financeiro</p>
                         </a>
@@ -152,9 +146,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('home')}}?tipo=cliente" class="nav-link">
+                        <a href="{{route('entradas.create')}}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Nova venda</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('entradas.index')}}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Vendas realizadas</p>
                         </a>
                     </li>
                 </ul>
@@ -171,9 +171,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('home')}}" class="nav-link">
+                        <a href="{{route('saidas.create')}}" class="nav-link">
                             <i class="fas fa-dollar-sign nav-icon"></i>
                             <p>Novo lançamento</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('saidas.index')}}" class="nav-link">
+                            <i class="fas fa-dollar-sign nav-icon"></i>
+                            <p>Saídas realizadas</p>
                         </a>
                     </li>
                 </ul>
@@ -189,7 +195,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('produtos.index')}}" class="nav-link">
+                        <a href="{{route('fechamentos.create')}}" class="nav-link">
                             <i class="fas fa-boxes dollar-sign nav-icon"></i>
                             <p>Fechar caixa</p>
                         </a>
