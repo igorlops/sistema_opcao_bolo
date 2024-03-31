@@ -14,7 +14,8 @@
         <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao" required>{{ isset($entrada->observacao) ? $entrada->observacao : ''}}</textarea>
         {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group row {{ $errors->has('id_tipo_pagamento') ? 'has-error' : ''}}">
+</div>
+<div class="form-group row {{ $errors->has('id_tipo_pagamento') ? 'has-error' : ''}}">
     <label for="id_tipo_pagamento" class="col-form-label col-sm-2 required">{{ 'Tipo Pagamento' }}</label>
     <div class="col-sm-10">
         <select class="form-select" name="id_tipo_pagamento" id="id_tipo_pagamento" required>
@@ -32,7 +33,7 @@
         {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-        <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user->id}}" required>
+        <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user()->id}}" required>
     <div class="form-group row {{ $errors->has('id_produto') ? 'has-error' : ''}}">
         <label for="id_produto" class="col-form-label col-sm-2 required">{{ 'Produto' }}</label>
         <div class="col-sm-10">

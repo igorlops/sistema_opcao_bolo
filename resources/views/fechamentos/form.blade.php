@@ -41,7 +41,7 @@
         {!! $errors->first('id_imagem', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user->id}}" required>
+<input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user()->id}}" required>
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Atualizar' : 'Criar' }}">

@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Fechamento de caixa')
 @section('title')
     <h1>Novo Fechamento</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/fechamentos')}}">Listagem de Fechamento</a>
-    </li>    
+        <a href="{{url('/fechamentos')}}">Listagem de Fechamentos</a>
+    </li>
     <li class="breadcrumb-item">
         <a href="{{url('/fechamentos/create')}}">Novo Fechamento</a>
     </li>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Novo Fechamento</div>
                     <div class="card-body">
-                        <a href="{{ url('/fechamentos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/fechamentos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 

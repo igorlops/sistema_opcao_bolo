@@ -11,13 +11,13 @@
         {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user->id}}" required>
+<input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user()->id}}" required>
 <div class="form-group row {{ $errors->has('id_descricao') ? 'has-error' : ''}}">
     <label for="id_descricao" class="col-form-label col-sm-2 required">{{ 'Descrição' }}</label>
     <div class="col-sm-10">
         <select class="form-select" name="id_descricao" id="id_descricao" required>
             @foreach ($descricoes as $descricao)
-                <option value="{{$descricao->id}}">{{$descricao->nome}}</option>
+                <option value="{{$descricao->id}}">{{$descricao->descricao}}</option>
             @endforeach
         </select>
         {!! $errors->first('id_descricao', '<p class="help-block">:message</p>') !!}

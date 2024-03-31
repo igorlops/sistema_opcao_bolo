@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Editar usuário')
 @section('title')
     <h1>Editar User</h1>
 @endsection
 
-@section('breadcrumb') 
+@section('breadcrumb')
     <li class="breadcrumb-item">
         <a href="{{url('/users')}}">Listagem de User</a>
     </li>
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit User #{{ $user->id }}</div>
+                    <div class="card-header">Editar User #{{ $user->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/users') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/users') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 

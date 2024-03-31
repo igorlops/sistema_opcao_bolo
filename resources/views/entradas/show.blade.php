@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Detalhe da entrada')
 @section('title')
     <h1>Listagem de Entrada</h1>
 @endsection
@@ -21,13 +21,13 @@
                     <div class="card-header">Entrada {{ $entrada->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/entradas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
-                        <a href="{{ url('/entradas/' . $entrada->id . '/edit') }}" title="Edit Entrada"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Atualizar</button></a>
+                        <a href="{{ url('/entradas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
+                        <a href="{{ url('/entradas/' . $entrada->id . '/edit') }}" title="Edit Entrada"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                         <form method="POST" action="{{ url('entradas' . '/' . $entrada->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Entrada" onclick="return confirm(&quot;Tem certeza?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Apagar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Entrada" onclick="return confirm(&quot;Tem certeza?&quot;)"><i class="bi bi-trash"></i> Apagar</button>
                         </form>
                         <br/>
                         <br/>

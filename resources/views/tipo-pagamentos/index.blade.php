@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Tipo pagamento')
 @section('title')
     <h1>Listagem de TipoPagamento</h1>
 @endsection
@@ -17,7 +17,7 @@
                     <div class="card-header">Tipopagamentos</div>
                     <div class="card-body">
                         <a href="{{ url('/tipo-pagamentos/create') }}" class="btn btn-success btn-sm" title="Novo TipoPagamento">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Novo
+                            <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
                         <form method="GET" action="{{ url('/tipo-pagamentos') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
@@ -25,7 +25,7 @@
                                 <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
                                 <span class="input-group-append">
                                     <button class="btn btn-secondary" type="submit">
-                                        <i class="fa fa-search"></i>
+                                        <i class="bi bi-search"></i>
                                     </button>
                                 </span>
                             </div>
@@ -37,7 +37,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Nome</th><th>Actions</th>
+                                        <th>#</th><th>Nome</th><th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,13 +46,13 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nome }}</td>
                                         <td>
-                                            <a href="{{ url('/tipo-pagamentos/' . $item->id) }}" title="View TipoPagamento"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Detalhes</button></a>
-                                            <a href="{{ url('/tipo-pagamentos/' . $item->id . '/edit') }}" title="Edit TipoPagamento"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Atualizar</button></a>
+                                            <a href="{{ url('/tipo-pagamentos/' . $item->id) }}" title="View TipoPagamento"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/tipo-pagamentos/' . $item->id . '/edit') }}" title="Edit TipoPagamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/tipo-pagamentos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete TipoPagamento" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete TipoPagamento" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>

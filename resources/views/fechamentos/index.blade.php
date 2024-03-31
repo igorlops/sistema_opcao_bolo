@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Fechamentos')
 @section('title')
     <h1>Listagem de Fechamento</h1>
 @endsection
@@ -17,7 +17,7 @@
                     <div class="card-header">Fechamentos</div>
                     <div class="card-body">
                         <a href="{{ url('/fechamentos/create') }}" class="btn btn-success btn-sm" title="Novo Fechamento">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Novo
+                            <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
                         <form method="GET" action="{{ url('/fechamentos') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
@@ -25,7 +25,7 @@
                                 <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
                                 <span class="input-group-append">
                                     <button class="btn btn-secondary" type="submit">
-                                        <i class="fa fa-search"></i>
+                                        <i class="bi bi-search"></i>
                                     </button>
                                 </span>
                             </div>
@@ -37,7 +37,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Total Vendas</th><th>Total Pagamentos</th><th>Saldo Ini</th><th>Actions</th>
+                                        <th>#</th><th>Total Vendas</th><th>Total Pagamentos</th><th>Saldo Ini</th><th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,13 +46,13 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->total_vendas }}</td><td>{{ $item->total_pagamentos }}</td><td>{{ $item->saldo_ini }}</td>
                                         <td>
-                                            <a href="{{ url('/fechamentos/' . $item->id) }}" title="View Fechamento"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Detalhes</button></a>
-                                            <a href="{{ url('/fechamentos/' . $item->id . '/edit') }}" title="Edit Fechamento"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Atualizar</button></a>
+                                            <a href="{{ url('/fechamentos/' . $item->id) }}" title="View Fechamento"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/fechamentos/' . $item->id . '/edit') }}" title="Edit Fechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/fechamentos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Fechamento" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Fechamento" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>

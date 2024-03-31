@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Models\Saida;
+use App\Models\TipoSaida;
 use Illuminate\Http\Request;
 
 class SaidasController extends Controller
@@ -40,7 +41,8 @@ class SaidasController extends Controller
      */
     public function create()
     {
-        return view('saidas.create');
+        $descricoes = TipoSaida::all();
+        return view('saidas.create', compact('descricoes'));
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Nova tipo pagamento')
 @section('title')
     <h1>Novo TipoPagamento</h1>
 @endsection
@@ -7,7 +7,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item">
         <a href="{{url('/tipo-pagamentos')}}">Listagem de TipoPagamento</a>
-    </li>    
+    </li>
     <li class="breadcrumb-item">
         <a href="{{url('/tipo-pagamentos/create')}}">Novo TipoPagamento</a>
     </li>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Novo TipoPagamento</div>
                     <div class="card-body">
-                        <a href="{{ url('/tipo-pagamentos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/tipo-pagamentos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 

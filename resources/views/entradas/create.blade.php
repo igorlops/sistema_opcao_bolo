@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Nova entrada')
 @section('title')
     <h1>Novo Entrada</h1>
 @endsection
@@ -7,9 +7,9 @@
 @section('breadcrumb')
     <li class="breadcrumb-item">
         <a href="{{url('/entradas')}}">Listagem de Entrada</a>
-    </li>    
+    </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/entradas/create')}}">Novo Entrada</a>
+        <a href="{{url('/entradas/create')}}">Nova Entrada</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Novo Entrada</div>
+                    <div class="card-header">Nova Entrada</div>
                     <div class="card-body">
-                        <a href="{{ url('/entradas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/entradas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 

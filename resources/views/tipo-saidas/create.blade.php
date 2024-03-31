@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Novo tipo de saida')
 @section('title')
     <h1>Novo TipoSaida</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-saidas')}}">Listagem de TipoSaida</a>
-    </li>    
+        <a href="{{url('/tipo-saidas')}}">Listagem de Tipo de Saida</a>
+    </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-saidas/create')}}">Novo TipoSaida</a>
+        <a href="{{url('/tipo-saidas/create')}}">Novo Tipo de Saida</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Novo TipoSaida</div>
+                    <div class="card-header">Novo Tipo de Saida</div>
                     <div class="card-body">
-                        <a href="{{ url('/tipo-saidas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/tipo-saidas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 

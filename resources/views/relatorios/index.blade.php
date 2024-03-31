@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('titulo_site','Relatório financeiro')
 @section('title')
     <h1>Listagem de Movimentos Financeiros</h1>
 @endsection

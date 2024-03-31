@@ -7,7 +7,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item">
         <a href="{{url('/%%routeGroup%%%%viewName%%')}}">Listagem de %%modelName%%</a>
-    </li>    
+    </li>
     <li class="breadcrumb-item">
         <a href="{{url('/%%routeGroup%%%%viewName%%/create')}}">Novo %%modelName%%</a>
     </li>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Novo %%modelName%%</div>
                     <div class="card-body">
-                        <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 

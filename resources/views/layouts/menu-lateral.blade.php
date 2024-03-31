@@ -18,7 +18,7 @@
                             document.getElementById('logout-form').submit();"
                             class="btn btn-danger btn-sm">
                             Sair
-                            <i class="fas fa-share-square"></i>
+                            <i class="bi bi-box-arrow-right nav-icon"></i>
             </a>
             <form action="{{route('logout')}}" method="post" style="display: none;" id="logout-form">
                 @csrf
@@ -33,7 +33,7 @@
             @if (auth()->user()->type_user == "1")
             <li class="nav-item menu-open">
                 <a href="{{route('home')}}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="bi bi-speedometer2 nav-icon"></i>
                     <p>
                         Dashboard
                     </p>
@@ -41,23 +41,23 @@
             </li>
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-arrow-circle-down"></i>
+                    <i class="bi bi-box-arrow-up nav-icon"></i>
                     <p>
                         Entrada
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('entradas.create')}}" class="nav-link">
-                            <i class="fas fa-dollar-sign nav-icon"></i>
+                            <i class="bi bi-plus-square nav-icon"></i>
                             <p>Nova Entrada</p>
                         </a>
                     </li>
                     <li class="nav-item">
 
                         <a href="{{route('entradas.index')}}" class="nav-link">
-                            <i class="fas fa-list-alt nav-icon"></i>
+                            <i class="bi bi-card-list nav-icon"></i>
                             <p>Lista de entradas</p>
                         </a>
                     </li>
@@ -67,22 +67,22 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-arrow-circle-up"></i>
+                    <i class="bi bi-box-arrow-down nav-icon"></i>
                     <p>
                         Saídas
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('saidas.create')}}" class="nav-link">
-                            <i class="fas fa-file nav-icon"></i>
+                            <i class="bi bi-plus-square nav-icon"></i>
                             <p>Novo saída</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('saidas.index')}}?tipo=cliente" class="nav-link">
-                            <i class="fas fa-list-alt nav-icon"></i>
+                            <i class="bi bi-card-list nav-icon"></i>
                             <p>Lista de saídas</p>
                         </a>
                     </li>
@@ -92,16 +92,16 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-money-check-alt"></i>
+                    <i class="bi bi-graph-down nav-icon"></i>
                     <p>
                         Financeiro
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('relatorios.index')}}" class="nav-link">
-                            <i class="fas fa-chart-pie nav-icon"></i>
+                            <i class="bi bi-bar-chart-fill nav-icon"></i>
                             <p>Relatório financeiro</p>
                         </a>
                     </li>
@@ -110,34 +110,34 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-box"></i>
+                    <i class="bi bi-folder-plus nav-icon"></i>
                     <p>
                         Cadastros
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('produtos.index')}}" class="nav-link">
-                            <i class="fas fa-boxes dollar-sign nav-icon"></i>
+                            <i class="bi bi-boxes nav-icon"></i>
                             <p>Produtos</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('users.index')}}" class="nav-link">
-                            <i class="fas fa-users dollar-sign nav-icon"></i>
+                            <i class="bi bi-person-plus nav-icon"></i>
                             <p>Usuarios</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('tipo-pagamentos.index')}}" class="nav-link">
-                            <i class="fas fa-card nav-icon"></i>
+                            <i class="bi bi-credit-card-fill nav-icon"></i>
                             <p>Tipos de pagamentos</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('tipo-saidas.index')}}" class="nav-link">
-                            <i class="fas fa-card nav-icon"></i>
+                            <i class="bi bi-arrow-up-right-square-fill nav-icon"></i>
                             <p>Tipos de saídas</p>
                         </a>
                     </li>
@@ -150,22 +150,22 @@
             @else
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-arrow-circle-up"></i>
+                    <i class="nav-icon fas fa-arrow-circle-up nav-icon"></i>
                     <p>
                         Cadastro de vendas
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('entradas.create')}}" class="nav-link">
-                            <i class="fas fa-file nav-icon"></i>
+                            <i class="fas fa-file nav-icon nav-icon"></i>
                             <p>Nova venda</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('entradas.index')}}" class="nav-link">
-                            <i class="fas fa-file nav-icon"></i>
+                            <i class="fas fa-file nav-icon nav-icon"></i>
                             <p>Vendas realizadas</p>
                         </a>
                     </li>
@@ -176,22 +176,22 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-money-check-alt"></i>
+                    <i class="nav-icon fas fa-money-check-alt nav-icon"></i>
                     <p>
                         Saídas
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('saidas.create')}}" class="nav-link">
-                            <i class="fas fa-dollar-sign nav-icon"></i>
+                            <i class="fas fa-dollar-sign nav-icon nav-icon"></i>
                             <p>Novo lançamento</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('saidas.index')}}" class="nav-link">
-                            <i class="fas fa-dollar-sign nav-icon"></i>
+                            <i class="fas fa-dollar-sign nav-icon nav-icon"></i>
                             <p>Saídas realizadas</p>
                         </a>
                     </li>
@@ -200,16 +200,16 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-box"></i>
+                    <i class="nav-icon fas fa-box nav-icon"></i>
                     <p>
                         Fechamento de caixa
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('fechamentos.create')}}" class="nav-link">
-                            <i class="fas fa-boxes dollar-sign nav-icon"></i>
+                            <i class="fas fa-boxes dollar-sign nav-icon nav-icon"></i>
                             <p>Fechar caixa</p>
                         </a>
                     </li>

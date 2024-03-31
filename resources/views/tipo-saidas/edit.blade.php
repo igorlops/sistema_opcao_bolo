@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Editar tipo de saida')
 @section('title')
     <h1>Editar TipoSaida</h1>
 @endsection
 
-@section('breadcrumb') 
+@section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-saidas')}}">Listagem de TipoSaida</a>
+        <a href="{{url('/tipo-saidas')}}">Listagem de Tipo de Saida</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-saidas/' . $tiposaida->id. '/edit')}}">Editar TipoSaida</a>
+        <a href="{{url('/tipo-saidas/' . $tiposaida->id. '/edit')}}">Editar Tipo de Saida</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit TipoSaida #{{ $tiposaida->id }}</div>
+                    <div class="card-header">Editar Tipo de Saida #{{ $tiposaida->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/tipo-saidas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+                        <a href="{{ url('/tipo-saidas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
                         <br />
                         <br />
 
