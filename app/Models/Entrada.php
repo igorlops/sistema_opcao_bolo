@@ -25,19 +25,19 @@ class Entrada extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipo_entrada', 'observacao', 'id_tipo_pagamento', 'user_id', 'id_produto'];
+    protected $fillable = ['tipo_entrada', 'observacao', 'id_tipo_pagamento', 'user_id', 'id_produto', 'valor'];
 
     public function tipo_pagamento()
     {
-        return $this->belongsTo('App\Models\TipoPagamento');
+        return $this->belongsTo('App\Models\TipoPagamento','id');
     }
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','id');
     }
     public function produto()
     {
-        return $this->belongsTo('App\Models\Produto');
+        return $this->belongsTo('App\Models\Produto','id');
     }
-    
+
 }

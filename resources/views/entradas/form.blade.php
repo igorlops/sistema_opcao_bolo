@@ -20,6 +20,13 @@
         <input class="form-control" name="id_tipo_pagamento" type="number" id="id_tipo_pagamento" value="{{ isset($entrada->id_tipo_pagamento) ? $entrada->id_tipo_pagamento : ''}}" required>
         {!! $errors->first('id_tipo_pagamento', '<p class="help-block">:message</p>') !!}
     </div>
+</div>
+<div class="form-group row {{ $errors->has('valor') ? 'has-error' : ''}}">
+    <label for="valor" class="col-form-label col-sm-2 required">{{ 'Valor' }}</label>
+    <div class="col-sm-10">
+        <input class="form-control" name="valor" type="number" id="valor" value="{{ isset($entrada->valor) ? $entrada->valor : ''}}" required>
+        {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
+    </div>
 </div><div class="form-group row {{ $errors->has('user_id') ? 'has-error' : ''}}">
     <label for="user_id" class="col-form-label col-sm-2 required">{{ 'User Id' }}</label>
     <div class="col-sm-10">

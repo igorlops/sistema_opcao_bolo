@@ -123,12 +123,18 @@
                             <p>Produtos</p>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{route('users.index')}}" class="nav-link">
                             <i class="fas fa-users dollar-sign nav-icon"></i>
                             <p>Usuarios</p>
                         </a>
-                    </li> -->
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('tipo-pagamentos.index')}}" class="nav-link">
+                            <i class="fas fa-card nav-icon"></i>
+                            <p>Tipos de pagamentos</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -158,6 +164,7 @@
                         </a>
                     </li>
                 </ul>
+
             </li>
 
 
