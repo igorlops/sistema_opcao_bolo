@@ -30,7 +30,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if (auth()->user()->type_user == "admin")
+            @if (auth()->user()->type_user == "1")
             <li class="nav-item menu-open">
                 <a href="{{route('home')}}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -133,6 +133,12 @@
                         <a href="{{route('tipo-pagamentos.index')}}" class="nav-link">
                             <i class="fas fa-card nav-icon"></i>
                             <p>Tipos de pagamentos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('tipo-saidas.index')}}" class="nav-link">
+                            <i class="fas fa-card nav-icon"></i>
+                            <p>Tipos de saídas</p>
                         </a>
                     </li>
                 </ul>

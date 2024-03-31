@@ -15,9 +15,13 @@
         {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group row {{ $errors->has('id_tipo_pagamento') ? 'has-error' : ''}}">
-    <label for="id_tipo_pagamento" class="col-form-label col-sm-2 required">{{ 'Id Tipo Pagamento' }}</label>
+    <label for="id_tipo_pagamento" class="col-form-label col-sm-2 required">{{ 'Tipo Pagamento' }}</label>
     <div class="col-sm-10">
-        <input class="form-control" name="id_tipo_pagamento" type="number" id="id_tipo_pagamento" value="{{ isset($entrada->id_tipo_pagamento) ? $entrada->id_tipo_pagamento : ''}}" required>
+        <select class="form-select" name="id_tipo_pagamento" id="id_tipo_pagamento" required>
+            @foreach ($tipo_pagamentos as $tipo_pagamento)
+                <option value="{{$tipo_pagamento->id}}">{{$tipo_pagamento->nome}}</option>
+            @endforeach
+        </select>
         {!! $errors->first('id_tipo_pagamento', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -27,18 +31,18 @@
         <input class="form-control" name="valor" type="number" id="valor" value="{{ isset($entrada->valor) ? $entrada->valor : ''}}" required>
         {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group row {{ $errors->has('user_id') ? 'has-error' : ''}}">
-    <label for="user_id" class="col-form-label col-sm-2 required">{{ 'User Id' }}</label>
-    <div class="col-sm-10">
-        <input class="form-control" name="user_id" type="number" id="user_id" value="{{ isset($entrada->user_id) ? $entrada->user_id : ''}}" required>
-        {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group row {{ $errors->has('id_produto') ? 'has-error' : ''}}">
-    <label for="id_produto" class="col-form-label col-sm-2 required">{{ 'Id Produto' }}</label>
-    <div class="col-sm-10">
-        <input class="form-control" name="id_produto" type="number" id="id_produto" value="{{ isset($entrada->id_produto) ? $entrada->id_produto : ''}}" required>
-        {!! $errors->first('id_produto', '<p class="help-block">:message</p>') !!}
-    </div>
+</div>
+        <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{ auth()->user->id}}" required>
+    <div class="form-group row {{ $errors->has('id_produto') ? 'has-error' : ''}}">
+        <label for="id_produto" class="col-form-label col-sm-2 required">{{ 'Produto' }}</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="id_produto" id="id_produto" required>
+                @foreach ($produtos as $produto)
+                    <option value="{{$produto->id}}">{{$produto->nome}}</option>
+                @endforeach
+            </select>
+            {!! $errors->first('id_produto', '<p class="help-block">:message</p>') !!}
+        </div>
 </div>
 
 <div class="form-group">

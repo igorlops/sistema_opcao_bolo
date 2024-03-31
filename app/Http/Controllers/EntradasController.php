@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Models\Entrada;
+use App\Models\Produto;
+use App\Models\TipoPagamento;
 use Illuminate\Http\Request;
 
 class EntradasController extends Controller
@@ -41,7 +43,9 @@ class EntradasController extends Controller
      */
     public function create()
     {
-        return view('entradas.create');
+        $tipo_pagamentos = TipoPagamento::all();
+        $produtos = Produto::all();
+        return view('entradas.create',compact('tipo_pagamentos','produtos'));
     }
 
     /**
@@ -61,7 +65,7 @@ class EntradasController extends Controller
 			'id_produto' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         Entrada::create($requestData);
 
         return redirect('entradas')->with('flash_message', 'Entrada added!');
@@ -113,7 +117,7 @@ class EntradasController extends Controller
 			'id_produto' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $entrada = Entrada::findOrFail($id);
         $entrada->update($requestData);
 

@@ -37,8 +37,8 @@ class RelatorioFinanceiro extends Controller
         // Filtrar entradas e saídas pelo usuário, se o ID do usuário estiver presente na solicitação
         $entradasQuery = $user_id ? Entrada::where('user_id', $user_id) : Entrada::query();
         $saidasQuery = $user_id ? Saida::where('user_id', $user_id) : Saida::query();
-        $entrada = Entrada::get();
-        $saida = Saida::get();
+        $entrada = $entradasQuery->get();
+        $saida = $saidasQuery->x11get();
         $total_entradas = $entradasQuery->sum('valor');
         $total_saidas = $saidasQuery->sum('valor');
         $diferenca = $total_entradas - $total_saidas;

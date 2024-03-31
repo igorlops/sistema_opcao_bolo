@@ -10,14 +10,9 @@
         <input class="form-control" name="email" type="text" id="email" value="{{ isset($user->email) ? $user->email : ''}}" required>
         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group row {{ $errors->has('password') ? 'has-error' : ''}}">
-    <label for="password" class="col-form-label col-sm-2 required">Senha</label>
-    <div class="col-sm-10">
-        <input class="form-control" name="password" type="password" id="password" value="" required>
-        {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group row {{ $errors->has('type_user') ? 'has-error' : ''}}">
-    <label for="type_user" class="col-form-label col-sm-2 required">{{ 'type_user' }}</label>
+</div>
+<div class="form-group row {{ $errors->has('type_user') ? 'has-error' : ''}}">
+    <label for="type_user" class="col-form-label col-sm-2 required">{{ 'Tipo de usuário' }}</label>
     <div class="col-sm-10">
         <select class="form-select" name="type_user" id="type_user" value="{{ isset($user->type_user) ? $user->type_user : ''}}" required>
             <option value="1">Administrador</option>
@@ -26,6 +21,14 @@
         {!! $errors->first('type_user', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group row {{ $errors->has('password') ? 'has-error' : ''}}">
+    <label for="password" class="col-form-label col-sm-2 required">Senha</label>
+    <div class="col-sm-10">
+        <input class="form-control" name="password" type="password" id="password" value="" required>
+        {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 <div class="row mb-3">
     <label for="password-confirm" class="col-sm-2 col-form-label">Confirme a senha</label>
 
