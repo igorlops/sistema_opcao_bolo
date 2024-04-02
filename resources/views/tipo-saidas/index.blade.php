@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('titulo_site','Tipos de saídas')
 @section('title')
-    <h1>Listagem de TipoSaida</h1>
+    <h1>Listagem de Tipo de Saida</h1>
 @endsection
 
 @section('breadcrumb')
@@ -46,8 +46,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->descricao }}</td>
                                         <td>
-                                            <a href="{{ url('/tipo-saidas/' . $item->id) }}" title="View TipoSaida"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
-                                            <a href="{{ url('/tipo-saidas/' . $item->id . '/edit') }}" title="Edit TipoSaida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                                            <a href="{{ url('/tipo-saidas/' . $item->id) }}" title="View Tipo Saida"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/tipo-saidas/' . $item->id . '/edit') }}" title="Edit Tipo Saida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/tipo-saidas' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}

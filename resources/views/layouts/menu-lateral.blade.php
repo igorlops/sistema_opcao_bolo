@@ -1,3 +1,4 @@
+@if (auth()->user()->type_user == "1")
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
@@ -30,7 +31,6 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if (auth()->user()->type_user == "1")
             <li class="nav-item menu-open">
                 <a href="{{route('home')}}" class="nav-link">
                     <i class="bi bi-speedometer2 nav-icon"></i>
@@ -144,10 +144,49 @@
                 </ul>
             </li>
 
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
 
-            {{-- Usuário não admin --}}
 
-            @else
+{{-- Usuário não admin --}}
+
+@else
+<aside class="sidebar-dark-primary">
+    <!-- Brand Logo -->
+    <a href="{{route('home')}}" class="brand-link">
+      <span class="brand-text font-weight-light">Opção do Bolo</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+        </div>
+        <div class="info d-flex justify-content-between w-100">
+            <a href="#">{{auth()->user()->name}}</a>
+            <a
+                href="{{route('logout')}}"
+                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                            class="btn btn-danger btn-sm">
+                            Sair
+                            <i class="bi bi-box-arrow-right nav-icon"></i>
+            </a>
+            <form action="{{route('logout')}}" method="post" style="display: none;" id="logout-form">
+                @csrf
+            </form>
+        </div>
+      </div>
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-row" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
                     <i class="bi bi-box-arrow-up nav-icon"></i>
@@ -203,10 +242,11 @@
                     </li>
                 </ul>
             </li>
-            @endif
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+
+</ul>
+</nav>
+<!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+</aside>
+@endif

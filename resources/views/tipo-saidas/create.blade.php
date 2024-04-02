@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('titulo_site','Novo tipo de saida')
 @section('title')
-    <h1>Novo TipoSaida</h1>
+    <h1>Novo Tipo Saida</h1>
 @endsection
 
 @section('breadcrumb')

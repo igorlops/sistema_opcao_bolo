@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('titulo_site','Editar tipo de saida')
 @section('title')
-    <h1>Editar TipoSaida</h1>
+    <h1>Editar Tipo Saida</h1>
 @endsection
 
 @section('breadcrumb')
