@@ -38,7 +38,7 @@ class RelatorioFinanceiro extends Controller
         $entradasQuery = $user_id ? Entrada::where('user_id', $user_id) : Entrada::query();
         $saidasQuery = $user_id ? Saida::where('user_id', $user_id) : Saida::query();
         $entrada = $entradasQuery->get();
-        $saida = $saidasQuery->x11get();
+        $saida = $saidasQuery-> get();
         $total_entradas = $entradasQuery->sum('valor');
         $total_saidas = $saidasQuery->sum('valor');
         $diferenca = $total_entradas - $total_saidas;
@@ -49,19 +49,19 @@ class RelatorioFinanceiro extends Controller
         $resultados = User::join('entradas', 'users.id', '=', 'entradas.user_id')
             ->join('saidas', 'users.id', '=', 'saidas.user_id')
             ->select(
-                'users.nome',
+                'users.name',
                 DB::raw('SUM(entradas.valor) as total_entradas'),
                 DB::raw('SUM(saidas.valor) as total_saidas')
             )
-        ->groupBy('users.id', 'users.nome')
+        ->groupBy('users.id', 'users.name')
         ->get();
 
         return view('relatorios.index', [
             'total_entradas' => $total_entradas,
             'total_saidas' => $total_saidas,
             'diferenca' => $diferenca,
-            'saida'=>$saida,
-            'entrada'=>$entrada,
+            'saidas'=>$saida,
+            'entradas'=>$entrada,
             'users'=>$users,
             'results' => $resultados
         ]);

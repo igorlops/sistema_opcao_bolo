@@ -29,11 +29,11 @@ class Saida extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','user_id');
     }
     public function tipo_saida()
     {
-        return $this->belongsTo('App\Models\TipoSaida');
+        return $this->belongsTo('App\Models\TipoSaida','id_descricao');
     }
 
 }

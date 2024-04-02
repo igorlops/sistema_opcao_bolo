@@ -55,6 +55,20 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="col-12 d-flex justify-content-around">
+                    @foreach ($results as $result)
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header"><strong>{{$result->name}}</strong></div>
+                                <hr>
+                                <p><strong>Total entradas:</strong> R$ {{numero_iso_para_br($result->total_entradas)}}</p>
+                                <p><strong>Total saídas:</strong> R$ {{numero_iso_para_br($result->total_saidas)}}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
                 <div class="card">
                     <div class="card-header">Movimentos Financeiros</div>
                     <div class="card-body">
@@ -69,7 +83,7 @@
 
                         <div class="p-3">
                             <h4>Relatórios gráficos</h4>
-                            <canvas id="graficoEntradas"></canvas>
+                            {{-- <canvas id="graficoEntradas"></canvas> --}}
                         </div>
 
                         <h2 class="pt-5">Entradas</h2>
@@ -86,16 +100,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($entrada as $item)
+                                    @foreach($entradas as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td><span class="badge badge-success">Saídas</span></td>
+                                            <td>{{ $item->user->name}} </td>
+                                            <td>{{ $item->observacao }}</td>
+                                            <td>{{ numero_iso_para_br($item->valor) }}</td>
+                                            <td>{{ data_iso_para_br($item->created_at) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                        </div>
+
+                        <h2 class="pt-5">Saídas</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td><span class="badge badge-success">Venda</span></td>
-                                        <td>{{ $item->user->nome }} </td>
-                                        <td>{{ $item->observacao }}</td>
-                                        <td>{{ numero_iso_para_br($item->valor) }}</td>
-                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
+                                        <th>#</th>
+                                        <th>Tipo</th>
+                                        <th>Usuário</th>
+                                        <th>Descricao</th>
+                                        <th>Valor</th>
+                                        <th>Data/Hora</th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach($saidas as $saida)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td><span class="badge badge-danger">Saída</span></td>
+                                            <td>{{ $saida->user->name }} </td>
+                                            <td>{{ $saida->observacao }}</td>
+                                            <td>{{ numero_iso_para_br($saida->valor) }}</td>
+                                            <td>{{ data_iso_para_br($saida->created_at) }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
@@ -106,31 +149,5 @@
             </div>
         </div>
     </div>
-    <script>
-        // Exemplo de dados para o gráfico de entradas
-        var dadosEntradas = @json($dadosEntradas); // Supondo que $dadosEntradas seja um array de dados vindo do seu controlador
-
-        var ctx = document.getElementById('graficoEntradas').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: dadosEntradas.labels,
-                datasets: [{
-                    label: 'Total de Entradas',
-                    data: dadosEntradas.valores,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
 
 @endsection

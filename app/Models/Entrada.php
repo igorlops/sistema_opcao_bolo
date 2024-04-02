@@ -29,15 +29,15 @@ class Entrada extends Model
 
     public function tipo_pagamento()
     {
-        return $this->belongsTo('App\Models\TipoPagamento','id');
+        return $this->belongsTo('App\Models\TipoPagamento','id_tipo_pagamento');
     }
     public function user()
     {
-        return $this->belongsTo('App\Models\User','id');
+        return $this->belongsTo('App\Models\User','user_id');
     }
     public function produto()
     {
-        return $this->belongsTo('App\Models\Produto','id');
+        return $this->belongsTo('App\Models\Produto','id_produto');
     }
 
 }

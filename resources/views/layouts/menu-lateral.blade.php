@@ -150,7 +150,7 @@
             @else
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-arrow-circle-up nav-icon"></i>
+                    <i class="bi bi-box-arrow-up nav-icon"></i>
                     <p>
                         Cadastro de vendas
                         <i class="right bi bi-caret-left-fill"></i>
@@ -159,14 +159,8 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('entradas.create')}}" class="nav-link">
-                            <i class="fas fa-file nav-icon nav-icon"></i>
+                            <i class="bi bi-plus-square nav-icon"></i>
                             <p>Nova venda</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('entradas.index')}}" class="nav-link">
-                            <i class="fas fa-file nav-icon nav-icon"></i>
-                            <p>Vendas realizadas</p>
                         </a>
                     </li>
                 </ul>
@@ -176,7 +170,7 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-money-check-alt nav-icon"></i>
+                    <i class="bi bi-box-arrow-down nav-icon"></i>
                     <p>
                         Saídas
                         <i class="right bi bi-caret-left-fill"></i>
@@ -185,14 +179,8 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('saidas.create')}}" class="nav-link">
-                            <i class="fas fa-dollar-sign nav-icon nav-icon"></i>
+                            <i class="bi bi-plus-square nav-icon"></i>
                             <p>Novo lançamento</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('saidas.index')}}" class="nav-link">
-                            <i class="fas fa-dollar-sign nav-icon nav-icon"></i>
-                            <p>Saídas realizadas</p>
                         </a>
                     </li>
                 </ul>
@@ -200,7 +188,7 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-box nav-icon"></i>
+                    <i class="bi bi-door-open nav-icon"></i>
                     <p>
                         Fechamento de caixa
                         <i class="right bi bi-caret-left-fill"></i>
@@ -209,7 +197,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('fechamentos.create')}}" class="nav-link">
-                            <i class="fas fa-boxes dollar-sign nav-icon nav-icon"></i>
+                            <i class="bi bi-box-arrow-in-left nav-icon"></i>
                             <p>Fechar caixa</p>
                         </a>
                     </li>
