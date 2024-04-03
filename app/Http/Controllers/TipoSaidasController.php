@@ -56,7 +56,7 @@ class TipoSaidasController extends Controller
         
         TipoSaida::create($requestData);
 
-        return redirect('tipo-saidas')->with('flash_message', 'TipoSaida added!');
+        return redirect()->route('tipo-saidas.index')->with('flash_message', 'TipoSaida added!');
     }
 
     /**
@@ -105,7 +105,7 @@ class TipoSaidasController extends Controller
         $tiposaida = TipoSaida::findOrFail($id);
         $tiposaida->update($requestData);
 
-        return redirect('tipo-saidas')->with('flash_message', 'TipoSaida updated!');
+        return redirect()->route('tipo-saidas.index')->with('flash_message', 'TipoSaida updated!');
     }
 
     /**
@@ -119,6 +119,6 @@ class TipoSaidasController extends Controller
     {
         TipoSaida::destroy($id);
 
-        return redirect('tipo-saidas')->with('flash_message', 'TipoSaida deleted!');
+        return redirect()->route('tipo-saidas.index')->with('flash_message', 'TipoSaida deleted!');
     }
 }

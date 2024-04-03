@@ -63,8 +63,10 @@ class SaidasController extends Controller
         $requestData = $request->all();
 
         Saida::create($requestData);
-
-        return redirect('saidas')->with('flash_message', 'Saida added!');
+        if(auth()->user()->type_user === "2"){
+            return redirect()->route('saidas.create');
+        }
+        return redirect()->route('saidas.index')->with('flash_message', 'Saida added!');
     }
 
     /**
@@ -116,7 +118,7 @@ class SaidasController extends Controller
         $saida = Saida::findOrFail($id);
         $saida->update($requestData);
 
-        return redirect('saidas')->with('flash_message', 'Saida updated!');
+        return redirect()->route('saidas.index')->with('flash_message', 'Saida updated!');
     }
 
     /**
@@ -130,6 +132,6 @@ class SaidasController extends Controller
     {
         Saida::destroy($id);
 
-        return redirect('saidas')->with('flash_message', 'Saida deleted!');
+        return redirect()->route('saidas.index')->with('flash_message', 'Saida deleted!');
     }
 }

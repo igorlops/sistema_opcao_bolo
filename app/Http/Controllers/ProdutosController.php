@@ -58,7 +58,7 @@ class ProdutosController extends Controller
         
         Produto::create($requestData);
 
-        return redirect('produtos')->with('flash_message', 'Produto added!');
+        return redirect()->route('produtos.index')->with('flash_message', 'Produto added!');
     }
 
     /**
@@ -108,7 +108,7 @@ class ProdutosController extends Controller
         $produto = Produto::findOrFail($id);
         $produto->update($requestData);
 
-        return redirect('produtos')->with('flash_message', 'Produto updated!');
+        return redirect()->route('produtos.index')->with('flash_message', 'Produto updated!');
     }
 
     /**
@@ -122,6 +122,6 @@ class ProdutosController extends Controller
     {
         Produto::destroy($id);
 
-        return redirect('produtos')->with('flash_message', 'Produto deleted!');
+        return redirect()->route('produtos.index')->with('flash_message', 'Produto deleted!');
     }
 }

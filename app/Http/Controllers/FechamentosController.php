@@ -69,8 +69,10 @@ class FechamentosController extends Controller
         $requestData = $request->all();
         
         Fechamento::create($requestData);
-
-        return redirect('fechamentos')->with('flash_message', 'Fechamento added!');
+        if(auth()->user()->type_user === "2"){
+            return redirect()->route('fechamentos.create');
+        }
+        return redirect()->route('fechamentos.index')->with('flash_message', 'Fechamento added!');
     }
 
     /**
@@ -126,7 +128,7 @@ class FechamentosController extends Controller
         $fechamento = Fechamento::findOrFail($id);
         $fechamento->update($requestData);
 
-        return redirect('fechamentos')->with('flash_message', 'Fechamento updated!');
+        return redirect()->route('fechamentos.index')->with('flash_message', 'Fechamento updated!');
     }
 
     /**
@@ -140,6 +142,6 @@ class FechamentosController extends Controller
     {
         Fechamento::destroy($id);
 
-        return redirect('fechamentos')->with('flash_message', 'Fechamento deleted!');
+        return redirect()->route('fechamentos.index')->with('flash_message', 'Fechamento deleted!');
     }
 }

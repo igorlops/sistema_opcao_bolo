@@ -63,7 +63,7 @@ class UsersController extends Controller
 
         User::create($requestData);
 
-        return redirect('users')->with('flash_message', 'User added!');
+        return redirect()->route('users.index')->with('flash_message', 'User added!');
     }
 
     /**
@@ -115,7 +115,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->update($requestData);
 
-        return redirect('users')->with('flash_message', 'User updated!');
+        return redirect()->route('users.index')->with('flash_message', 'User updated!');
     }
 
     /**
@@ -129,6 +129,6 @@ class UsersController extends Controller
     {
         User::destroy($id);
 
-        return redirect('users')->with('flash_message', 'User deleted!');
+        return redirect()->route('users.index')->with('flash_message', 'User deleted!');
     }
 }

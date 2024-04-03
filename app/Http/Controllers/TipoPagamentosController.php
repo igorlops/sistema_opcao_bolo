@@ -56,7 +56,7 @@ class TipoPagamentosController extends Controller
         
         TipoPagamento::create($requestData);
 
-        return redirect('tipo-pagamentos')->with('flash_message', 'TipoPagamento added!');
+        return redirect()->route('tipo-pagamentos.index')->with('flash_message', 'TipoPagamento added!');
     }
 
     /**
@@ -105,7 +105,7 @@ class TipoPagamentosController extends Controller
         $tipopagamento = TipoPagamento::findOrFail($id);
         $tipopagamento->update($requestData);
 
-        return redirect('tipo-pagamentos')->with('flash_message', 'TipoPagamento updated!');
+        return redirect()->route('tipo-pagamentos.index')->with('flash_message', 'TipoPagamento updated!');
     }
 
     /**
@@ -119,6 +119,6 @@ class TipoPagamentosController extends Controller
     {
         TipoPagamento::destroy($id);
 
-        return redirect('tipo-pagamentos')->with('flash_message', 'TipoPagamento deleted!');
+        return redirect()->route('tipo-pagamentos.index')->with('flash_message', 'TipoPagamento deleted!');
     }
 }

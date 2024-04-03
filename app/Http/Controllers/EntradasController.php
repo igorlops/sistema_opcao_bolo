@@ -67,8 +67,11 @@ class EntradasController extends Controller
         $requestData = $request->all();
 
         Entrada::create($requestData);
-
-        return redirect('entradas')->with('flash_message', 'Entrada added!');
+        
+        if(auth()->user()->type_user === "2"){
+            return redirect()->route('entradas.create');
+        }
+        return redirect()->route('entradas.index')->with('flash_message', 'Entrada added!');   
     }
 
     /**
@@ -121,7 +124,7 @@ class EntradasController extends Controller
         $entrada = Entrada::findOrFail($id);
         $entrada->update($requestData);
 
-        return redirect('entradas')->with('flash_message', 'Entrada updated!');
+        return redirect()->route('entradas.index')->with('flash_message', 'Entrada updated!');
     }
 
     /**
@@ -135,6 +138,6 @@ class EntradasController extends Controller
     {
         Entrada::destroy($id);
 
-        return redirect('entradas')->with('flash_message', 'Entrada deleted!');
+        return redirect()->route('entradas.index')->with('flash_message', 'Entrada deleted!');
     }
 }

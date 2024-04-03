@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Editar Fechamento #{{ $fechamento->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/fechamentos') }}" title="Back"><div class="botao-voltar"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></div></a>
+                        <a href="{{ url('/fechamentos') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />
                         <br />
 
