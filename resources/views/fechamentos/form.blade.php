@@ -37,7 +37,7 @@
 </div><div class="form-group row {{ $errors->has('id_imagem') ? 'has-error' : ''}}">
     <label for="id_imagem" class="col-form-label col-sm-2 required">{{ 'Imagem' }}</label>
     <div class="col-sm-10">
-        <input class="form-control" name="id_imagem" type="text" id="id_imagem" value="{{ isset($fechamento->id_imagem) ? $fechamento->id_imagem : ''}}" required>
+        <input class="form-control" name="id_imagem" type="file" id="id_imagem" value="{{ isset($fechamento->id_imagem) ? $fechamento->id_imagem : ''}}" required>
         {!! $errors->first('id_imagem', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

@@ -66,6 +66,9 @@ class FechamentosController extends Controller
 			'id_imagem' => 'string',
 			'user_id' => 'required'
 		]);
+        $data_comprovante = now()->format('Y-m-d');
+        $nomeArquivo = $data_comprovante . '_' . $request->user_id . '_' . $request->file('id_imagem')->getClientOriginalName();
+        $request->file('id_imagem')->storeAs("imagens/comprovantes",$nomeArquivo);
         $requestData = $request->all();
         
         Fechamento::create($requestData);
