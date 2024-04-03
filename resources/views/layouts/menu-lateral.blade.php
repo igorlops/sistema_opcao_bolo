@@ -258,9 +258,9 @@
 
 {{-- MENU MOBILE --}}
 
-<div class="menu-mobile">
+<div class="menu-mobile pb-5">
     @if (auth()->user()->type_user == "1")
-    <nav class="navbar navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-dark bg-dark fixed-top py-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('home')}}">
                 <span class="brand-text font-weight-light">Opção do Bolo</span>
@@ -442,6 +442,20 @@
                                     <a href="{{route('saidas.create')}}" class="dropdown-item">
                                         <i class="bi bi-plus-square nav-icon"></i>
                                         Novo saída
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-door-open nav-icon"></i>
+                                Fechamento de caixa
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('fechamentos.create')}}" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                                        Fechar caixa
                                     </a>
                                 </li>
                             </ul>

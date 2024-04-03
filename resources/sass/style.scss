@@ -5,3 +5,20 @@
     height: 37px;
     border: 1px solid #ced4da;
 }
+.menu-mobile{
+    display: none;
+}
+@media screen and (max-width:991px) {
+    .menu-desktop {
+        display: none;
+    }
+    .menu-mobile {
+        display: block;
+    }
+    .breadcrumb {
+        display: none;
+    }
+    .botao-voltar{
+        display: none;
+    }
+}

@@ -21,7 +21,7 @@
                     <div class="card-header">Tipos de Saidas {{ $tiposaida->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/tipo-saidas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
+                        <a href="{{ url('/tipo-saidas') }}" title="Back"><div class="botao-voltar"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></div></a>
                         <a href="{{ url('/tipo-saidas/' . $tiposaida->id . '/edit') }}" title="Edit TipoSaida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                         <form method="POST" action="{{ url('tiposaidas' . '/' . $tiposaida->id) }}" accept-charset="UTF-8" style="display:inline">

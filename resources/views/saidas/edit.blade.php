@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Editar Saida #{{ $saida->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/saidas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
+                        <a href="{{ url('/saidas') }}" title="Back"><div class="botao-voltar"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></div></a>
                         <br />
                         <br />
 

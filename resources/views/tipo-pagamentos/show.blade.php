@@ -21,7 +21,7 @@
                     <div class="card-header">TipoPagamento {{ $tipopagamento->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/tipo-pagamentos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
+                        <a href="{{ url('/tipo-pagamentos') }}" title="Back"><div class="botao-voltar"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></div></a>
                         <a href="{{ url('/tipo-pagamentos/' . $tipopagamento->id . '/edit') }}" title="Edit TipoPagamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                         <form method="POST" action="{{ url('tipopagamentos' . '/' . $tipopagamento->id) }}" accept-charset="UTF-8" style="display:inline">

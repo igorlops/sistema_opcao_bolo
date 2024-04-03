@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Editara Entrada #{{ $entrada->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/entradas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></a>
+                        <a href="{{ url('/entradas') }}" title="Back"><div class="botao-voltar"><button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button></div></a>
                         <br />
                         <br />
 
