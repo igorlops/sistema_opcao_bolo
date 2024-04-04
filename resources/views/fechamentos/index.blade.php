@@ -23,6 +23,8 @@
                         <form method="GET" action="{{ url('/fechamentos') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+                                <input type="date" class="form-control" name="start_date" placeholder="Data Inicial" value="{{ request('start_date') }}">
+                                <input type="date" class="form-control" name="end_date" placeholder="Data Final" value="{{ request('end_date') }}">
                                 <span class="input-group-append">
                                     <button class="btn btn-secondary" type="submit">
                                         <i class="bi bi-search"></i>

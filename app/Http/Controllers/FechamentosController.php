@@ -18,22 +18,36 @@ class FechamentosController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
+        $startDate = $request->get('start_date');
+        $endDate = $request->get('end_date');
         $perPage = 25;
-
-        if (!empty($keyword)) {
-            $fechamentos = Fechamento::where('total_vendas', 'LIKE', "%$keyword%")
-                ->orWhere('total_pagamentos', 'LIKE', "%$keyword%")
-                ->orWhere('saldo_ini', 'LIKE', "%$keyword%")
-                ->orWhere('saldo_fin', 'LIKE', "%$keyword%")
-                ->orWhere('diferenca_caixa', 'LIKE', "%$keyword%")
-                ->orWhere('observacao', 'LIKE', "%$keyword%")
-                ->orWhere('id_imagem', 'LIKE', "%$keyword%")
-                ->orWhere('user_id', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $fechamentos = Fechamento::latest()->paginate($perPage);
+    
+        $query = Fechamento::select('*')
+            ->join('users as u', 'u.id', '=', 'fechamentos.user_id')
+            ->join('entradas as in', 'in.user_id', '=', 'fechamentos.user_id')
+            ->join('saidas as out', 'out.user_id', '=', 'fechamentos.user_id');
+    
+        if (!empty($startDate) && !empty($endDate)) {
+            $query->whereBetween('fechamentos.created_at', [$startDate . '00:00:00', $endDate . '23:59:59']);
+            $query->whereBetween('in.created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59']);
+            $query->whereBetween('out.created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59']);
         }
-
+    
+        if (!empty($keyword)) {
+            $query->where(function($q) use ($keyword) {
+                $q->where('total_vendas', 'LIKE', "%$keyword%")
+                  ->orWhere('total_pagamentos', 'LIKE', "%$keyword%")
+                  ->orWhere('saldo_ini', 'LIKE', "%$keyword%")
+                  ->orWhere('saldo_fin', 'LIKE', "%$keyword%")
+                  ->orWhere('diferenca_caixa', 'LIKE', "%$keyword%")
+                  ->orWhere('observacao', 'LIKE', "%$keyword%")
+                  ->orWhere('id_imagem', 'LIKE', "%$keyword%")
+                  ->orWhere('user_id', 'LIKE', "%$keyword%");
+            });
+        }
+    
+        $fechamentos = $query->latest()->paginate($perPage);
+    
         return view('fechamentos.index', compact('fechamentos'));
     }
 
@@ -63,11 +77,15 @@ class FechamentosController extends Controller
 			'saldo_fin' => 'required',
 			'diferenca_caixa' => 'required',
 			'observacao' => 'string',
-			'id_imagem' => 'string',
+			'id_imagem' => 'file',
 			'user_id' => 'required'
 		]);
         $data_comprovante = now()->format('Y-m-d');
-        $nomeArquivo = $data_comprovante . '_' . $request->user_id . '_' . $request->file('id_imagem')->getClientOriginalName();
+        $nomeArquivo = $data_comprovante . '_' . $request->user_id . '_' .  $request->
+                                                                            file('id_imagem')->
+                                                                            getClientOriginalName();
+
+
         $request->file('id_imagem')->storeAs("imagens/comprovantes",$nomeArquivo);
         $requestData = $request->all();
         
