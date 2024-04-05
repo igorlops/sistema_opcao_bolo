@@ -1,0 +1,92 @@
+{
+    "fields": [
+        {
+            "name": "producao",
+            "type": "string"
+        },
+        {
+            "name": "desperdicio",
+            "type": "double"
+        },
+        {
+            "name": "sobra",
+            "type": "double"
+        },
+        {
+            "name": "bolos_vendidos",
+            "type": "double"
+        },
+        {
+            "name": "total_bolos_vendidos",
+            "type": "double"
+        },
+        {
+            "name":"id_produto",
+            "type":"bigint#unsigned"
+        },
+        {
+            "name":"id_fechamento",
+            "type":"bigint#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "id_produto",
+            "references": "id",
+            "on": "produtos",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "id_fechamento",
+            "references": "id",
+            "on": "fechamentos",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "produto",
+            "type": "belongsTo",
+            "class": "App\\Models\\Produto"
+        },
+        {
+            "name": "fechamento",
+            "type": "belongsTo",
+            "class": "App\\Models\\Fechamento"
+        }
+    ],
+    "validations": [
+        {
+            "field": "total_vendas",
+            "rules": "required|string|max:100"
+        },
+        {
+            "field": "total_pagamentos",
+            "rules": "required|text"
+        },
+        {
+            "field": "saldo_ini",
+            "rules": "required"
+        },
+        {
+            "field": "saldo_fin",
+            "rules": "required"
+        },
+        {
+            "field": "diferenca_caixa",
+            "rules": "required"
+        },
+        {
+            "field": "observacao",
+            "rules": "string"
+        },
+        {
+            "field": "id_imagem",
+            "rules": "string"
+        },
+        {
+            "field": "user_id",
+            "rules": "required"
+        }
+    ]
+}
