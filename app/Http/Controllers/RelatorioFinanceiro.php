@@ -67,4 +67,10 @@ class RelatorioFinanceiro extends Controller
         ]);
 
     }
+    public function show($id)
+    {
+        $saida = Saida::findOrFail($id);
+
+        return view('relatorios.user_details', compact('saida'));
+    }
 }

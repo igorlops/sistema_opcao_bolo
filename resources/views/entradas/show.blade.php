@@ -38,7 +38,8 @@
                                     <tr>
                                         <th>ID</th><td>{{ $entrada->id }}</td>
                                     </tr>
-                                    <tr><th> Tipo Entrada </th><td> {{ $entrada->tipo_entrada }} </td></tr><tr><th> Observacao </th><td> {{ $entrada->observacao }} </td></tr><tr><th> Id Tipo Pagamento </th><td> {{ $entrada->id_tipo_pagamento }} </td></tr>
+                                    <tr><th> Tipo Entrada </th><td> {{ $entrada->tipo_entrada }} </td></tr><tr><th> Observacao </th><td> {{ $entrada->observacao }} </td></tr><tr><th> Tipo de Pagamento </th><td> {{ $entrada->tipo_pagamento->nome }} </td></tr>
+                                    <tr><th> Usuário </th><td> {{ $entrada->user->name }} </td></tr>
                                 </tbody>
                             </table>
                         </div>
