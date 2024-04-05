@@ -108,6 +108,23 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-door-open nav-icon"></i>
+                    <p>
+                        Fechamento de caixa
+                        <i class="right bi bi-caret-left-fill"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('fechamentos.index')}}" class="nav-link">
+                            <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                            <p>Fechamentos</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
@@ -342,6 +359,20 @@
                                     <a href="{{route('relatorios.index')}}" class="dropdown-item">
                                         <i class="bi bi-bar-chart-fill nav-icon"></i>
                                         Relatório financeiro
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-door-open nav-icon"></i>
+                                Fechamento de caixa
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('fechamentos.index')}}" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                                        Fechamentos
                                     </a>
                                 </li>
                             </ul>

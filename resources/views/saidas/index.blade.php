@@ -37,14 +37,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Valor</th><th>Observacao</th><th>User Id</th><th>Ações</th>
+                                        <th>#</th><th>Valor</th><th>Usuário</th><th>Observacao</th><th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($saidas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->valor }}</td><td>{{ $item->observacao }}</td><td>{{ $item->user_id }}</td>
+                                        <td>{{ $item->valor }}</td><td>{{ $item->user->name }}</td><td>{{ $item->observacao }}</td>
                                         <td>
                                             <a href="{{ url('/saidas/' . $item->id) }}" title="View Saida"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
                                             <a href="{{ url('/saidas/' . $item->id . '/edit') }}" title="Edit Saida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>

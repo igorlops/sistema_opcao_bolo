@@ -22,7 +22,7 @@
 
           <!-- Content Wrapper. Contains page content -->
         <div>
-            <main class="py-4">
+            <main style="overflow: hidden">
                 @yield('content')
             </main>
         </div>
