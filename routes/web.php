@@ -34,3 +34,6 @@ Route::middleware('auth')->group(function(){
     Route::get('relatorio-financeiro', [App\Http\Controllers\RelatorioFinanceiro::class, 'index'])->name('relatorios.index');
     Route::get('relatorio-financeiro/user/{id}', [App\Http\Controllers\RelatorioFinanceiro::class, 'user_details'])->name('relatorios.user_details');
 });
+
+Route::resource('fechamentos', 'App\Http\Controllers\FechamentosController');
+Route::resource('produtos-fechamentos', 'App\Http\Controllers\ProdutosFechamentosController');
