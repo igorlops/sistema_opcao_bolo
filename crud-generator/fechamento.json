@@ -1,14 +1,6 @@
 {
     "fields": [
         {
-            "name": "total_vendas",
-            "type": "string"
-        },
-        {
-            "name": "total_pagamentos",
-            "type": "text"
-        },
-        {
             "name": "saldo_ini",
             "type": "double"
         },
@@ -17,48 +9,49 @@
             "type": "double"
         },
         {
-            "name": "diferenca_caixa",
+            "name": "vendas_extras",
             "type": "double"
         },
         {
-            "name": "observacao",
+            "name": "vendas_abc",
             "type": "double"
         },
         {
-            "name": "id_imagem",
-            "type": "string"
+            "name": "total_caixa",
+            "type": "double"
         },
         {
-            "name": "user_id",
-            "type": "bigint#unsigned"
-        }
-    ],
-    "foreign_keys": [
+            "name": "env",
+            "type": "double"
+        },
         {
-            "column": "user_id",
-            "references": "id",
-            "on": "users",
-            "onDelete": "cascade"
-        }
-    ],
-    "relationships": [
+            "name": "desconto",
+            "type": "double"
+        },
         {
-            "name": "user",
-            "type": "belongsTo",
-            "class": "App\\Models\\User"
+            "name": "cartao_cred",
+            "type": "double"
+        },
+        {
+            "name": "cartao_deb",
+            "type": "double"
+        },
+        {
+            "name": "pix",
+            "type": "double"
         }
     ],
     "validations": [
         {
-            "field": "total_vendas",
-            "rules": "required|string|max:100"
-        },
-        {
-            "field": "total_pagamentos",
-            "rules": "required|text"
-        },
-        {
             "field": "saldo_ini",
+            "rules": "required"
+        },
+        {
+            "field": "saldo_fin",
+            "rules": "required"
+        },
+        {
+            "field": "vendas_extras",
             "rules": "required"
         },
         {
@@ -71,11 +64,11 @@
         },
         {
             "field": "observacao",
-            "rules": "string"
+            "rules": ""
         },
         {
             "field": "id_imagem",
-            "rules": "string"
+            "rules": ""
         },
         {
             "field": "user_id",
