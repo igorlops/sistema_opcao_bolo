@@ -409,6 +409,21 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-boxes"></i>
+                                Controle de estoque
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('fechamentos.index')}}" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                                        Estoque
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -456,6 +471,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
+                                    <a href="{{route('entradas.index')}}" class="dropdown-item">
+                                        <i class="bi bi-card-list nav-icon"></i>
+                                        Lista de entradas
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{route('entradas.create')}}" class="dropdown-item">
                                         <i class="bi bi-plus-square nav-icon"></i>
                                         Nova Entrada
@@ -473,6 +494,12 @@
                                     <a href="{{route('saidas.create')}}" class="dropdown-item">
                                         <i class="bi bi-plus-square nav-icon"></i>
                                         Novo saída
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('saidas.index')}}" class="dropdown-item">
+                                        <i class="bi bi-card-list nav-icon"></i>
+                                        Lista de saídas
                                     </a>
                                 </li>
                             </ul>

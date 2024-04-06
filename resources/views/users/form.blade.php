@@ -11,6 +11,20 @@
         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group row {{ $errors->has('perc_cred') ? 'has-error' : ''}}">
+    <label for="perc_cred" class="col-form-label col-sm-2 required">{{ 'Percentual crédito' }}</label>
+    <div class="col-sm-10">
+        <input class="form-control" name="perc_cred" type="text" id="perc_cred" value="{{ isset($user->perc_cred) ? $user->perc_cred : ''}}" required>
+        {!! $errors->first('perc_cred', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group row {{ $errors->has('perc_deb') ? 'has-error' : ''}}">
+    <label for="perc_deb" class="col-form-label col-sm-2 required">{{ 'Percentual débito' }}</label>
+    <div class="col-sm-10">
+        <input class="form-control" name="perc_deb" type="text" id="perc_deb" value="{{ isset($user->perc_deb) ? $user->perc_deb : ''}}" required>
+        {!! $errors->first('perc_deb', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
 <div class="form-group row {{ $errors->has('type_user') ? 'has-error' : ''}}">
     <label for="type_user" class="col-form-label col-sm-2 required">{{ 'Tipo de usuário' }}</label>
     <div class="col-sm-10">

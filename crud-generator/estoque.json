@@ -1,0 +1,67 @@
+{
+    "fields": [
+        {
+            "name": "tipo_estoque",
+            "type": "select",
+            "options": {
+                "p": "Produção",
+                "d": "Desperdício",
+                "s": "Sobra",
+                "v": "Venda"
+            }
+        },
+        {
+            "name": "quantidade",
+            "type": "integer"
+        },
+        {
+            "name":"id_produto",
+            "type":"bigint#unsigned"
+        },
+        {
+            "name":"user_id",
+            "type":"bigint#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "id_produto",
+            "references": "id",
+            "on": "produtos",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users",
+            "onDelete": "cascade"
+        }
+
+    ],
+    "relationships": [
+        {
+            "name": "produto",
+            "type": "belongsTo",
+            "class": "App\\Models\\Produto"
+        },
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Models\\User"
+        }
+    ],
+    "validations": [
+        {
+            "field": "tipo_estoque",
+            "rules": "required"
+        },
+        {
+            "field": "quantidade",
+            "rules": "required"
+        },
+        {
+            "field": "id_produto",
+            "rules": "required"
+        }
+    ]
+}

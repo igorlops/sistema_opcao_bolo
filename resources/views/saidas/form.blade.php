@@ -4,10 +4,11 @@
         <input class="form-control" name="valor" type="text" id="valor" value="{{ isset($saida->valor) ? $saida->valor : ''}}" required>
         {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group row {{ $errors->has('observacao') ? 'has-error' : ''}}">
+</div>
+<div class="form-group row {{ $errors->has('observacao') ? 'has-error' : ''}}">
     <label for="observacao" class="col-form-label col-sm-2 required">{{ 'Observacao' }}</label>
     <div class="col-sm-10">
-        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao" required>{{ isset($saida->observacao) ? $saida->observacao : ''}}</textarea>
+        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao">{{ isset($saida->observacao) ? $saida->observacao : ''}}</textarea>
         {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

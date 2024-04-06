@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
-use App\Models\Saida;
-use App\Models\TipoSaida;
+use App\Http\Controllers\Controller;
+use App\Models\Produto;
+use App\Models\Estoque;
 use Illuminate\Http\Request;
 
-class SaidasController extends Controller
+class EstoquesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,16 +21,16 @@ class SaidasController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $saidas = Saida::where('valor', 'LIKE', "%$keyword%")
-                ->orWhere('observacao', 'LIKE', "%$keyword%")
+            $estoques = Estoque::where('tipo_estoque', 'LIKE', "%$keyword%")
+                ->orWhere('quantidade', 'LIKE', "%$keyword%")
+                ->orWhere('id_produto', 'LIKE', "%$keyword%")
                 ->orWhere('user_id', 'LIKE', "%$keyword%")
-                ->orWhere('id_descricao', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $saidas = Saida::latest()->paginate($perPage);
+            $estoques = Estoque::latest()->paginate($perPage);
         }
 
-        return view('saidas.index', compact('saidas'));
+        return view('estoques.index', compact('estoques'));
     }
 
     /**
@@ -41,8 +40,8 @@ class SaidasController extends Controller
      */
     public function create()
     {
-        $descricoes = TipoSaida::all();
-        return view('saidas.create', compact('descricoes'));
+        $produtos = Produto::all();
+        return view('estoques.create',compact('produtos'));
     }
 
     /**
@@ -55,18 +54,18 @@ class SaidasController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'valor' => 'required|string|max:100',
-			'observacao' => 'required|string|max:1000',
-			'user_id' => 'required',
-			'id_descricao' => 'required'
+			'tipo_estoque' => 'required',
+			'quantidade' => 'required',
+			'id_produto' => 'required'
 		]);
         $requestData = $request->all();
 
-        Saida::create($requestData);
-        if(auth()->user()->type_user === 2){
-            return redirect()->route('saidas.create');
+        Estoque::create($requestData);
+
+        if(auth()->user()->type_user === 1){
+            return redirect()->route('estoques')->with('flash_message', 'Estoque added!');
         }
-        return redirect()->route('saidas.index')->with('flash_message', 'Saida added!');
+        return redirect()->route('estoques.create');
     }
 
     /**
@@ -78,9 +77,9 @@ class SaidasController extends Controller
      */
     public function show($id)
     {
-        $saida = Saida::findOrFail($id);
+        $estoque = Estoque::findOrFail($id);
 
-        return view('saidas.show', compact('saida'));
+        return view('estoques.show', compact('estoque'));
     }
 
     /**
@@ -92,9 +91,9 @@ class SaidasController extends Controller
      */
     public function edit($id)
     {
-        $saida = Saida::findOrFail($id);
+        $estoque = Estoque::findOrFail($id);
 
-        return view('saidas.edit', compact('saida'));
+        return view('estoques.edit', compact('estoque'));
     }
 
     /**
@@ -108,17 +107,16 @@ class SaidasController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'valor' => 'required|string|max:100',
-			'observacao' => 'required|string|max:1000',
-			'user_id' => 'required',
-			'id_descricao' => 'required'
+			'tipo_estoque' => 'required',
+			'quantidade' => 'required',
+			'id_produto' => 'required'
 		]);
         $requestData = $request->all();
 
-        $saida = Saida::findOrFail($id);
-        $saida->update($requestData);
+        $estoque = Estoque::findOrFail($id);
+        $estoque->update($requestData);
 
-        return redirect()->route('saidas.index')->with('flash_message', 'Saida updated!');
+        return redirect()->route('estoques')->with('flash_message', 'Estoque updated!');
     }
 
     /**
@@ -130,8 +128,8 @@ class SaidasController extends Controller
      */
     public function destroy($id)
     {
-        Saida::destroy($id);
+        Estoque::destroy($id);
 
-        return redirect()->route('saidas.index')->with('flash_message', 'Saida deleted!');
+        return redirect()->route('estoques')->with('flash_message', 'Estoque deleted!');
     }
 }

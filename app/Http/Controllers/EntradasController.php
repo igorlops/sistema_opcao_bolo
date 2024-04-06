@@ -67,11 +67,11 @@ class EntradasController extends Controller
         $requestData = $request->all();
 
         Entrada::create($requestData);
-        
-        if(auth()->user()->type_user === "2"){
+
+        if(auth()->user()->type_user === 2){
             return redirect()->route('entradas.create');
         }
-        return redirect()->route('entradas.index')->with('flash_message', 'Entrada added!');   
+        return redirect()->route('entradas.index')->with('flash_message', 'Entrada added!');
     }
 
     /**
