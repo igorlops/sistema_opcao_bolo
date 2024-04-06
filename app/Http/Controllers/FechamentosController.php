@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Produto;
 
 use App\Models\Fechamento;
 use Illuminate\Http\Request;
@@ -44,7 +45,8 @@ class FechamentosController extends Controller
      */
     public function create()
     {
-        return view('fechamentos.create');
+        $produtos = Produto::all();
+        return view('fechamentos.create', compact('produtos'));
     }
 
     /**
@@ -65,7 +67,7 @@ class FechamentosController extends Controller
 			'pix' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         Fechamento::create($requestData);
 
         return redirect()->route('fechamentos')->with('flash_message', 'Fechamento added!');
@@ -118,7 +120,7 @@ class FechamentosController extends Controller
 			'pix' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $fechamento = Fechamento::findOrFail($id);
         $fechamento->update($requestData);
 

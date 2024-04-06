@@ -79,7 +79,7 @@
                             <hr>
                             <p><strong>Total entradas:</strong> R$ {{numero_iso_para_br($result->total_entradas)}}</p>
                             <p><strong>Total saídas:</strong> R$ {{numero_iso_para_br($result->total_saidas)}}</p>
-                            {{-- <a href="{{route('relatorios.user_details')}}" class="btn btn-secondary">Ver mais</a> --}}
+                            {{-- <a href="{{route('relatorios.user_details')}}/user/{{$user->id}}" class="btn btn-secondary">Ver mais</a> --}}
                         </div>
                     </div>
                 @endforeach

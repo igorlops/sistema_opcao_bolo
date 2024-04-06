@@ -52,9 +52,14 @@ class RelatorioFinanceiro extends Controller
                 'users.name',
                 DB::raw('SUM(entradas.valor) as total_entradas'),
                 DB::raw('SUM(saidas.valor) as total_saidas')
-            )
-        ->groupBy('users.id', 'users.name')
-        ->get();
+            );
+            if($user_id){
+                $resultados->where('users.id','=',$user_id);
+            }
+            $resultados
+            ->groupBy('users.id', 'users.name')
+            ->get();
+
 
         return view('relatorios.index', [
             'total_entradas' => $total_entradas,
