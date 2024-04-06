@@ -1,15 +1,11 @@
 {
     "fields": [
         {
-            "name": "saldo_ini",
-            "type": "double"
-        },
-        {
-            "name": "saldo_fin",
-            "type": "double"
-        },
-        {
             "name": "vendas_extras",
+            "type": "double"
+        },
+        {
+            "name": "desconto",
             "type": "double"
         },
         {
@@ -22,10 +18,6 @@
         },
         {
             "name": "env",
-            "type": "double"
-        },
-        {
-            "name": "desconto",
             "type": "double"
         },
         {
@@ -43,35 +35,27 @@
     ],
     "validations": [
         {
-            "field": "saldo_ini",
+            "field": "vendas_abc",
             "rules": "required"
         },
         {
-            "field": "saldo_fin",
+            "field": "total_caixa",
             "rules": "required"
         },
         {
-            "field": "vendas_extras",
+            "field": "env",
             "rules": "required"
         },
         {
-            "field": "saldo_fin",
+            "field": "cartao_cred",
             "rules": "required"
         },
         {
-            "field": "diferenca_caixa",
+            "field": "cartao_deb",
             "rules": "required"
         },
         {
-            "field": "observacao",
-            "rules": ""
-        },
-        {
-            "field": "id_imagem",
-            "rules": ""
-        },
-        {
-            "field": "user_id",
+            "field": "pix",
             "rules": "required"
         }
     ]

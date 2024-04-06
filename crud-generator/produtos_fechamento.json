@@ -57,35 +57,19 @@
     ],
     "validations": [
         {
-            "field": "total_vendas",
-            "rules": "required|string|max:100"
-        },
-        {
-            "field": "total_pagamentos",
-            "rules": "required|text"
-        },
-        {
-            "field": "saldo_ini",
+            "field": "producao",
             "rules": "required"
         },
         {
-            "field": "saldo_fin",
+            "field": "total_bolos_vendidos",
             "rules": "required"
         },
         {
-            "field": "diferenca_caixa",
+            "field": "id_produto",
             "rules": "required"
         },
         {
-            "field": "observacao",
-            "rules": "string"
-        },
-        {
-            "field": "id_imagem",
-            "rules": "string"
-        },
-        {
-            "field": "user_id",
+            "field": "id_fechamento",
             "rules": "required"
         }
     ]
