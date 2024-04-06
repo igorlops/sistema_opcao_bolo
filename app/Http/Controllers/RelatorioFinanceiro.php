@@ -16,7 +16,7 @@ class RelatorioFinanceiro extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return View
      */
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         if(!$request->filled('data_inicial') || !$request->filled('data_final')){
             return redirect()->route('relatorios.index',[
@@ -67,7 +67,7 @@ class RelatorioFinanceiro extends Controller
         ]);
 
     }
-    public function show($id)
+    public function user_details($id)
     {
         $saida = Saida::findOrFail($id);
 
