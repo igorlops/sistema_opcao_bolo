@@ -128,6 +128,29 @@
 
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
+                    <i class="bi bi-boxes"></i>
+                    <p>
+                        Controle de estoque
+                        <i class="right bi bi-caret-left-fill"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('estoques.create')}}" class="nav-link">
+                            <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                            Cadastro estoque
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('estoques.index')}}" class="nav-link">
+                            <i class="bi bi-ui-checks"></i>
+                            Relatório de estoque
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
                     <i class="bi bi-folder-plus nav-icon"></i>
                     <p>
                         Cadastros
@@ -161,7 +184,6 @@
                     </li>
                 </ul>
             </li>
-
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
@@ -256,6 +278,31 @@
                         <a href="{{route('fechamentos.create')}}" class="nav-link">
                             <i class="bi bi-box-arrow-in-left nav-icon"></i>
                             <p>Fechar caixa</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-boxes"></i>
+                    <p>
+                        Controle de estoque
+                        <i class="right bi bi-caret-left-fill"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('estoques.create')}}" class="nav-link">
+                            <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                            Cadastro estoque
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('estoques.index')}}" class="nav-link">
+                            <i class="bi bi-ui-checks"></i>
+                            Relatório de estoque
                         </a>
                     </li>
                 </ul>
@@ -377,6 +424,28 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-boxes"></i>
+                                Controle de estoque
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('estoques.create')}}" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                                        Cadastro estoque
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('estoques.index')}}" class="dropdown-item">
+                                        <i class="bi bi-ui-checks"></i>
+                                        Relatório de estoque
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-folder-plus nav-icon"></i>
@@ -405,21 +474,6 @@
                                     <a href="{{route('tipo-saidas.index')}}" class="dropdown-item">
                                         <i class="bi bi-arrow-up-right-square-fill nav-icon"></i>
                                         Tipos de saídas
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-boxes"></i>
-                                Controle de estoque
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li>
-                                    <a href="{{route('fechamentos.index')}}" class="dropdown-item">
-                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
-                                        Estoque
                                     </a>
                                 </li>
                             </ul>
@@ -500,6 +554,27 @@
                                     <a href="{{route('saidas.index')}}" class="dropdown-item">
                                         <i class="bi bi-card-list nav-icon"></i>
                                         Lista de saídas
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-boxes"></i>
+                                Controle de estoque
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('estoques.create')}}" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                                        Cadastro estoque
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('estoques.index')}}" class="dropdown-item">
+                                        <i class="bi bi-ui-checks"></i>
+                                        Relatório de estoque
                                     </a>
                                 </li>
                             </ul>

@@ -4,7 +4,6 @@
         <select name="tipo_estoque" class="form-control" id="tipo_estoque" required>
             <option value="p" selected>Produção</option>
             <option value="d">Desperdício</option>
-            <option value="s">Sobra</option>
         </select>
         {!! $errors->first('tipo_estoque', '<p class="help-block">:message</p>') !!}
     </div>
