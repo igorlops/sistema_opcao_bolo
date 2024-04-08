@@ -53,7 +53,7 @@
                                         <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
                                         <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
                                         <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
-                                        <td>{{ $produto->sobra ? $produto->sobra : '0'}}</td>
+                                        <td>{{ $produto->producao - ($produto->venda + $produto->desperdicio) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
