@@ -59,7 +59,6 @@ class EntradasController extends Controller
     {
         $this->validate($request, [
 			'tipo_entrada' => 'required|string',
-			'observacao' => 'required|string',
 			'id_tipo_pagamento' => 'required',
 			'user_id' => 'required',
 			'id_produto' => 'required'
@@ -114,7 +113,6 @@ class EntradasController extends Controller
     {
         $this->validate($request, [
 			'tipo_entrada' => 'required|string',
-			'observacao' => 'required|string',
 			'id_tipo_pagamento' => 'required',
 			'user_id' => 'required',
 			'id_produto' => 'required'

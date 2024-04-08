@@ -56,7 +56,6 @@ class SaidasController extends Controller
     {
         $this->validate($request, [
 			'valor' => 'required|string|max:100',
-			'observacao' => 'required|string|max:1000',
 			'user_id' => 'required',
 			'id_descricao' => 'required'
 		]);
@@ -109,7 +108,6 @@ class SaidasController extends Controller
     {
         $this->validate($request, [
 			'valor' => 'required|string|max:100',
-			'observacao' => 'required|string|max:1000',
 			'user_id' => 'required',
 			'id_descricao' => 'required'
 		]);

@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'type_user'
+        'type_user',
+        'perc_cred',
+        'perc_deb'
     ];
 
     /**

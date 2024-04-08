@@ -31,9 +31,9 @@ class EstoquesController extends Controller
         }
 
         $produtos = Produto::select('produtos.id', 'produtos.nome')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "d" AND created_at LIKE "2024-04-06%" AND id_produto = produtos.id) AS desperdicio')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "v" AND created_at LIKE "2024-04-06%" AND id_produto = produtos.id) AS venda')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "p" AND created_at LIKE "2024-04-06%" AND id_produto = produtos.id) AS producao')
+        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "d" AND created_at LIKE "2024-04-08%" AND id_produto = produtos.id) AS desperdicio')
+        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "p" AND created_at LIKE "2024-04-08%" AND id_produto = produtos.id) AS producao')
+        ->selectRaw('(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at LIKE "2024-04-08%" AND entradas.id_produto = produtos.id) AS venda')
         ->addSelect('estoques.user_id')
         ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
         ->leftJoin('users', 'estoques.user_id', '=', 'users.id')

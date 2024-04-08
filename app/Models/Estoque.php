@@ -25,7 +25,7 @@ class Estoque extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipo_estoque', 'quantidade', 'id_produto', 'user_id'];
+    protected $fillable = ['tipo_estoque', 'quantidade', 'id_produto','user_id'];
 
     public function produto()
     {
