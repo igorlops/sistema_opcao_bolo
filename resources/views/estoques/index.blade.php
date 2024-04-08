@@ -37,24 +37,23 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Tipo Estoque</th><th>Quantidade</th><th>Id Produto</th><th>Ações</th>
+                                        <th>#</th>
+                                        <th>Produto</th>
+                                        <th>Produção</th>
+                                        <th>Desperdício</th>
+                                        <th>Vendas</th>
+                                        <th>Sobra</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($estoques as $item)
+                                @foreach($produtos as $produto)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->tipo_estoque }}</td><td>{{ $item->quantidade }}</td><td>{{ $item->id_produto }}</td>
-                                        <td>
-                                            <a href="{{ url('/estoques/' . $item->id) }}" title="View Estoque"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
-                                            <a href="{{ url('/estoques/' . $item->id . '/edit') }}" title="Edit Estoque"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
-
-                                            <form method="POST" action="{{ url('/estoques' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Estoque" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
-                                            </form>
-                                        </td>
+                                        <td>{{ $produto->nome }}</td>
+                                        <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
+                                        <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
+                                        <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
+                                        <td>{{ $produto->sobra ? $produto->sobra : '0'}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
