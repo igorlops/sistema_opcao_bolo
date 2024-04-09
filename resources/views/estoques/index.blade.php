@@ -46,7 +46,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($produtos as $produto)
+                                @foreach($produtos_users as $produto)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $produto->nome }}</td>

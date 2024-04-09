@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Produto;
 use App\Models\Estoque;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EstoquesController extends Controller
@@ -29,21 +30,26 @@ class EstoquesController extends Controller
         } else {
             $estoques = Estoque::latest()->paginate($perPage);
         }
+        $users = User::all();
+        $products_users = [];
+        foreach ($users as $key => $user) {
+            $produtos = Produto::select('produtos.id', 'produtos.nome')
+                                ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "d" AND created_at LIKE "2024-04-08%" AND id_produto = produtos.id AND user_id = '.$user->id.') AS desperdicio')
+                                ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "p" AND created_at LIKE "2024-04-08%" AND id_produto = produtos.id AND user_id = '.$user->id.') AS producao')
+                                ->selectRaw('(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at LIKE "2024-04-08%" AND entradas.id_produto = produtos.id AND user_id = '.$user->id.') AS venda')
+                                ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "d" AND id_produto = produtos.id AND user_id = '.$user->id.') AS total_desperdicio')
+                                ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "p" AND id_produto = produtos.id AND  user_id = '.$user->id.') AS total_producao')
+                                ->selectRaw('(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND user_id = '.$user->id.') AS total_venda')
+                                ->addSelect('estoques.user_id')
+                                ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
+                                ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
+                                ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
+                                ->get();
+            $products_users[] = $produtos;
+        }
 
-        $produtos = Produto::select('produtos.id', 'produtos.nome')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "d" AND created_at LIKE "2024-04-08%" AND id_produto = produtos.id) AS desperdicio')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "p" AND created_at LIKE "2024-04-08%" AND id_produto = produtos.id) AS producao')
-        ->selectRaw('(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at LIKE "2024-04-08%" AND entradas.id_produto = produtos.id) AS venda')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "d" AND id_produto = produtos.id) AS total_desperdicio')
-        ->selectRaw('(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = "p" AND id_produto = produtos.id) AS total_producao')
-        ->selectRaw('(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id) AS total_venda')
-        ->addSelect('estoques.user_id')
-        ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
-        ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
-        ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
-        ->get();
 
-        return view('estoques.index', compact('estoques','produtos'));
+        return view('estoques.index', compact('estoques','produtos_users'));
     }
 
     /**
