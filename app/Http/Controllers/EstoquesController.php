@@ -48,7 +48,7 @@ class EstoquesController extends Controller
             $products_users[] = $produtos;
         }
 
-
+        
         return view('estoques.index', compact('estoques','produtos_users'));
     }
 
