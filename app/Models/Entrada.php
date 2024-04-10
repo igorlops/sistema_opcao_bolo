@@ -25,7 +25,7 @@ class Entrada extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipo_entrada', 'observacao', 'id_tipo_pagamento', 'user_id', 'id_produto', 'valor'];
+    protected $fillable = ['tipo_entrada', 'observacao', 'id_tipo_pagamento', 'user_id', 'id_produto', 'valor','metade'];
 
     public function tipo_pagamento()
     {

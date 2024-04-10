@@ -5,10 +5,10 @@
         {!! $errors->first('nome', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group row {{ $errors->has('is_bolo_extra') ? 'has-error' : ''}}">
-    <label for="is_bolo_extra" class="col-form-label col-sm-2 required">{{ 'Is Bolo Extra' }}</label>
+    <label for="is_bolo_extra" class="col-form-label col-sm-2 required">{{ 'É Bolo Extra?' }}</label>
     <div class="col-sm-10">
         <select name="is_bolo_extra" class="form-control" id="is_bolo_extra" required>
-    @foreach (json_decode('{"s":"Sim","n":"N\u00e3o"}', true) as $optionKey => $optionValue)
+    @foreach (json_decode('{"s":"Sim","n":"Não"}', true) as $optionKey => $optionValue)
         <option value="{{ $optionKey }}" {{ (isset($produto->is_bolo_extra) && $produto->is_bolo_extra == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
     @endforeach
 </select>

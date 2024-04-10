@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo_site','Laravel')
+@section('titulo_site','Edita estoque')
 @section('title')
     <h1>Editar Estoque</h1>
 @endsection

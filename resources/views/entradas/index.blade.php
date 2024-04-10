@@ -37,23 +37,35 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Tipo Entrada</th><th>Usuário</th><th>Observacao</th><th>Id Tipo Pagamento</th><th>Ações</th>
+                                        <th>#</th>
+                                        <th>Tipo de Entrada</th>
+                                        <th>Valor</th>
+                                        <th>Usuário</th>
+                                        <th>Observação</th>
+                                        <th>Tipo de Pagamento</th>
+                                        <th>É metade?</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($entradas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->tipo_entrada }}</td><td>{{ $item->user->name }}</td><td>{{ $item->observacao }}</td><td>{{ $item->tipo_pagamento->nome }}</td>
+                                        <td>{{ $item->tipo_entrada }}</td>
+                                        <td>{{ $item->valor }}</td>
+                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->observacao }}</td>
+                                        <td>{{ $item->tipo_pagamento->nome }}</td>
+                                        <td>{{$item->is_metade === 's' ? 'Sim' : 'Não'}}</td>
 
                                         <td>
-                                            <a href="{{ url('/entradas/' . $item->id) }}" title="View Entrada"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
-                                            <a href="{{ url('/entradas/' . $item->id . '/edit') }}" title="Edit Entrada"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                                            <a href="{{ url('/entradas/' . $item->id) }}" title="Ver Entrada"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/entradas/' . $item->id . '/edit') }}" title="Editar Entrada"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/entradas' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Entrada" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar Entrada" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>

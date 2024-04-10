@@ -16,7 +16,7 @@ class CreateSaidasTable extends Migration
         Schema::create('saidas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->double('valor');
+            $table->decimal('valor',10,2);
             $table->text('observacao')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('id_descricao')->unsigned();

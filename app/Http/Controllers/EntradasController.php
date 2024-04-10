@@ -61,7 +61,8 @@ class EntradasController extends Controller
 			'tipo_entrada' => 'required|string',
 			'id_tipo_pagamento' => 'required',
 			'user_id' => 'required',
-			'id_produto' => 'required'
+			'id_produto' => 'required',
+            'metade'=>'required'
 		]);
         $requestData = $request->all();
 
@@ -115,7 +116,8 @@ class EntradasController extends Controller
 			'tipo_entrada' => 'required|string',
 			'id_tipo_pagamento' => 'required',
 			'user_id' => 'required',
-			'id_produto' => 'required'
+			'id_produto' => 'required',
+            'metade' => 'required'
 		]);
         $requestData = $request->all();
 

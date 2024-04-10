@@ -1,7 +1,7 @@
 <div class="form-group row {{ $errors->has('descricao') ? 'has-error' : ''}}">
     <label for="descricao" class="col-form-label col-sm-2 required">{{ 'Descrição' }}</label>
     <div class="col-sm-10">
-        <textarea class="form-control" rows="5" name="descricao" type="textarea" id="descricao" required>{{ isset($tiposaida->descricao) ? $tiposaida->descricao : ''}}</textarea>
+        <input class="form-control" name="descricao" type="text" id="descricao" required/>{{ isset($tiposaida->descricao) ? $tiposaida->descricao : ''}}
         {!! $errors->first('descricao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
