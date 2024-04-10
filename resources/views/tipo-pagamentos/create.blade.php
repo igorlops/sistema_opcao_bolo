@@ -1,15 +1,15 @@
 @extends('layouts.app')
 @section('titulo_site','Nova tipo pagamento')
 @section('title')
-    <h1>Novo TipoPagamento</h1>
+    <h1>Novo Tipo de Pagamento</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-pagamentos')}}">Listagem de TipoPagamento</a>
+        <a href="{{url('/tipo-pagamentos')}}">Listagem de Tipo de Pagamento</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-pagamentos/create')}}">Novo TipoPagamento</a>
+        <a href="{{url('/tipo-pagamentos/create')}}">Novo Tipo de Pagamento</a>
     </li>
 @endsection
 @section('content')
@@ -18,7 +18,7 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Novo TipoPagamento</div>
+                    <div class="card-header">Novo Tipo de Pagamento</div>
                     <div class="card-body">
                         <a href="{{ url('/tipo-pagamentos') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />

@@ -16,10 +16,10 @@ class CreateProdutosFechamentosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('producao')->nullable();
-            $table->double('desperdicio')->nullable();
-            $table->double('sobra')->nullable();
-            $table->double('bolos_vendidos')->nullable();
-            $table->double('total_bolos_vendidos')->nullable();
+            $table->decimal('desperdicio',10,2)->nullable();
+            $table->decimal('sobra',10,2)->nullable();
+            $table->decimal('bolos_vendidos',10,2)->nullable();
+            $table->decimal('total_bolos_vendidos',10,2)->nullable();
             $table->bigInteger('id_produto')->unsigned();
             $table->bigInteger('id_fechamento')->unsigned();
             $table->foreign('id_produto')->references('id')->on('produtos')->onDelete('cascade')->onUpdate('cascade');

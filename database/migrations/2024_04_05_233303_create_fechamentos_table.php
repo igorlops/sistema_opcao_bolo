@@ -15,14 +15,14 @@ class CreateFechamentosTable extends Migration
         Schema::create('fechamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->double('vendas_extras')->nullable();
-            $table->double('desconto')->nullable();
-            $table->double('vendas_abc')->nullable();
-            $table->double('total_caixa')->nullable();
-            $table->double('env')->nullable();
-            $table->double('cartao_cred')->nullable();
-            $table->double('cartao_deb')->nullable();
-            $table->double('pix')->nullable();
+            $table->decimal('vendas_extras')->nullable();
+            $table->decimal('desconto',10,2)->nullable();
+            $table->decimal('vendas_abc',10,2)->nullable();
+            $table->decimal('total_caixa',10,2)->nullable();
+            $table->decimal('env',10,2)->nullable();
+            $table->decimal('cartao_cred',10,2)->nullable();
+            $table->decimal('cartao_deb',10,2)->nullable();
+            $table->decimal('pix',10,2)->nullable();
             });
     }
 

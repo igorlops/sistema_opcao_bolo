@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('titulo_site','Tipo pagamento')
 @section('title')
-    <h1>Listagem de TipoPagamento</h1>
+    <h1>Listagem de Tipo de Pagamento</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/tipo-pagamentos')}}">Listagem TipoPagamento</a>
+        <a href="{{url('/tipo-pagamentos')}}">Listagem Tipo de Pagamento</a>
     </li>
 @endsection
 @section('content')
@@ -14,9 +14,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Tipopagamentos</div>
+                    <div class="card-header">Tipo de pagamentos</div>
                     <div class="card-body">
-                        <a href="{{ url('/tipo-pagamentos/create') }}" class="btn btn-success btn-sm" title="Novo TipoPagamento">
+                        <a href="{{ url('/tipo-pagamentos/create') }}" class="btn btn-success btn-sm" title="Novo Tipo de Pagamento">
                             <i class="bi bi-plus-lg"></i> Novo
                         </a>
 

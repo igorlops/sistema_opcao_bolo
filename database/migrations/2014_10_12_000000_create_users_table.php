@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('type_user');
-            $table->string('perc_cred');
-            $table->string('perc_deb');
+            $table->decimal('perc_cred',10,2)->default(0);
+            $table->decimal('perc_deb',10,2)->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

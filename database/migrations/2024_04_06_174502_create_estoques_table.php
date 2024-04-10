@@ -16,7 +16,7 @@ class CreateEstoquesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('tipo_estoque');
-            $table->integer('quantidade');
+            $table->decimal('quantidade',10,2);
             $table->bigInteger('id_produto')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('id_produto')->references('id')->on('produtos')->onDelete('cascade')->onUpdate('cascade');

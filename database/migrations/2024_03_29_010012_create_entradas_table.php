@@ -18,7 +18,8 @@ class CreateEntradasTable extends Migration
             $table->timestamps();
             $table->string('tipo_entrada');
             $table->text('observacao')->nullable();
-            $table->double('valor');
+            $table->decimal('valor',10,2);
+            $table->char('metade',1);
             $table->bigInteger('id_tipo_pagamento')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('id_produto')->unsigned();
