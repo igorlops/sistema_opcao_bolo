@@ -6,13 +6,13 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        {{-- <a href="{{url('/estoques')}}">Listagem Estoque</a> --}}
+        <a href="{{url('/estoques')}}">Listagem Estoque</a>
     </li>
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            {{-- <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Estoques</div>
                     <div class="card-body">
@@ -20,7 +20,7 @@
                             <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
-                        <form method="GET" action="{{ url('/estoques') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                        <form method="GET" action="{{ url('/estoques') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="data_ini" placeholder="Data Inicial" value="{{ request('data_ini') }}">
                                 <input type="text" class="form-control" name="data_fin" placeholder="Data final" value="{{ request('data_fin') }}">
@@ -59,12 +59,12 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $estoques->appends(['search' => Request::get('search')])->render() !!} </div>
+                            {{-- <div class="pagination-wrapper"> {!! $estoques->appends(['search' => Request::get('search')])->render() !!} </div>  --}}
                         </div>
 
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 @endsection

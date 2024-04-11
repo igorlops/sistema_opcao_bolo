@@ -46,12 +46,12 @@
         {!! $errors->first('id_produto', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" name="metade" id="flexCheckChecked" {{isset($entrada->metade) || $entrada->metade === 's' ? $entrada->metade : 'checked'}}>
+<div class="form-check pb-5">
+    <input class="form-check-input" type="checkbox" name="metade" id="metade">
     <label class="form-check-label" for="flexCheckChecked">
       É metade?
     </label>
-  </div>
+</div>
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Atualizar' : 'Criar' }}">

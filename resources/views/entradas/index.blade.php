@@ -56,7 +56,7 @@
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>{{ $item->tipo_pagamento->nome }}</td>
-                                        <td>{{$item->is_metade === 's' ? 'Sim' : 'Não'}}</td>
+                                        <td>{{ $item->metade == 's' ? 'Sim' : 'Não'}}</td>
 
                                         <td>
                                             <a href="{{ url('/entradas/' . $item->id) }}" title="Ver Entrada"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>

@@ -61,12 +61,11 @@ class EntradasController extends Controller
 			'tipo_entrada' => 'required|string',
 			'id_tipo_pagamento' => 'required',
 			'user_id' => 'required',
-			'id_produto' => 'required',
-            'metade'=>'required'
+			'id_produto' => 'required'
 		]);
         $requestData = $request->all();
-
         Entrada::create($requestData);
+
 
         if(auth()->user()->type_user === 2){
             return redirect()->route('entradas.create');

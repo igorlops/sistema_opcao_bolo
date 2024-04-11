@@ -18,30 +18,48 @@ class EstoquesController extends Controller
      */
     public function index(Request $request)
     {
-        $data_ini = $request->get('data_ini');
-        $data_fin = $request->get('data_fin');
 
-        if(empty($data_ini)){
-            $data = new \DateTime();
-            $data_ini = $data->format('Y-m-d');
-        }
-        if(empty($data_fin)){
-            $data = new \DateTime();
-            $data_fin = $data->format('Y-m-d');
+        if(!$request->filled('data_ini') || !$request->filled('data_fin')){
+            return redirect()->route('estoques.index',[
+                'data_ini'=>(new \DateTime())
+                ->format('d/m/Y'),
+                'data_fin'=>(new \DateTime())
+                ->format('d/m/Y')
+            ]);
         }
 
-        $users = User::all();
+        // dd(data_br_to_iso($request->data_ini));
+
         $produtos = Produto::select('produtos.id', 'produtos.nome')
-            ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND created_at BETWEEN '$data_ini 00:00:00' AND '$data_fin 23:59:59' AND id_produto = produtos.id ) AS desperdicio")
-            ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND created_at BETWEEN '$data_ini 00:00:00' AND '$data_fin 23:59:59'  AND id_produto = produtos.id ) AS producao")
-            ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at BETWEEN '$data_ini 00:00:00' AND '$data_fin 23:59:59'  AND entradas.id_produto = produtos.id ) AS venda")
-            ->addSelect('estoques.user_id')
-            ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
-            ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
-            ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
-            ->get();
+        ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59' AND id_produto = produtos.id  AND estoques.user_id = ".auth()->user()->id.") AS desperdicio")
+        ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND id_produto = produtos.id AND estoques.user_id = ".auth()->user()->id." ) AS producao")
+        ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND entradas.id_produto = produtos.id AND entradas.user_id = ".auth()->user()->id." AND entradas.metade IS NULL ) AS venda")
+        ->addSelect('estoques.user_id')
+        ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
+        ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
+        ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
+        ->get();
+        // dd($produtos);
+        // $users = User::all();
+        // $produtosAllUsersAll = [];
 
-        return view('estoques.index', compact('estoques','produtos'));
+        // if(auth()->user()->type_user == 1){
+        //     foreach($users as $key=>$user){
+        //         $produtosAllUsers = Produto::select('produtos.id', 'produtos.nome')
+        //         ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59' AND id_produto = produtos.id ) AS desperdicio")
+        //         ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND id_produto = produtos.id ) AS producao")
+        //         ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND entradas.id_produto = produtos.id ) AS venda")
+        //         ->addSelect('estoques.user_id')
+        //         ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
+        //         ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
+        //         ->where('users.id','=',$user->id)
+        //         ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
+        //         ->get();
+        //         $produtosAllUsersAll[] = $produtosAllUsers;
+        //     }
+        // }
+
+        return view('estoques.index',compact('produtos'));
     }
 
     /**
