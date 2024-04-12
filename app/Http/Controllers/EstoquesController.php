@@ -43,7 +43,6 @@ class EstoquesController extends Controller
         // $users = User::all();
         // $produtosAllUsersAll = [];
 
-<<<<<<< HEAD
         // if(auth()->user()->type_user == 1){
         //     foreach($users as $key=>$user){
         //         $produtosAllUsers = Produto::select('produtos.id', 'produtos.nome')
@@ -61,10 +60,6 @@ class EstoquesController extends Controller
         // }
 
         return view('estoques.index',compact('produtos'));
-=======
-
-        return view('estoques.index', compact('estoques','produtos'));
->>>>>>> de72c2dcdc2c04eebe1b1e8531510039ddf97dff
     }
 
     /**
