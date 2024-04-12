@@ -324,7 +324,7 @@
 
 <div class="menu-mobile pb-5">
     @if (auth()->user()->type_user == "1")
-    <nav class="navbar navbar-dark bg-dark fixed-top py-5">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('home')}}">
                 <span class="brand-text font-weight-light">Opção do Bolo</span>

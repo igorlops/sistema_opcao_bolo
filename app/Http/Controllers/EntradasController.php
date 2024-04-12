@@ -115,8 +115,7 @@ class EntradasController extends Controller
 			'tipo_entrada' => 'required|string',
 			'id_tipo_pagamento' => 'required',
 			'user_id' => 'required',
-			'id_produto' => 'required',
-            'metade' => 'required'
+			'id_produto' => 'required'
 		]);
         $requestData = $request->all();
 

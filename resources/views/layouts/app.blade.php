@@ -31,7 +31,7 @@
 
 
           <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper bg-dark text-white">
             <!-- Content Header (Page header) -->
           <section class="content-header">
             <div class="container-fluid">
