@@ -36,10 +36,12 @@
                     <div class="card bg-success p-3 my-3 flex-wrap text-center ">
                         <i class="bi bi-cash-stack"></i>
                         <h4>Saldo atual</h4>
+                        <h5>{{$resultados->total_entradas ?? 0}}</h5>
                     </div>
                     <div class="card bg-warning p-3 my-3 flex-wrap text-center ">
                         <i class="bi bi-cash-coin"></i>
                         <h4>Vendas</h4>
+                        <h5>{{$venda ?? 0}}</h5>
                     </div>
                 </div>
             </div>
