@@ -6,6 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
+            <h1>Resumo do mês {{$mes}}</h1>
             <div class="card p-3">
                 <div class="card-title py-3">
                     <h4>Pesquisar por usuário</h4>
@@ -31,17 +32,17 @@
                     <div class="card bg-primary p-3 my-3 flex-wrap text-center">
                         <i class="bi bi-boxes"></i>
                         <h4>Estoques</h4>
-                        <h5>{{$venda ?? 0}}</h5>
+                        <h5>{{$sobra}}</h5>
                     </div>
                     <div class="card bg-success p-3 my-3 flex-wrap text-center ">
                         <i class="bi bi-cash-stack"></i>
                         <h4>Saldo atual</h4>
-                        <h5>{{$resultados->total_entradas ?? 0}}</h5>
+                        <h5>{{$sobra}}</h5>
                     </div>
                     <div class="card bg-warning p-3 my-3 flex-wrap text-center ">
                         <i class="bi bi-cash-coin"></i>
                         <h4>Vendas</h4>
-                        <h5>{{$venda ?? 0}}</h5>
+                        <h5>{{$sobra}}</h5>
                     </div>
                 </div>
             </div>

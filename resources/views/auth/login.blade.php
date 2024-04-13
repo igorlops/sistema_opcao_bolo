@@ -2,16 +2,19 @@
 
 @section('content')
     <div class="d-flex justify-content-between flex-row">
-        <div class="w-50 imagem-login">
+        <div class="imagem-login">
             <div class="m-0">
                 <img src="images/imagem_login.jpg" alt="Imagem bolo" style="width:100%;height:100vh" class="col-12">
             </div>
-        </div>
-        <div class="w-50 formulario-login">
+        </div>ww
+        <div class="formulario-login">
             <div class="row justify-content-center align-items-center" style="height: 100vh">
                 <div class="col-10 row justify-content-center align-items-center">
                     <div class="card" style="max-width: 400px!important">
                         <div class="card-body">
+                            <div class="card-image">
+                                <img src="images/logo.jpg" alt="Logo opção do bolo" width="100">
+                            </div>
                             <div class="text-center mb-5">
                                 <h1 class="fw-bold">LOGIN</h1>
                                 <h3>Acesse o sistema</h3>

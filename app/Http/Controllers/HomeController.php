@@ -27,7 +27,14 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user_id = $request->user_id;
-
+        if(!$request->filled('data_ini') || !$request->filled('data_fin')){
+            return redirect()->route('home',[
+                'data_ini'=>(new \DateTime('first day of this month'))
+                ->format('d/m/Y'),
+                'data_fin'=>(new \DateTime('last day of this month'))
+                ->format('d/m/Y')
+            ]);
+        }
         $data_ini = (new \DateTime('first day of this month'))->format('Y-m-d');
         $data_fin = (new \DateTime('last day of this month'))->format('Y-m-d');
 
@@ -56,7 +63,6 @@ class HomeController extends Controller
             $produtos->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND estoques.created_at BETWEEN '$data_ini 00:00:00' AND '$data_fin 23:59:59' AND id_produto = produtos.id) AS producao")
                     ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '$data_ini 00:00:00' AND '$data_fin 23:59:59' AND entradas.metade IS NULL ) AS venda")
                     ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND estoques.created_at BETWEEN '$data_ini 00:00:00' AND '$data_fin 23:59:59' AND id_produto = produtos.id) AS desperdicio")
-                    ->addSelect('estoques.user_id')
                     ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id');
 
             $resultados->select(
@@ -66,11 +72,10 @@ class HomeController extends Controller
                     );
         }
         $resultados = $resultados->groupBy('users.id', 'users.name')->get();
-            
         $produtos = $produtos->groupBy('produtos.id', 'produtos.nome', 'estoques.user_id')->get();
+        dd($resultados);
+        $sobra = $produtos === [] ? $produtos->producao - ($produtos->venda + $produtos->desperdicio) : 0;
 
-        $venda = $produtos === [] ? $produtos->producao - ($produtos->venda + $produtos->desperdicio) : 0;
-
-        return view('home', compact('users','resultados','produtos', 'venda'));
+        return view('home', compact('users','resultados','produtos', 'sobra','mes'));
     }
 }
