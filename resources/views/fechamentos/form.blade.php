@@ -35,7 +35,7 @@
         <div class="form-group row {{ $errors->has('env') ? 'has-error' : ''}}">
             <label for="env" class="col-form-label col-sm-2 required">{{ 'Env' }}</label>
             <div class="col-sm-3">
-                <input class="form-control" name="env" type="text" id="env" value="{{ isset($fechamento->env) ? $fechamento->env : ''}}" required>
+                <input class="form-control" name="env" type="text" id="env" value="{{ isset($fechamento->env) ? $fechamento->env : ''}}">
                 {!! $errors->first('env', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
@@ -62,22 +62,6 @@
         </div>
     </div>
 </div>
-
-@if ($formMode === 'create')
-
-<br><br>
-<h2>Bolos que tiveram ações</h2>
-@foreach ($produtos as $produto)
-<div class="form-check">
-    <input type="checkbox" class="form-check-input" id="flexCheckChecked{{$produto->id}}" name="produtos[]" value="{{$produto->id}}">
-    <label class="form-check-label" for="flexCheckChecked">
-        {{$produto->nome}}
-    </label>
-</div>
-@endforeach
-<br>
-@endif
-
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Atualizar' : 'Criar' }}">
 </div>

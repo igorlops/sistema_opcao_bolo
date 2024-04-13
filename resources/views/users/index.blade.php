@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-header">Usuários</div>
                     <div class="card-body">
                         <a href="{{ url('/users/create') }}" class="btn btn-success btn-sm" title="Novo User">

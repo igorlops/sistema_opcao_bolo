@@ -6,7 +6,7 @@
             @include('admin.sidebar')
 
             <div class="col-md-9">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body">

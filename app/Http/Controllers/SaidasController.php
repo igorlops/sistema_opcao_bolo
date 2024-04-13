@@ -62,7 +62,7 @@ class SaidasController extends Controller
         $requestData = $request->all();
 
         Saida::create($requestData);
-        if(auth()->user()->type_user === 2){
+        if(auth()->user()->type_user == 2){
             return redirect()->route('saidas.create');
         }
         return redirect()->route('saidas.index')->with('flash_message', 'Saida added!');

@@ -1,18 +1,16 @@
 @extends('layouts.login')
 
 @section('content')
-    <div class="d-flex justify-content-between flex-row">
-        <div class="imagem-login">
-            <div class="m-0">
-                <img src="images/imagem_login.jpg" alt="Imagem bolo" style="width:100%;height:100vh" class="col-12">
-            </div>
-        </div>ww
+    <div class="d-flex justify-content-center flex-row bg-danger" style="position: relative">
+        <div style="position: absolute">
+            <img src="images/imagem_login.jpg" alt="imagem background" style="width:100%">
+        </div>
         <div class="formulario-login">
             <div class="row justify-content-center align-items-center" style="height: 100vh">
-                <div class="col-10 row justify-content-center align-items-center">
-                    <div class="card" style="max-width: 400px!important">
+                <div class="col-12 row justify-content-center align-items-center">
+                    <div class="card" style="width:400px">
                         <div class="card-body">
-                            <div class="card-image">
+                            <div class="card-image d-flex justify-content-center">
                                 <img src="images/logo.jpg" alt="Logo opção do bolo" width="100">
                             </div>
                             <div class="text-center mb-5">
@@ -63,8 +61,8 @@
                                 </div>
 
                                 <div class="row mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary px-5" style="border-radius:20px!important">
                                             {{ __('Login') }}
                                         </button>
                                     </div>

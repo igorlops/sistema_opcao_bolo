@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-header">Produtos</div>
                     <div class="card-body">
                         <a href="{{ url('/produtos/create') }}" class="btn btn-success btn-sm" title="Novo Produto">

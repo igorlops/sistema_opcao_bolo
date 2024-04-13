@@ -63,11 +63,19 @@ class EntradasController extends Controller
 			'user_id' => 'required',
 			'id_produto' => 'required'
 		]);
+        if ($request->has('metade') && $request->input('metade') === "on") {
+            $request->merge(['metade' => 's']);
+        } else {
+            $request->merge(['metade' => null]);
+        }
+
         $requestData = $request->all();
         Entrada::create($requestData);
 
 
-        if(auth()->user()->type_user === 2){
+
+
+        if(auth()->user()->type_user == 2){
             return redirect()->route('entradas.create');
         }
         return redirect()->route('entradas.index')->with('flash_message', 'Entrada added!');

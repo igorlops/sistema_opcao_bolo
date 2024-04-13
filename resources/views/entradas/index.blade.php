@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-header">Entradas</div>
                     <div class="card-body">
                         <a href="{{ url('/entradas/create') }}" class="btn btn-success btn-sm" title="Novo Entrada">
@@ -34,7 +34,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-dark">
                                 <thead>
                                     <tr>
                                         <th>#</th>

@@ -11,7 +11,7 @@
 @endsection
 @section('content')
 
-    <div class="card">
+    <div class="card bg-dark">
         <div class="p-3">
             <h4>Filtrar por data</h4>
             <form action="" method="GET">
@@ -73,7 +73,7 @@
         <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
             <div class="col-12 d-flex justify-content-around pt-5">
                 @foreach ($results as $result)
-                    <div class="card">
+                    <div class="card bg-dark">
                         <div class="card-body">
                             <div class="header"><strong>{{$result->name}}</strong></div>
                             <hr>
@@ -148,7 +148,7 @@
         </div>
         <div class="tab-pane fade" id="totais-tab-pane" role="tabpanel" aria-labelledby="totais-tab" tabindex="0">
             <div class="pt-5">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-body">
                         <h5>
                             Totais acumulados

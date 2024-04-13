@@ -17,7 +17,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-header">Novo Fechamento</div>
                     <div class="card-body">
                         <a href="{{ url('/fechamentos') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
@@ -31,7 +31,36 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <h1>Relatório atual</h1>
+                        <h1>Relatório de produção atual</h1>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Produto</th>
+                                        <th>Produção</th>
+                                        <th>Desperdício</th>
+                                        <th>Vendas</th>
+                                        <th>Sobra</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($produtos as $produto)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $produto->nome }}</td>
+                                        <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
+                                        <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
+                                        <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
+                                        <td>{{ $produto->producao - ($produto->venda + $produto->desperdicio) }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            {{-- <div class="pagination-wrapper"> {!! $estoques->appends(['search' => Request::get('search')])->render() !!} </div>  --}}
+                        </div>
+
                         <form method="POST" action="{{ url('/fechamentos') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 

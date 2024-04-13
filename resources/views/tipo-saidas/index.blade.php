@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-header">Tipo de saidas</div>
                     <div class="card-body">
                         <a href="{{ url('/tipo-saidas/create') }}" class="btn btn-success btn-sm" title="Novo TipoSaida">
