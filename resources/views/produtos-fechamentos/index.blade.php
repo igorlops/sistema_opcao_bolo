@@ -34,7 +34,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                             <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Producao</th><th>Desperdicio</th><th>Sobra</th><th>Ações</th>

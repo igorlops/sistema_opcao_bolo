@@ -34,7 +34,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                             <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Nome</th><th>É bolo extra?</th><th>Ações</th>

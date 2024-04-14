@@ -47,7 +47,7 @@
     </div>
 </div>
 <div class="form-check pb-5">
-    <input class="form-check-input" type="checkbox" name="metade" id="metade" @if($entrada->metade) checked @endif>
+    <input class="form-check-input" type="checkbox" name="metade" id="metade" {{$formMode === 'edit' ? ($entrada->metade == "on" ? 'checked' : '') : ''}}>
     <label class="form-check-label" for="flexCheckChecked">
       É metade?
     </label>

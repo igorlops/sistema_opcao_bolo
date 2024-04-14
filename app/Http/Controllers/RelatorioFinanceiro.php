@@ -44,8 +44,6 @@ class RelatorioFinanceiro extends Controller
         $diferenca = $total_entradas - $total_saidas;
         $users = User::all();
 
-
-// Consulta com Eloquent para calcular a soma dos valores de entrada e saída por usuário
         $resultados = User::join('entradas', 'users.id', '=', 'entradas.user_id')
             ->join('saidas', 'users.id', '=', 'saidas.user_id')
             ->select(

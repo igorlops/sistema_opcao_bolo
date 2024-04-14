@@ -34,7 +34,7 @@
                         <h1>Relatório de produção atual</h1>
 
                         <div class="table-responsive">
-                            <table class="table">
+                             <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>

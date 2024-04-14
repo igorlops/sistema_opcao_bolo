@@ -33,7 +33,7 @@
                         <br/>
 
                         <div class="table-responsive">
-                            <table class="table">
+                             <table class="table table-dark table-hover">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $produto->id }}</td>

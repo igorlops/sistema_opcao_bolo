@@ -90,7 +90,7 @@
         <div class="tab-pane fade" id="in-out-tab-pane" role="tabpanel" aria-labelledby="in-out-tab" tabindex="0">
             <h2 class="pt-5">Entradas</h2>
             <div class="table-responsive">
-                <table class="table">
+                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -119,7 +119,7 @@
 
             <h2 class="pt-5">Saídas</h2>
             <div class="table-responsive">
-                <table class="table">
+                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
                             <th>#</th>

@@ -65,7 +65,7 @@ class EntradasController extends Controller
 		]);
 
         $requestData = $request->all();
-        // dd($request->all());
+        dd($request->all());
         Entrada::create($requestData);
 
         if(auth()->user()->type_user == 2){
