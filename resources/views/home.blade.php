@@ -13,7 +13,7 @@
                 </div>
                 <form method="GET">
                 <div class="d-flex justify-content-center flex-row">
-                    @if (auth()->user->type_user == 1)
+                    @if (auth()->user()->type_user == 1)
                     <div class="col-sm-4 mb-3">
                         <label for="data_ini_home" class="control-label">Selecione usuário</label>
                         <select name="user_id" class="form-select"
@@ -63,7 +63,7 @@
                     <a class="btn btn-success p-3 my-3 flex-wrap text-center " href="{{route('relatorios.index')}}">
                         <i class="bi bi-cash-stack"></i>
                         <h4>Saldo atual</h4>
-                        <h5>R$ {{numero_iso_para_br($entradas->total_entradas - $saidas->total_saidas)}}</h5>
+                        {{-- <h5>R$ {{numero_iso_para_br($entradas->total_entradas - $saidas->total_saidas)}}</h5> --}}
                     </a>
                     <a class="btn btn-warning p-3 my-3 flex-wrap text-center " href="{{route('entradas.index')}}">
                         <i class="bi bi-cash-coin"></i>

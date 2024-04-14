@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entrada;
 use App\Models\Produto;
 use App\Models\Saida;
+use App\Models\TipoPagamento;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -115,7 +116,7 @@ class HomeController extends Controller
                 $saidas->selectRaw('SUM(saidas.valor) as total_saidas');
             }
             $produtos = $produtos->get();
-            dd($produtos);
+            // dd($produtos);
             $entradas = $entradas->get();
             $saidas = $saidas->get();
             // $resultados = $entradas - $saidas;
@@ -129,6 +130,11 @@ class HomeController extends Controller
                 'sobra' => $sobra,
                 'mes' => $mes
             ]);
+        }
+        else {
+            $tipo_pagamentos = TipoPagamento::all();
+            $produtos = Produto::all();
+            return redirect()->route('entradas.create',compact('tipo_pagamentos','produtos'));
         }
 
     }

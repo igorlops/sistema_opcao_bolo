@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrada;
+use App\Models\Produto;
 use App\Models\Saida;
+use App\Models\TipoPagamento;
+use App\Models\TipoSaida;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -32,8 +35,7 @@ class RelatorioFinanceiro extends Controller
         //     data_br_to_iso($request->data_final)
         // );
 
-        $user_id = $request->user_id;
-
+        $user_id = $request->usuario_select;
         // Filtrar entradas e saídas pelo usuário, se o ID do usuário estiver presente na solicitação
         $entradasQuery = $user_id ? Entrada::where('user_id', $user_id) : Entrada::query();
         $saidasQuery = $user_id ? Saida::where('user_id', $user_id) : Saida::query();
@@ -42,22 +44,30 @@ class RelatorioFinanceiro extends Controller
         $total_entradas = $entradasQuery->sum('valor');
         $total_saidas = $saidasQuery->sum('valor');
         $diferenca = $total_entradas - $total_saidas;
+
+        // elementos do select no relatório financeiro
         $users = User::all();
+        $formaPagamentos = TipoPagamento::all();
+        $tipoSaida = TipoSaida::all();
+        $produtos = Produto::all();
 
         $resultados = User::join('entradas', 'users.id', '=', 'entradas.user_id')
-            ->join('saidas', 'users.id', '=', 'saidas.user_id')
-            ->select(
+        ->join('saidas', 'users.id', '=', 'saidas.user_id');
+        if($user_id){
+            $resultados->select(
                 'users.name',
-                DB::raw('SUM(entradas.valor) as total_entradas'),
-                DB::raw('SUM(saidas.valor) as total_saidas')
+                DB::raw('SUM(CASE WHEN entradas.user_id = ' . $user_id . ' THEN entradas.valor ELSE 0 END) as total_entradas'),
+                DB::raw('SUM(CASE WHEN saidas.user_id = ' . $user_id . ' THEN saidas.valor ELSE 0 END) as total_saidas')
             );
-            if($user_id){
-                $resultados->where('users.id','=',$user_id);
-            }
-            $resultados
-            ->groupBy('users.id', 'users.name')
-            ->get();
+        } else {
+            $resultados->select(
+                'users.name'
+            )
+            ->selectRaw('(SELECT SUM(entradas.valor) FROM entradas) as total_entradas')
+            ->selectRaw('(SELECT SUM(saidas.valor) FROM saidas) as total_saidas');
+        }
 
+        $resultados = $resultados->groupBy('users.name')->get();
 
         return view('relatorios.index', [
             'total_entradas' => $total_entradas,
@@ -66,7 +76,10 @@ class RelatorioFinanceiro extends Controller
             'saidas'=>$saida,
             'entradas'=>$entrada,
             'users'=>$users,
-            'results' => $resultados
+            'results' => $resultados,
+            'pagamentos' => $formaPagamentos,
+            'tipoSaidas' => $tipoSaida,
+            'produtos' => $produtos
         ]);
 
     }

@@ -1,14 +1,9 @@
 @extends('layouts.app')
 @section('titulo_site','Relatório financeiro')
 @section('title')
-    <h1>Listagem de Movimentos Financeiros</h1>
+    <h1>Resumo financeiro</h1>
 @endsection
 
-@section('breadcrumb')
-    <li class="breadcrumb-item">
-        <a href="{{url('/relatorios-financeiro')}}">Listagem Movimentos Financeiros</a>
-    </li>
-@endsection
 @section('content')
 
     <div class="card bg-dark">
@@ -31,23 +26,82 @@
                             <div class="input-group">
                                 <input class="form-control date" type="text" name="data_final" value="{{request('data_final')}}" id="data_final">
                             </div>
-
                         </div>
                     </div>
                 </div>
-                <div class="py-3 col-sm-4">
-                    <h4>Filtrar por usuário</h4>
-                    <select class="form-select" name="usuario_select" id="usuario_select">
-                        <option value="0" selected>Todos</option>
-                        @foreach ($users as $user)
-                            <option value="{{$user->id}}">{{$user->name}}</option>
-                        @endforeach
-                    </select>
+
+                <div class="row">
+                    <div class="py-3 col-sm-3">
+                        <h4>Usuário</h4>
+                        <select class="form-select" name="usuario_select" id="usuario_select">
+                            @if (request('usuario_select'))
+                                <option value="">Selecione um usuário</option>
+                                @foreach ($users as $user)
+                                    <option value="{{$user->id}}" @if ($user->id == request('usuario_select'))  selected @endif>{{$user->name}}</option>
+                                @endforeach
+                            @else
+                                <option value="" selected>Selecione um usuário</option>
+                                @foreach ($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="py-3 col-sm-3">
+                        <h4>Forma de pagamento</h4>
+                        <select class="form-select" name="formaPagamento" id="formaPagamento">
+                            @if (request('formaPagamento'))
+                                <option value="">Selecione uma forma de pagamento</option>
+                                @foreach ($pagamentos as $pagamento)
+                                    <option value="{{$pagamento->id}}" @if ($pagamento->id == request('formaPagamento'))  selected @endif>{{$pagamento->nome}}</option>
+                                @endforeach
+                            @else
+                                <option value="">Selecione uma forma de pagamento</option>
+                                @foreach ($pagamentos as $pagamento)
+                                    <option value="{{$pagamento->id}}">{{$pagamento->nome}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="py-3 col-sm-3">
+                        <h4>Tipo de saída</h4>
+                        <select class="form-select" name="tipoSaida" id="tipoSaida">
+                            @if (request('tipoSaida'))
+                                <option value="">Selecione um usuário</option>
+                                @foreach ($tipoSaidas as $saida)
+                                    <option value="{{$saida->id}}" @if ($saida->id == request('tipoSaida'))  selected @endif>{{$saida->descricao}}</option>
+                                @endforeach
+                            @else
+                                <option value="" selected>Selecione um usuário</option>
+                                @foreach ($tipoSaidas as $saida)
+                                    <option value="{{$saida->id}}">{{$saida->descricao}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+
+                    <div class="py-3 col-sm-3">
+                        <h4>Produto</h4>
+                        <select class="form-select" name="produto" id="produto">
+                            @if (request('produto'))
+                                <option value="">Selecione um produto</option>
+                                @foreach ($produtos as $produto)
+                                    <option value="{{$produto->id}}" @if ($produto->id == request('produto'))  selected @endif>{{$produto->nome}}</option>
+                                @endforeach
+                            @else
+                                <option value="" selected>Selecione um produto</option>
+                                @foreach ($produtos as $produto)
+                                    <option value="{{$produto->id}}">{{$produto->nome}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label for="" class="control-label"></label>
                     <div class="input-group">
-                        <button class="btn btn-primary m-t-xs" title="Buscar data" name="buscar_por_filtro" id="data_">Aplicar filtro</button>
+                        <button class="btn btn-primary m-t-xs" title="Buscar data">Aplicar filtro</button>
                     </div>
                 </div>
             </form>
@@ -73,6 +127,9 @@
         <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
             <div class="col-12 d-flex justify-content-around pt-5">
                 @foreach ($results as $result)
+                    @empty($result)
+                        Não há dados para serem exibidos
+                    @endempty
                     <div class="card bg-dark">
                         <div class="card-body">
                             <div class="header"><strong>{{$result->name}}</strong></div>
