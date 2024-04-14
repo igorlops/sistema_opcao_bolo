@@ -63,17 +63,10 @@ class EntradasController extends Controller
 			'user_id' => 'required',
 			'id_produto' => 'required'
 		]);
-        if ($request->has('metade') && $request->input('metade') === "on") {
-            $request->merge(['metade' => 's']);
-        } else {
-            $request->merge(['metade' => null]);
-        }
 
         $requestData = $request->all();
+        // dd($request->all());
         Entrada::create($requestData);
-
-
-
 
         if(auth()->user()->type_user == 2){
             return redirect()->route('entradas.create');
@@ -105,8 +98,9 @@ class EntradasController extends Controller
     public function edit($id)
     {
         $entrada = Entrada::findOrFail($id);
-
-        return view('entradas.edit', compact('entrada'));
+        $tipo_pagamentos = TipoPagamento::all();
+        $produtos = Produto::all();
+        return view('entradas.edit', compact('entrada','tipo_pagamentos','produtos'));
     }
 
     /**

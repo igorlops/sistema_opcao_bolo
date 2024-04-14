@@ -97,7 +97,7 @@ class HomeController extends Controller
 
                 $produtos->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id AND estoques.user_id = $user_id) AS producao")
                 ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade IS NULL AND entradas.user_id = $user_id ) AS vendaInteiras")
-                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade = 's' AND entradas.user_id = $user_id ) AS vendaMetades")
+                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade = 'on' AND entradas.user_id = $user_id ) AS vendaMetades")
                 ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id AND estoques.user_id = $user_id) AS desperdicio")
                 ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
                 ->join('entradas','entradas.id_produto','produtos.id')
@@ -105,7 +105,7 @@ class HomeController extends Controller
 
             }else {
                 $produtos->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id) AS producao")
-                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade = 's' ) AS vendaMetades")
+                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade = 'on' ) AS vendaMetades")
                 ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade IS NULL ) AS vendaInteiras")
                 ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id) AS desperdicio")
                 ->join('estoques', 'estoques.id_produto', 'produtos.id')

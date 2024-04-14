@@ -18,7 +18,7 @@
 
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Editara Entrada #{{ $entrada->id }}</div>
+                    <div class="card-header">Editar Entrada #{{ $entrada->id }}</div>
                     <div class="card-body">
                         <a href="{{ url('/entradas') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />

@@ -39,6 +39,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Tipo de Entrada</th>
+                                        <th>Produto</th>
                                         <th>Valor</th>
                                         <th>Usuário</th>
                                         <th>Observação</th>
@@ -52,11 +53,12 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->tipo_entrada }}</td>
+                                        <td>{{ $item->produto->nome }}</td>
                                         <td>{{ $item->valor }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>{{ $item->tipo_pagamento->nome }}</td>
-                                        <td>{{ $item->metade == 's' ? 'Sim' : 'Não'}}</td>
+                                        <td>{{ $item->metade == 'on' ? 'Sim' : 'Não'}}</td>
 
                                         <td>
                                             <a href="{{ url('/entradas/' . $item->id) }}" title="Ver Entrada"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
