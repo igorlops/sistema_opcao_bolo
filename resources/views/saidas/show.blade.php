@@ -38,8 +38,22 @@
                                     <tr>
                                         <th>ID</th><td>{{ $saida->id }}</td>
                                     </tr>
-                                    <tr><th> Valor </th><td> {{ $saida->valor }} </td></tr><tr><th> Observação </th><td> {{ $saida->observacao }} </td></tr>
-                                    <tr><th> Usuário </th><td> {{ $saida->user->name }} </td></tr><tr><th> Descrição </th><td> {{ $saida->tipo_saida->descricao }} </td></tr>
+                                    <tr>
+                                        <th> Valor </th>
+                                        <td> {{ $saida->valor }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Observação </th>
+                                        <td> {{ $saida->observacao }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Usuário </th>
+                                        <td> {{ $saida->user->name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Descrição </th>
+                                        <td> {{ $saida->tipo_saida->descricao }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

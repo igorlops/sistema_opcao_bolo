@@ -49,7 +49,7 @@
                                 @foreach($produtos as $produto)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $produto->nome }}</td>
+                                        <td>{{ $produto->produto_nome }}</td>
                                         <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
                                         <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
                                         <td>{{ $produto->venda ? $produto->venda : '0'}}</td>

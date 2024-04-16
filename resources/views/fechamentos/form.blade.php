@@ -2,28 +2,28 @@
     <div class="d-flex justify-content-center flex-column w-50">
 
         <div class="form-group row {{ $errors->has('vendas_extras') ? 'has-error' : ''}}">
-            <label for="vendas_extras" class="col-form-label col-sm-2 required">{{ 'Vendas Extras' }}</label>
+            <label for="vendas_extras" class="col-form-label col-sm-2 required">{{ 'Vendas Extras/Embalagens (B)' }}</label>
             <div class="col-sm-3">
                 <input class="form-control" name="vendas_extras" type="text" id="vendas_extras" value="{{ isset($fechamento->vendas_extras) ? $fechamento->vendas_extras : ''}}" >
                 {!! $errors->first('vendas_extras', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group row {{ $errors->has('desconto') ? 'has-error' : ''}}">
-            <label for="desconto" class="col-form-label col-sm-2 required">{{ 'Desconto' }}</label>
+            <label for="desconto" class="col-form-label col-sm-2 required">{{ 'Desconto (C)' }}</label>
             <div class="col-sm-3">
                 <input class="form-control" name="desconto" type="text" id="desconto" value="{{ isset($fechamento->desconto) ? $fechamento->desconto : ''}}" >
                 {!! $errors->first('desconto', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group row {{ $errors->has('vendas_abc') ? 'has-error' : ''}}">
-            <label for="vendas_abc" class="col-form-label col-sm-2 required">{{ 'Vendas Abc' }}</label>
+            <label for="vendas_abc" class="col-form-label col-sm-2 required">{{ 'Vendas ABC' }}</label>
             <div class="col-sm-3">
                 <input class="form-control" name="vendas_abc" type="text" id="vendas_abc" value="{{ isset($fechamento->vendas_abc) ? $fechamento->vendas_abc : ''}}" required>
                 {!! $errors->first('vendas_abc', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group row {{ $errors->has('total_caixa') ? 'has-error' : ''}}">
-            <label for="total_caixa" class="col-form-label col-sm-2 required">{{ 'Total Caixa' }}</label>
+            <label for="total_caixa" class="col-form-label col-sm-2 required">{{ 'Total Caixa:' }}</label>
             <div class="col-sm-3">
                 <input class="form-control" name="total_caixa" type="text" id="total_caixa" value="{{ isset($fechamento->total_caixa) ? $fechamento->total_caixa : ''}}" required>
                 {!! $errors->first('total_caixa', '<p class="help-block">:message</p>') !!}
@@ -33,30 +33,60 @@
     <div class="d-flex justify-content-center flex-column w-50">
 
         <div class="form-group row {{ $errors->has('env') ? 'has-error' : ''}}">
-            <label for="env" class="col-form-label col-sm-2 required">{{ 'Env' }}</label>
+            <label for="env" class="col-form-label col-sm-2 required">{{ 'Env.:' }}</label>
             <div class="col-sm-3">
                 <input class="form-control" name="env" type="text" id="env" value="{{ isset($fechamento->env) ? $fechamento->env : ''}}">
                 {!! $errors->first('env', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group row {{ $errors->has('cartao_cred') ? 'has-error' : ''}}">
-            <label for="cartao_cred" class="col-form-label col-sm-2 required">{{ 'Cartao Cred' }}</label>
+            <label for="cartao_cred" class="col-form-label col-sm-2 required">{{ 'Cartão Crédito' }}</label>
             <div class="col-sm-3">
-                <input class="form-control" name="cartao_cred" type="text" id="cartao_cred" value="{{ isset($fechamento->cartao_cred) ? $fechamento->cartao_cred : ''}}" required>
+                <input class="form-control"
+                    name="cartao_cred"
+                    type="text"
+                    id="cartao_cred"
+                    @if ($formMode === 'edit')
+                        value="{{isset($fechamento->cartao_cred) ? $fechamento->cartao_cred : ''}}"
+                    @else
+                        value="{{isset($cartaoCredito) ? $cartaoCredito : '0'}}"
+                    @endif
+                    required>
+
                 {!! $errors->first('cartao_cred', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group row {{ $errors->has('cartao_deb') ? 'has-error' : ''}}">
-            <label for="cartao_deb" class="col-form-label col-sm-2 required">{{ 'Cartao Deb' }}</label>
+            <label for="cartao_deb" class="col-form-label col-sm-2 required">{{ 'Cartão Débito' }}</label>
             <div class="col-sm-3">
-                <input class="form-control" name="cartao_deb" type="text" id="cartao_deb" value="{{ isset($fechamento->cartao_deb) ? $fechamento->cartao_deb : ''}}" required>
+                <input class="form-control"
+                    name="cartao_deb"
+                    type="text"
+                    id="cartao_deb"
+                    @if ($formMode === 'edit')
+                        value="{{isset($fechamento->cartao_deb) ? $fechamento->cartao_deb : ''}}"
+                    @else
+                        value="{{isset($cartaoDebito) ? $cartaoDebito : '0'}}"
+                    @endif
+                    required>
+
                 {!! $errors->first('cartao_deb', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group row {{ $errors->has('pix') ? 'has-error' : ''}}">
             <label for="pix" class="col-form-label col-sm-2 required">{{ 'Pix' }}</label>
             <div class="col-sm-3">
-                <input class="form-control" name="pix" type="text" id="pix" value="{{ isset($fechamento->pix) ? $fechamento->pix : ''}}" required>
+                <input class="form-control"
+                    name="pix"
+                    type="text"
+                    id="pix"
+                    @if ($formMode === 'edit')
+                        value="{{isset($fechamento->pix) ? $fechamento->pix : ''}}"
+                    @else
+                        value="{{isset($pix) ? $pix : '0'}}"
+                    @endif
+                    required>
+
                 {!! $errors->first('pix', '<p class="help-block">:message</p>') !!}
             </div>
         </div>

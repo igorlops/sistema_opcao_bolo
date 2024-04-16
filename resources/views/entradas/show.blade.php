@@ -36,10 +36,37 @@
                              <table class="table table-dark table-hover">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $entrada->id }}</td>
+                                        <th>ID</th>
+                                        <td>{{ $entrada->id }}</td>
                                     </tr>
-                                    <tr><th> Tipo Entrada </th><td> {{ $entrada->tipo_entrada }} </td></tr><tr><th> Observacao </th><td> {{ $entrada->observacao }} </td></tr><tr><th> Tipo de Pagamento </th><td> {{ $entrada->tipo_pagamento->nome }} </td></tr>
-                                    <tr><th> Usuário </th><td> {{ $entrada->user->name }} </td></tr>
+                                    <tr>
+                                        <th> Tipo Entrada </th>
+                                        <td> {{ $entrada->tipo_entrada }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Observação </th>
+                                        <td> {{ $entrada->observacao }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Tipo de Pagamento </th>
+                                        <td> {{ $entrada->tipo_pagamento->nome }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Usuário </th>
+                                        <td> {{ $entrada->user->name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Valor </th>
+                                        <td> {{ $entrada->valor }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Metade </th>
+                                        <td> {{ $entrada->metade ? "Sim" : "Não" }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Produto </th>
+                                        <td> {{ $entrada->produto->nome }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

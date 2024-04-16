@@ -37,14 +37,26 @@
                              <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Vendas Extras</th><th>Desconto</th><th>Vendas Abc</th><th>Ações</th>
+                                        <th>#</th>
+                                        <th>Cartão de crédito</th>
+                                        <th>Cartão de débito</th>
+                                        <th>Pix</th>
+                                        <th>Desconto</th>
+                                        <th>Vendas Extras</th>
+                                        <th>Vendas ABC</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($fechamentos as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->vendas_extras }}</td><td>{{ $item->desconto }}</td><td>{{ $item->vendas_abc }}</td>
+                                        <td>{{ $item->cartao_cred }}</td>
+                                        <td>{{ $item->cartao_deb }}</td>
+                                        <td>{{ $item->pix }}</td>
+                                        <td>{{ $item->vendas_extras }}</td>
+                                        <td>{{ $item->desconto }}</td>
+                                        <td>{{ $item->vendas_abc }}</td>
                                         <td>
                                             <a href="{{ url('/fechamentos/' . $item->id) }}" title="View Fechamento"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
                                             <a href="{{ url('/fechamentos/' . $item->id . '/edit') }}" title="Edit Fechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
