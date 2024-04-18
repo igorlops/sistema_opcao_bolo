@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Entrada;
+use App\Models\Estoque;
 use App\Models\Produto;
 
 use App\Models\Fechamento;
@@ -49,17 +50,23 @@ class FechamentosController extends Controller
         $data = new \DateTime();
         $data_atual = $data->format('Y-m-d');
         $produtos = Produto::select('produtos.id AS produto_id', 'produtos.nome AS produto_nome')
-        ->selectRaw('(SELECT COALESCE(SUM(quantidade), 0) FROM estoques WHERE created_at LIKE "%2024-04-15%" AND id_produto = produtos.id AND tipo_estoque = "d" AND user_id = 1) AS desperdicio')
-        ->selectRaw('(SELECT COALESCE(SUM(quantidade), 0) FROM estoques WHERE created_at LIKE "%2024-04-15%" AND id_produto = produtos.id AND tipo_estoque = "p" AND user_id = 1) AS producao')
-        ->selectRaw('(SELECT COALESCE(count(valor), 0) FROM entradas WHERE created_at LIKE "%2024-04-15%" AND id_produto = produtos.id AND user_id = 1) AS venda')
+        ->selectRaw('(SELECT COALESCE(SUM(quantidade), 0) FROM estoques WHERE created_at LIKE "%'.$data_atual.'%" AND id_produto = produtos.id AND tipo_estoque = "d" AND user_id = '.auth()->user()->id.') AS desperdicio')
+        ->selectRaw('(SELECT COALESCE(SUM(quantidade), 0) FROM estoques WHERE created_at LIKE "%'.$data_atual.'%" AND id_produto = produtos.id AND tipo_estoque = "p" AND user_id = '.auth()->user()->id.') AS producao')
+        ->selectRaw('(SELECT COALESCE(count(*), 0) FROM entradas WHERE created_at LIKE "%'.$data_atual.'%" AND id_produto = produtos.id AND user_id = '.auth()->user()->id.') AS venda')
         ->get();
 
-        $cartaoCredito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento', '=', 3)->sum('valor');
-        $cartaoDebito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',4)->sum('valor');
-        $pix = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',1)->sum('valor');
-        $dinheiro = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',2)->sum('valor');
+        $desperdicio = Estoque::where('tipo_estoque','=','d')->sum('quantidade');
+        $producao = Estoque::where('tipo_estoque','=','p')->sum('quantidade');
+        $entrada = Entrada::count('*');
+        $sobra = $producao - ($desperdicio + $entrada);
 
-        return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro'));
+
+        $cartaoCredito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento', '=', 3)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $cartaoDebito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',4)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $pix = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',1)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $dinheiro = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',2)->where('user_id','=',auth()->user()->id)->sum('valor');
+
+        return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro','sobra'));
     }
 
     /**

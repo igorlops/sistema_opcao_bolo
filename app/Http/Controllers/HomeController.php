@@ -93,8 +93,8 @@ class HomeController extends Controller
             $produtos = Produto::query();
 
             if($user_id){
-                $entradas->selectRaw('SUM(entradas.valor) as total_entradas WHERE entradas.user_id = '.$user_id);
-                $saidas->selectRaw('SUM(saidas.valor) as total_saidas WHERE saidas.user_id = '.$user_id);
+                $entradas->where('user_id' ,'=',$user_id)->sum('valor');
+                $saidas->where('user_id','=',$user_id)->sum('valor');
 
                 $produtos->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id AND estoques.user_id = $user_id) AS producao")
                 ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade IS NULL AND entradas.user_id = $user_id ) AS vendaInteiras")
@@ -112,8 +112,8 @@ class HomeController extends Controller
                 ->join('estoques', 'estoques.id_produto', 'produtos.id')
                 ->join('entradas','entradas.id_produto','produtos.id');
 
-                $entradas->selectRaw('SUM(entradas.valor) as total_entradas');
-                $saidas->selectRaw('SUM(saidas.valor) as total_saidas');
+                $entradas->sum('valor');
+                $saidas->sum('valor');
             }
             $produtos = $produtos->get();
             // dd($produtos);
