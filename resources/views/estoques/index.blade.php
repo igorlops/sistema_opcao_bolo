@@ -20,8 +20,25 @@
                             <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
-                        <form method="GET" action="{{ url('/estoques') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right">
+                        <form method="GET" 
+                            action="{{ url('/estoques') }}"
+                            accept-charset="UTF-8"
+                            class="form-inline my-2 my-lg-0 float-right">
+
                             <div class="input-group">
+                                @if (auth()->user()->type_user == 1)
+                                    <select class="form-select" name="user_selected">
+                                            <option value="" @unless (request()->has('user_selected')) selected @endunless>
+                                                Selecione o usuário
+                                            </option>
+                                            @foreach ($users as $user)
+                                                <option value="{{$user->id}}"
+                                                    @if ($user->id == request('user_selected')) selected @endif>
+                                                    {{$user->name}}
+                                                </option>
+                                            @endforeach
+                                    </select>
+                                @endif
                                 <input type="text" class="form-control" name="data_ini" placeholder="Data Inicial" value="{{ request('data_ini') }}">
                                 <input type="text" class="form-control" name="data_fin" placeholder="Data final" value="{{ request('data_fin') }}">
                                 <span class="input-group-append">
@@ -54,7 +71,7 @@
                                         <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
                                         <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
                                         <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
-                                        <td>{{ $produto->producao - ($produto->venda + $produto->desperdicio) }}</td>
+                                        <td>{{ $produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Produto;
 use App\Models\Estoque;
+use App\Models\Entrada;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,22 +28,33 @@ class EstoquesController extends Controller
                 ->format('d/m/Y')
             ]);
         }
+        $user_id = null;
+        if($request->user_selected){
+            $user_id = $request->user_selected;
+        }
+        $users = User::all();
         $produtos = Produto::query();
         if(auth()->user()->type_user == 1){
             $produtos = $produtos->select('produtos.id', 'produtos.nome')
             ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59' AND id_produto = produtos.id ) AS desperdicio")
             ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND id_produto = produtos.id ) AS producao")
             ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND entradas.id_produto = produtos.id ) AS venda")
+            ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND id_produto = produtos.id ) AS totaldesperdicio")
+            ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND id_produto = produtos.id ) AS totalproducao")
+            ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id ) AS totalvenda")
             ->addSelect('estoques.user_id')
             ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
             ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
             ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
             ->get();
-        } else if (auth()->user()->type_user == 2){
+        } else if (auth()->user()->type_user == 2 || $user_id){
             $produtos = $produtos->select('produtos.id', 'produtos.nome')
             ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59' AND id_produto = produtos.id AND estoques.user_id = ".auth()->user()->id.") AS desperdicio")
             ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND id_produto = produtos.id AND estoques.user_id = ".auth()->user()->id.") AS producao")
-            ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND entradas.id_produto = produtos.id  AND estoques.user_id = ".auth()->user()->id.") AS venda")
+            ->selectRaw("(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN '".data_br_to_iso($request->data_ini)." 00:00:00' AND '".data_br_to_iso($request->data_fin)." 23:59:59'  AND entradas.id_produto = produtos.id  AND entradas.user_id = ".auth()->user()->id.") AS venda")
+            ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND id_produto = produtos.id AND estoques.user_id = ".auth()->user()->id.") AS totaldesperdicio")
+            ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND id_produto = produtos.id AND estoques.user_id = ".auth()->user()->id.") AS totalproducao")
+            ->selectRaw("(SELECT COUNT(*) FROM entradas WHERE entradas.id_produto = produtos.id  AND entradas.user_id = ".auth()->user()->id.") AS totalvenda")
             ->addSelect('estoques.user_id')
             ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
             ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
@@ -50,9 +62,8 @@ class EstoquesController extends Controller
             ->groupBy('produtos.id','produtos.nome', 'estoques.user_id')
             ->get();
         }
-        // dd($produtos);
 
-        return view('estoques.index',compact('produtos'));
+        return view('estoques.index',compact('produtos','users'));
     }
 
     /**
