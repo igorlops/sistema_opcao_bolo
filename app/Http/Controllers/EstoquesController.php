@@ -96,9 +96,9 @@ class EstoquesController extends Controller
         Estoque::create($requestData);
 
         if(auth()->user()->type_user == 1){
-            return redirect()->route('estoques.index')->with('flash_message', 'Estoque added!');
+            return redirect()->route('estoques.index')->with('success', 'Estoque adicionado com sucesso!');
         }
-        return redirect()->route('estoques.create');
+        return redirect()->route('estoques.create')->with('success', 'Estoque adicionado com sucesso!');
     }
 
     /**
