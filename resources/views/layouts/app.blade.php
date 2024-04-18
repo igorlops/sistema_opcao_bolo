@@ -65,6 +65,36 @@
 
           @endif
 
+          @if(session('success'))
+            <script>
+                $(document).ready(function(){
+                    $('#modal_success').modal('show');
+                    setTimeout(function(){
+                        $('#modal_success').modal('hide');
+                        setTimeout(function(){
+                            // Remover a session 'success'
+                            {!! session()->forget('success') !!}
+                        }, 1000);
+                    }, 1000);
+                });
+            </script>
+        @endif
+
+<!-- Modal -->
+<div class="modal fade" id="modal_success" tabindex="-1" aria-labelledby="Cadastrado com sucesso" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sucesso!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ session('success') }}
+            </div>
+        </div>
+    </div>
+</div>
+
             <!-- Main content -->
 
           <section class="content">
