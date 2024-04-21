@@ -67,6 +67,10 @@
                                         <th> Produto </th>
                                         <td> {{ $entrada->produto->nome }} </td>
                                     </tr>
+                                    <tr>
+                                        <th> Data </th>
+                                        <td> {{ data_iso_para_br($entrada->created_at) }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

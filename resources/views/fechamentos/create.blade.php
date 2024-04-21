@@ -11,8 +11,8 @@
     <li class="breadcrumb-item">
         <a href="{{url('/fechamentos/create')}}">Novo Fechamento</a>
     </li>
-@endsection
-@section('content')
+    @endsection
+    @section('content')
     <div class="container-fluid">
         <div class="row">
 
@@ -49,11 +49,11 @@
                                 @foreach($produtos as $produto)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $produto->produto_nome }}</td>
+                                        <td>{{ $produto->nome }}</td>
                                         <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
                                         <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
                                         <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
-                                        <td>{{ $produto->producao - ($produto->venda + $produto->desperdicio) }}</td>
+                                        <td>{{ $produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

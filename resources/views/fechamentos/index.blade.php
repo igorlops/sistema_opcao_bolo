@@ -38,6 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Data</th>
                                         <th>Cartão de crédito</th>
                                         <th>Cartão de débito</th>
                                         <th>Pix</th>
@@ -51,6 +52,7 @@
                                 @foreach($fechamentos as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
                                         <td>{{ $item->cartao_cred }}</td>
                                         <td>{{ $item->cartao_deb }}</td>
                                         <td>{{ $item->pix }}</td>

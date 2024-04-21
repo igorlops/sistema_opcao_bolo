@@ -131,7 +131,7 @@
                     <div class="card-header">Tipos de pagamentos</div>
                     @foreach ($filtro_pagamentos as $tipopagamento)
                         <div class="card-body">
-                            <p><strong>{{$tipopagamento->nome}}</strong> R$ <span>{{$tipopagamento->soma_valores}}</span></p>
+                            <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? $tipopagamento->soma_valores : '0.00'}}</span></p>
                         </div>
                     @endforeach
                 </div>
@@ -140,7 +140,7 @@
                     <div class="card-header">Tipos de saidas</div>
                     @foreach ($filtro_saida as $tiposaida)
                         <div class="card-body">
-                            <p><strong>{{$tiposaida->descricao}}</strong> R$ <span>{{$tiposaida->soma_saidas}}</span></p>
+                            <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? $tiposaida->soma_saidas : '0.00'}}</span></p>
                         </div>
                     @endforeach
                 </div>
@@ -149,7 +149,7 @@
                     <div class="card-header">Produtos mais vendidos</div>
                     @foreach ($filtro_vendas as $produto)
                         <div class="card-body">
-                            <p><strong>{{$produto->nome}}</strong> R$ <span>{{$produto->contador_produtos}}</span></p>
+                            <p><strong>{{$produto->nome}}:</strong> R$ <span>{{$produto->contador_produtos ? $produto->contador_produtos : '0.00'}}</span></p>
                         </div>
                     @endforeach
                 </div>
@@ -172,7 +172,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($entradas as $item)
+                        {{-- @foreach($entradas as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><span class="badge badge-success">Saídas</span></td>
@@ -181,7 +181,7 @@
                                 <td>{{ numero_iso_para_br($item->valor) }}</td>
                                 <td>{{ data_iso_para_br($item->created_at) }}</td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
                 {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
@@ -201,7 +201,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($saidas as $saida)
+                        {{-- @foreach($saidas as $saida)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><span class="badge badge-danger">Saída</span></td>
@@ -210,7 +210,7 @@
                                 <td>{{ numero_iso_para_br($saida->valor) }}</td>
                                 <td>{{ data_iso_para_br($saida->created_at) }}</td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
                 {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
@@ -218,7 +218,7 @@
         </div>
         <div class="tab-pane fade" id="totais-tab-pane" role="tabpanel" aria-labelledby="totais-tab" tabindex="0">
             <div class="pt-5">
-                <div class="card bg-dark">
+                {{-- <div class="card bg-dark">
                     <div class="card-body">
                         <h5>
                             Totais acumulados
@@ -230,9 +230,9 @@
 
                     <div class="p-3">
                         <h4>Relatórios gráficos</h4>
-                        {{-- <canvas id="graficoEntradas"></canvas> --}}
+                        {{-- <canvas id="graficoEntradas"></canvas>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

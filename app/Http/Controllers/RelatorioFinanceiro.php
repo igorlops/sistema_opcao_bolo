@@ -31,7 +31,7 @@ class RelatorioFinanceiro extends Controller
         }
         $data_inicial = \data_br_to_iso($request->data_inicial);
         $data_final = \data_br_to_iso($request->data_final);
-        // dd($request);
+
         $users = User::all();
         $formaPagamentos = TipoPagamento::all();
         $tipoSaidas = TipoSaida::all();
@@ -73,7 +73,7 @@ class RelatorioFinanceiro extends Controller
                 ->selectRaw('(SELECT COUNT("*")
                 FROM entradas
                 WHERE entradas.id_produto = produtos.id
-                '.($user_id || $user_id != '' ? "AND entradas.user_id = '$user_id" : '' ).'
+                '.($user_id || $user_id != '' ? "AND entradas.user_id = $user_id" : '' ).'
                 '.($formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento " : '').'
                 '.($produto || $produto != '' ? "AND entradas.id_produto = $produto " : '').'
                 AND entradas.created_at BETWEEN "'.$data_inicial.' 00:00:00"

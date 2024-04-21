@@ -39,6 +39,7 @@
                                         <th>ID</th><td>{{ $produto->id }}</td>
                                     </tr>
                                     <tr><th> Nome </th><td> {{ $produto->nome }} </td></tr><tr><th> É bolo extra? </th><td> {{ $produto->is_bolo_extra === 's' ? 'Sim' : 'Não' }} </td></tr>
+                                    <tr><th> Data de criação</th><td> {{ data_iso_para_br($produto->created_at )}} </td></tr>
                                 </tbody>
                             </table>
                         </div>

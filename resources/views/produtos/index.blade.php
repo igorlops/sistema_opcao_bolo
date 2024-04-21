@@ -37,7 +37,7 @@
                              <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Nome</th><th>É bolo extra?</th><th>Ações</th>
+                                        <th>#</th><th>Nome</th><th>É bolo extra?</th><th>Data</th><th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,6 +45,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nome }}</td><td>{{ $item->is_bolo_extra === 's' ? "Sim" : "Não"}}</td>
+                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
                                         <td>
                                             <a href="{{ url('/produtos/' . $item->id) }}" title="View Produto"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
                                             <a href="{{ url('/produtos/' . $item->id . '/edit') }}" title="Edit Produto"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>

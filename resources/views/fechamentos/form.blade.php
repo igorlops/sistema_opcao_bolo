@@ -25,7 +25,13 @@
         <div class="form-group row {{ $errors->has('total_caixa') ? 'has-error' : ''}}">
             <label for="total_caixa" class="col-form-label col-sm-2 required">{{ 'Total Caixa:' }}</label>
             <div class="col-sm-3">
-                <input class="form-control" name="total_caixa" type="text" id="total_caixa" value="{{ isset($fechamento->total_caixa) ? $fechamento->total_caixa : ''}}" required>
+                <input class="form-control" name="total_caixa" type="text" id="total_caixa"
+                @if ($formMode === 'edit')
+                    value="{{ isset($fechamento->total_caixa) ? $fechamento->total_caixa : ''}}"
+                @else
+                    value="{{isset($dinheiro) ? $dinheiro : '0'}}"
+                @endif
+                    required>
                 {!! $errors->first('total_caixa', '<p class="help-block">:message</p>') !!}
             </div>
         </div>

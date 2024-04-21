@@ -44,6 +44,7 @@
                                         <th>Usuário</th>
                                         <th>Observação</th>
                                         <th>Tipo de Pagamento</th>
+                                        <th>Data</th>
                                         <th>É metade?</th>
                                         <th>Ações</th>
                                     </tr>
@@ -58,6 +59,7 @@
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>{{ $item->tipo_pagamento->nome }}</td>
+                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
                                         <td>{{ $item->metade == 'on' ? 'Sim' : 'Não'}}</td>
 
                                         <td>
