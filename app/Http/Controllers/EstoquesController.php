@@ -96,9 +96,9 @@ class EstoquesController extends Controller
         Estoque::create($requestData);
 
         if(auth()->user()->type_user == 1){
-            return redirect()->route('estoques.index')->with('success', 'Estoque adicionado com sucesso!');
+            return redirect()->route('estoques.index')->with('success', 'Estoque adicionado!');
         }
-        return redirect()->route('estoques.create')->with('success', 'Estoque adicionado com sucesso!');
+        return redirect()->route('estoques.create')->with('success', 'Estoque adicionado!');
     }
 
     /**
@@ -149,7 +149,7 @@ class EstoquesController extends Controller
         $estoque = Estoque::findOrFail($id);
         $estoque->update($requestData);
 
-        return redirect()->route('estoques')->with('flash_message', 'Estoque updated!');
+        return redirect()->route('estoques')->with('success', 'Estoque atualizado!');
     }
 
     /**
@@ -163,6 +163,6 @@ class EstoquesController extends Controller
     {
         Estoque::destroy($id);
 
-        return redirect()->route('estoques')->with('flash_message', 'Estoque deleted!');
+        return redirect()->route('estoques')->with('success', 'Estoque deletado!');
     }
 }

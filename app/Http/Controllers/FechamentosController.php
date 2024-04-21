@@ -21,7 +21,7 @@ class FechamentosController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $fechamentos = Fechamento::where('vendas_extras', 'LIKE', "%$keyword%")
@@ -55,8 +55,8 @@ class FechamentosController extends Controller
         ->selectRaw('(SELECT COALESCE(count(*), 0) FROM entradas WHERE created_at LIKE "%'.$data_atual.'%" AND id_produto = produtos.id AND user_id = '.auth()->user()->id.') AS venda')
         ->get();
 
-        $desperdicio = Estoque::where('tipo_estoque','=','d')->sum('quantidade');
-        $producao = Estoque::where('tipo_estoque','=','p')->sum('quantidade');
+        $desperdicio = Estoque::where('tipo_estoque','=','d')->where('user_id', '=', auth()->user()->id)->sum('quantidade');
+        $producao = Estoque::where('tipo_estoque','=','p')->where('user_id', '=', auth()->user()->id)->sum('quantidade');
         $entrada = Entrada::count('*');
         $sobra = $producao - ($desperdicio + $entrada);
 
@@ -89,8 +89,11 @@ class FechamentosController extends Controller
         $requestData = $request->all();
 
         Fechamento::create($requestData);
+        if(auth()->user()->type_user == 2){
+            return redirect()->route('fechamentos.create')->with('success', 'Fechamento adicionado!');
+        }
 
-        return redirect()->route('fechamentos')->with('flash_message', 'Fechamento added!');
+        return redirect()->route('fechamentos.index')->with('success', 'Fechamento adicionado!');
     }
 
     /**
@@ -143,7 +146,7 @@ class FechamentosController extends Controller
         $fechamento = Fechamento::findOrFail($id);
         $fechamento->update($requestData);
 
-        return redirect()->route('fechamentos')->with('flash_message', 'Fechamento updated!');
+        return redirect()->route('fechamentos')->with('success', 'Fechamento atualizado!');
     }
 
     /**
@@ -157,6 +160,6 @@ class FechamentosController extends Controller
     {
         Fechamento::destroy($id);
 
-        return redirect()->route('fechamentos')->with('flash_message', 'Fechamento deleted!');
+        return redirect()->route('fechamentos')->with('success', 'Fechamento deletado!');
     }
 }

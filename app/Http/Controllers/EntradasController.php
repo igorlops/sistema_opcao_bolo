@@ -20,7 +20,7 @@ class EntradasController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $entradas = Entrada::where('tipo_entrada', 'LIKE', "%$keyword%")
@@ -68,9 +68,9 @@ class EntradasController extends Controller
         Entrada::create($requestData);
 
         if(auth()->user()->type_user == 2){
-            return redirect()->route('entradas.create');
+            return redirect()->route('entradas.create')->with('success', 'Entrada Adicionada!');
         }
-        return redirect()->route('entradas.index')->with('flash_message', 'Entrada added!');
+        return redirect()->route('entradas.index')->with('success', 'Entrada Adicionada!');
     }
 
     /**
@@ -83,7 +83,6 @@ class EntradasController extends Controller
     public function show($id)
     {
         $entrada = Entrada::findOrFail($id);
-
         return view('entradas.show', compact('entrada'));
     }
 
@@ -123,7 +122,7 @@ class EntradasController extends Controller
         $entrada = Entrada::findOrFail($id);
         $entrada->update($requestData);
 
-        return redirect()->route('entradas.index')->with('flash_message', 'Entrada updated!');
+        return redirect()->route('entradas.index')->with('success', 'Entrada Atualizada!');
     }
 
     /**
@@ -137,6 +136,6 @@ class EntradasController extends Controller
     {
         Entrada::destroy($id);
 
-        return redirect()->route('entradas.index')->with('flash_message', 'Entrada deleted!');
+        return redirect()->route('entradas.index')->with('success', 'Entrada deletada!');
     }
 }

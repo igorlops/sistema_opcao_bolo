@@ -110,13 +110,13 @@
 
     <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user-tab-pane" type="button" role="tab" aria-controls="user-tab-pane" aria-selected="true">Usuários</button>
+            <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user-tab-pane" type="button" role="tab" aria-controls="user-tab-pane" aria-selected="true">Resumo</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="in-out-tab" data-bs-toggle="tab" data-bs-target="#in-out-tab-pane" type="button" role="tab" aria-controls="in-out-tab-pane" aria-selected="false">Entradas/Saídas</button>
+            <button class="nav-link" id="in-out-tab" data-bs-toggle="tab" data-bs-target="#in-out-tab-pane" type="button" role="tab" aria-controls="in-out-tab-pane" aria-selected="false">Totais</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="totais-tab" data-bs-toggle="tab" data-bs-target="#totais-tab-pane" type="button" role="tab" aria-controls="totais-tab-pane" aria-selected="false">Totais</button>
+            <button class="nav-link" id="totais-tab" data-bs-toggle="tab" data-bs-target="#totais-tab-pane" type="button" role="tab" aria-controls="totais-tab-pane" aria-selected="false">Lucros</button>
         </li>
     </ul>
 
@@ -125,21 +125,34 @@
 
         {{-- Cards com detalhes das saidas por usuário --}}
         <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
+            <h2 class="text-center mt-4">Resumo</h2>
             <div class="col-12 d-flex justify-content-around pt-5">
-                @foreach ($results as $result)
-                    @empty($result)
-                        Não há dados para serem exibidos
-                    @endempty
-                    <div class="card bg-dark">
+                <div class="card bg-dark">
+                    <div class="card-header">Tipos de pagamentos</div>
+                    @foreach ($filtro_pagamentos as $tipopagamento)
                         <div class="card-body">
-                            <div class="header"><strong>{{$result->name}}</strong></div>
-                            <hr>
-                            <p><strong>Total entradas:</strong> R$ {{numero_iso_para_br($result->total_entradas)}}</p>
-                            <p><strong>Total saídas:</strong> R$ {{numero_iso_para_br($result->total_saidas)}}</p>
-                            {{-- <a href="{{route('relatorios.user_details')}}/user/{{$user->id}}" class="btn btn-secondary">Ver mais</a> --}}
+                            <p><strong>{{$tipopagamento->nome}}</strong> R$ <span>{{$tipopagamento->soma_valores}}</span></p>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                <div class="card bg-dark">
+                    <div class="card-header">Tipos de saidas</div>
+                    @foreach ($filtro_saida as $tiposaida)
+                        <div class="card-body">
+                            <p><strong>{{$tiposaida->descricao}}</strong> R$ <span>{{$tiposaida->soma_saidas}}</span></p>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="card bg-dark">
+                    <div class="card-header">Produtos mais vendidos</div>
+                    @foreach ($filtro_vendas as $produto)
+                        <div class="card-body">
+                            <p><strong>{{$produto->nome}}</strong> R$ <span>{{$produto->contador_produtos}}</span></p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
 

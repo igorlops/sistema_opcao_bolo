@@ -18,7 +18,7 @@ class TipoSaidasController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $tiposaidas = TipoSaida::where('descricao', 'LIKE', "%$keyword%")
@@ -53,10 +53,10 @@ class TipoSaidasController extends Controller
 			'descricao' => 'required|string'
 		]);
         $requestData = $request->all();
-        
+
         TipoSaida::create($requestData);
 
-        return redirect()->route('tipo-saidas.index')->with('flash_message', 'TipoSaida added!');
+        return redirect()->route('tipo-saidas.index')->with('success', 'Tipo de saída adicionado!');
     }
 
     /**
@@ -101,11 +101,11 @@ class TipoSaidasController extends Controller
 			'descricao' => 'required|string'
 		]);
         $requestData = $request->all();
-        
+
         $tiposaida = TipoSaida::findOrFail($id);
         $tiposaida->update($requestData);
 
-        return redirect()->route('tipo-saidas.index')->with('flash_message', 'TipoSaida updated!');
+        return redirect()->route('tipo-saidas.index')->with('success', 'TipoSaida updated!');
     }
 
     /**
@@ -119,6 +119,6 @@ class TipoSaidasController extends Controller
     {
         TipoSaida::destroy($id);
 
-        return redirect()->route('tipo-saidas.index')->with('flash_message', 'TipoSaida deleted!');
+        return redirect()->route('tipo-saidas.index')->with('success', 'TipoSaida deleted!');
     }
 }

@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
     <script src="{{asset('js/app.js')}}"></script>
 
     <!-- Fonts -->
@@ -65,35 +66,53 @@
 
           @endif
 
-          @if(session('success'))
-            <script>
-                $(document).ready(function(){
-                    $('#modal_success').modal('show');
-                    setTimeout(function(){
-                        $('#modal_success').modal('hide');
+            @if(session('success'))
+                <div class="modal fade" id="modal_success" tabindex="-1" aria-labelledby="Cadastrado com sucesso" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content  bg-dark text-white">
+                            <div class="modal-body">
+                                <div class="wrapper_check_success p-3">
+                                    <h3>{{session('success')}}</h3>
+                                    <svg
+                                    class="checkmark"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 52 52"
+                                    >
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                    <path
+                                        class="checkmark__check"
+                                        fill="none"
+                                        d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                                    />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('#modal_success').modal('show');
+
+                        // Adiciona a classe de animação quando o modal é mostrado
+                        $('#modal_success').on('shown.bs.modal', function () {
+                            $('#check-icon').addClass('animate__animated animate__bounce');
+                        });
+
                         setTimeout(function(){
+                            $('#modal_success').modal('hide');
+
                             // Remover a session 'success'
                             {!! session()->forget('success') !!}
-                        }, 1000);
-                    }, 1000);
-                });
-            </script>
-        @endif
+                        }, 3000);
 
-<!-- Modal -->
-<div class="modal fade" id="modal_success" tabindex="-1" aria-labelledby="Cadastrado com sucesso" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sucesso!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {{ session('success') }}
-            </div>
-        </div>
-    </div>
-</div>
+                        // Remove a classe de animação quando o modal é fechado
+                        $('#modal_success').on('hidden.bs.modal', function () {
+                            $('#check-icon').removeClass('animate__animated animate__bounce');
+                        });
+                    });
+                </script>
+            @endif
 
             <!-- Main content -->
 

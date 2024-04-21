@@ -18,7 +18,7 @@ class ProdutosFechamentosController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $produtosfechamentos = ProdutosFechamento::where('producao', 'LIKE', "%$keyword%")
@@ -62,10 +62,9 @@ class ProdutosFechamentosController extends Controller
 			'id_fechamento' => 'required'
 		]);
         $requestData = $request->all();
-        
-        ProdutosFechamento::create($requestData);
 
-        return redirect()->route('produtos-fechamentos')->with('flash_message', 'ProdutosFechamento added!');
+        ProdutosFechamento::create($requestData);
+        return redirect()->route('fechamentos.index');
     }
 
     /**
@@ -113,11 +112,11 @@ class ProdutosFechamentosController extends Controller
 			'id_fechamento' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $produtosfechamento = ProdutosFechamento::findOrFail($id);
         $produtosfechamento->update($requestData);
 
-        return redirect()->route('produtos-fechamentos')->with('flash_message', 'ProdutosFechamento updated!');
+        return redirect()->route('produtos-fechamentos')->with('success', 'ProdutosFechamento updated!');
     }
 
     /**
@@ -131,6 +130,6 @@ class ProdutosFechamentosController extends Controller
     {
         ProdutosFechamento::destroy($id);
 
-        return redirect()->route('produtos-fechamentos')->with('flash_message', 'ProdutosFechamento deleted!');
+        return redirect()->route('produtos-fechamentos')->with('success', 'ProdutosFechamento deleted!');
     }
 }

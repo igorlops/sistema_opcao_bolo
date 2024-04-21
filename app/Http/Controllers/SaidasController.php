@@ -19,7 +19,7 @@ class SaidasController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $saidas = Saida::where('valor', 'LIKE', "%$keyword%")
@@ -63,9 +63,9 @@ class SaidasController extends Controller
 
         Saida::create($requestData);
         if(auth()->user()->type_user == 2){
-            return redirect()->route('saidas.create');
+            return redirect()->route('saidas.create')->with('success', 'Saida cadastrada!');
         }
-        return redirect()->route('saidas.index')->with('flash_message', 'Saida added!');
+        return redirect()->route('saidas.index')->with('success', 'Saida cadastrada!');
     }
 
     /**
@@ -116,7 +116,7 @@ class SaidasController extends Controller
         $saida = Saida::findOrFail($id);
         $saida->update($requestData);
 
-        return redirect()->route('saidas.index')->with('flash_message', 'Saida updated!');
+        return redirect()->route('saidas.index')->with('success', 'Saida atualizada!');
     }
 
     /**
@@ -130,6 +130,6 @@ class SaidasController extends Controller
     {
         Saida::destroy($id);
 
-        return redirect()->route('saidas.index')->with('flash_message', 'Saida deleted!');
+        return redirect()->route('saidas.index')->with('success', 'Saida deletada!');
     }
 }

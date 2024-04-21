@@ -18,7 +18,7 @@ class ProdutosController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $produtos = Produto::where('nome', 'LIKE', "%$keyword%")
@@ -55,10 +55,10 @@ class ProdutosController extends Controller
 			'is_bolo_extra' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         Produto::create($requestData);
 
-        return redirect()->route('produtos.index')->with('flash_message', 'Produto added!');
+        return redirect()->route('produtos.index')->with('success', 'Produto adicionado!');
     }
 
     /**
@@ -104,11 +104,11 @@ class ProdutosController extends Controller
 			'is_bolo_extra' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $produto = Produto::findOrFail($id);
         $produto->update($requestData);
 
-        return redirect()->route('produtos.index')->with('flash_message', 'Produto updated!');
+        return redirect()->route('produtos.index')->with('success', 'Produto atualizado!');
     }
 
     /**
@@ -122,6 +122,6 @@ class ProdutosController extends Controller
     {
         Produto::destroy($id);
 
-        return redirect()->route('produtos.index')->with('flash_message', 'Produto deleted!');
+        return redirect()->route('produtos.index')->with('success', 'Produto deletado!');
     }
 }

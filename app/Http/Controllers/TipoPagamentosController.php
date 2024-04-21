@@ -18,7 +18,7 @@ class TipoPagamentosController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $tipopagamentos = TipoPagamento::where('nome', 'LIKE', "%$keyword%")
@@ -53,10 +53,10 @@ class TipoPagamentosController extends Controller
 			'nome' => 'required|string|max:255'
 		]);
         $requestData = $request->all();
-        
+
         TipoPagamento::create($requestData);
 
-        return redirect()->route('tipo-pagamentos.index')->with('flash_message', 'TipoPagamento added!');
+        return redirect()->route('tipo-pagamentos.index')->with('success', 'Tipo de pagamento adicionado!');
     }
 
     /**
@@ -101,11 +101,11 @@ class TipoPagamentosController extends Controller
 			'nome' => 'required|string|max:255'
 		]);
         $requestData = $request->all();
-        
+
         $tipopagamento = TipoPagamento::findOrFail($id);
         $tipopagamento->update($requestData);
 
-        return redirect()->route('tipo-pagamentos.index')->with('flash_message', 'TipoPagamento updated!');
+        return redirect()->route('tipo-pagamentos.index')->with('success', 'TipoPagamento updated!');
     }
 
     /**
@@ -119,6 +119,6 @@ class TipoPagamentosController extends Controller
     {
         TipoPagamento::destroy($id);
 
-        return redirect()->route('tipo-pagamentos.index')->with('flash_message', 'TipoPagamento deleted!');
+        return redirect()->route('tipo-pagamentos.index')->with('success', 'TipoPagamento deleted!');
     }
 }

@@ -19,7 +19,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
             $users = User::where('name', 'LIKE', "%$keyword%")
@@ -63,7 +63,7 @@ class UsersController extends Controller
 
         User::create($requestData);
 
-        return redirect()->route('users.index')->with('flash_message', 'User added!');
+        return redirect()->route('users.index')->with('success', 'User adicionado!');
     }
 
     /**
@@ -115,7 +115,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->update($requestData);
 
-        return redirect()->route('users.index')->with('flash_message', 'User updated!');
+        return redirect()->route('users.index')->with('success', 'User usuário atualizado!');
     }
 
     /**
@@ -129,6 +129,6 @@ class UsersController extends Controller
     {
         User::destroy($id);
 
-        return redirect()->route('users.index')->with('flash_message', 'User deleted!');
+        return redirect()->route('users.index')->with('success', 'User deleted!');
     }
 }

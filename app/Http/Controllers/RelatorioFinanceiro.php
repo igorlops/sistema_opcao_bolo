@@ -29,65 +29,62 @@ class RelatorioFinanceiro extends Controller
                 ->format('d/m/Y')
             ]);
         }
-        // $saldo = Saldo::buscaPorIntervalo(
-        //     $empresa->id,
-        //     data_br_to_iso($request->data_inicial),
-        //     data_br_to_iso($request->data_final)
-        // );
-
-        $user_id = $request->usuario_select;
-        // Filtrar entradas e saídas pelo usuário, se o ID do usuário estiver presente na solicitação
-        $entradasQuery = $user_id ? Entrada::where('user_id', $user_id) : Entrada::query();
-        $saidasQuery = $user_id ? Saida::where('user_id', $user_id) : Saida::query();
-        $entrada = $entradasQuery->get();
-        $saida = $saidasQuery-> get();
-        $total_entradas = $entradasQuery->sum('valor');
-        $total_saidas = $saidasQuery->sum('valor');
-        $diferenca = $total_entradas - $total_saidas;
-
-        // elementos do select no relatório financeiro
+        dd($$request);
         $users = User::all();
         $formaPagamentos = TipoPagamento::all();
-        $tipoSaida = TipoSaida::all();
+        $tipoSaidas = TipoSaida::all();
         $produtos = Produto::all();
 
-        $resultados = User::join('entradas', 'users.id', '=', 'entradas.user_id')
-        ->join('saidas', 'users.id', '=', 'saidas.user_id');
-        if($user_id){
-            $resultados->select(
-                'users.name',
-                DB::raw('SUM(CASE WHEN entradas.user_id = ' . $user_id . ' THEN entradas.valor ELSE 0 END) as total_entradas'),
-                DB::raw('SUM(CASE WHEN saidas.user_id = ' . $user_id . ' THEN saidas.valor ELSE 0 END) as total_saidas')
-            );
-        } else {
-            $resultados->select(
-                'users.name'
-            )
-            ->selectRaw('(SELECT SUM(entradas.valor) FROM entradas) as total_entradas')
-            ->selectRaw('(SELECT SUM(saidas.valor) FROM saidas) as total_saidas');
-        }
+        $user_id = $request->usuario_select;
+        $formaPagamento = $request->formaPagamento;
+        $tipoSaida = $request->tipo_saida;
+        $produto = $request->produto;
 
-        $resultados = $resultados->groupBy('users.name')->get();
+        $pagamentos = TipoPagamento::select('tipo_pagamentos.id', 'tipo_pagamentos.nome')
+    ->selectRaw('(SELECT SUM(entradas.valor)
+    FROM entradas
+    WHERE entradas.id_tipo_pagamento = tipo_pagamentos.id
+    '.($user_id || $user_id != '' ? "AND entradas.user_id = '$user_id'" : '').'
+    '.($formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento" : '').'
+    '.($produto || $produto != '' ? "AND entradas.id_produto = $produto" : '').'
+    AND entradas.created_at BETWEEN "'.$request->data_inicial.' 00:00:00" AND "'.$request->data_final.' 23:59:59") as soma_valores')
+    ->whereBetween('tipo_pagamentos.created_at', ["$request->data_inicial 00:00:00", "$request->data_final 23:59:59"])
+    ->groupBy('tipo_pagamentos.id', 'tipo_pagamentos.nome')
+    ->get();
+
+
+        $saida = TipoSaida::select('tipo_saidas.descricao','tipo_saidas.id')
+                ->selectRaw('(SELECT SUM("saidas.valor")
+                FROM saidas
+                WHERE saidas.id_descricao = tipo_saidas.id
+                '.$user_id || $user_id != '' ? "AND saidas.user_id = $user_id " : ''.'
+                '.$tipoSaida || $tipoSaida != '' ? "AND saidas.id_descricao = $tipoSaida " : ''.'
+                AND saidas.created_at BETWEEN "'.$request->data_inicial.' 00:00:00" AND "'.$request->data_final.' 23:59:59") as soma_saidas)')
+                ->whereBetween('created_at',[$request->data_inicial,$request->data_final])
+                ->groupBy('tipo_saidas.descricao','tipo_saidas.id')
+                ->get();
+
+        $produto_vendidos = Produto::select('produtos.id','produtos.nome')
+                ->selectRaw('(SELECT COUNT("*")
+                FROM entradas
+                WHERE entradas.id_produto = produtos.id
+                '.$user_id || $user_id != '' ? "AND entradas.user_id = '$user_id" : '' .'
+                '.$formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento " : ''.'
+                '.$produto || $produto != '' ? "AND entradas.id_produto = $produto " : ''.'
+                AND entradas.created_at BETWEEN "'.$request->data_inicial.' 00:00:00" AND "'.$request->data_final.' 23:59:59") as contador_produtos)')
+                ->whereBetween('created_at',[$request->data_inicial,$request->data_final])
+                ->groupBy('produtos.nome','produtos.id')
+                ->get();
 
         return view('relatorios.index', [
-            'total_entradas' => $total_entradas,
-            'total_saidas' => $total_saidas,
-            'diferenca' => $diferenca,
-            'saidas'=>$saida,
-            'entradas'=>$entrada,
             'users'=>$users,
-            'results' => $resultados,
             'pagamentos' => $formaPagamentos,
-            'tipoSaidas' => $tipoSaida,
-            'produtos' => $produtos
+            'tipoSaidas' => $tipoSaidas,
+            'produtos' => $produtos,
+            'filtro_pagamentos' => $pagamentos,
+            'filtro_saida' => $saida,
+            'filtro_vendas' => $produto_vendidos
         ]);
 
-    }
-
-    public function user_details($id)
-    {
-        $saida = Saida::findOrFail($id);
-
-        return view('relatorios.user_details', compact('saida'));
     }
 }
