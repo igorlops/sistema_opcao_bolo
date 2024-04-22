@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-center flex-row bg-danger" style="position: relative">
-        <div style="position: absolute">
+        <div class="background-login" style="position: absolute;height:100vh">
             <img src="images/imagem_login.jpg" alt="imagem background" style="width:100%">
         </div>
         <div class="formulario-login">

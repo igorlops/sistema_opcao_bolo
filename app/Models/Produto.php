@@ -41,6 +41,4 @@ class Produto extends Model
         ->get();
         return $produtos;
     }
-
-
 }

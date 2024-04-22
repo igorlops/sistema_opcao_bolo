@@ -70,20 +70,25 @@
 //   Fim check success
 
 @media screen and (max-width:991px) {
-    .menu-desktop {
-        display: none;
-    }
-    .menu-mobile {
-        display: block;
-    }
-    .breadcrumb {
-        display: none;
-    }
-    .formulario-login{
-        width:100%!important;
-    }
-    .imagem-login{
-        position: absolute;
-        width: 100%!important;
-    }
+  .menu-desktop {
+      display: none;
+  }
+  .menu-mobile {
+      display: block;
+  }
+  .breadcrumb {
+      display: none;
+  }
+  .formulario-login{
+      width:100%!important;
+  }
+  .imagem-login{
+      position: absolute;
+      width: 100%!important;
+  }
+}
+@media screen and (max-width:630px) {
+  .background-login img {
+    height: 100%;
+  }
 }

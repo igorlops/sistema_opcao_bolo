@@ -74,7 +74,6 @@ class HomeController extends Controller
                 break;
         }
         if(auth()->user()->type_user == 1 ){
-            $user_id = $request->user_id;
             if(!$request->filled('data_ini_home') || !$request->filled('data_fin_home')){
                 return redirect()->route('home',[
                     'data_ini_home'=>(new \DateTime('first day of this month'))
@@ -83,51 +82,42 @@ class HomeController extends Controller
                     ->format('d/m/Y')
                 ]);
             }
+            $user_id = $request->user_id;
             $data_ini = $request->data_ini_home;
             $data_fin = $request->data_fin_home;
+            $resultados = Entrada::query();
 
             $users = User::all();
 
-            $entradas = Entrada::query();
-            $saidas = Saida::query();
-            $produtos = Produto::query();
-
             if($user_id){
-                $entradas->where('user_id' ,'=',$user_id)->sum('valor');
-                $saidas->where('user_id','=',$user_id)->sum('valor');
-
-                $produtos->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id AND estoques.user_id = $user_id) AS producao")
-                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade IS NULL AND entradas.user_id = $user_id ) AS vendaInteiras")
-                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade = 'on' AND entradas.user_id = $user_id ) AS vendaMetades")
-                ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id AND estoques.user_id = $user_id) AS desperdicio")
-                ->leftJoin('estoques', 'estoques.id_produto', '=', 'produtos.id')
-                ->join('entradas','entradas.id_produto','produtos.id')
-                ->where('estoques.user_id','=',$user_id);
+                $resultados = $resultados
+                    ->select(
+                        DB::raw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.') AS venda'),
+                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d" AND user_id = '.$user_id.') AS totaldesperdicio'),
+                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p" AND user_id = '.$user_id.') AS totalproducao'),
+                        DB::raw('(SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.') AS totalvenda'),
+                        DB::raw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.') AS totalentrada'),
+                        DB::raw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.') AS totalsaida')
+                    )
+                    ->limit(1)
+                    ->get();
 
             }else {
-                $produtos->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'p' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id) AS producao")
-                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade = 'on' ) AS vendaMetades")
-                ->selectRaw("(SELECT COUNT(entradas.valor) FROM entradas WHERE entradas.id_produto = produtos.id AND entradas.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND entradas.metade IS NULL ) AS vendaInteiras")
-                ->selectRaw("(SELECT SUM(estoques.quantidade) FROM estoques WHERE tipo_estoque = 'd' AND estoques.created_at BETWEEN '".data_br_to_iso($data_ini)." 00:00:00' AND '".data_br_to_iso($data_fin)." 23:59:59' AND id_produto = produtos.id) AS desperdicio")
-                ->join('estoques', 'estoques.id_produto', 'produtos.id')
-                ->join('entradas','entradas.id_produto','produtos.id');
-
-                $entradas->sum('valor');
-                $saidas->sum('valor');
+                $resultados = $resultados
+                    ->select(
+                        DB::raw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS venda'),
+                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d") AS totaldesperdicio'),
+                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p") AS totalproducao'),
+                        DB::raw('(SELECT COUNT(*) FROM entradas) AS totalvenda'),
+                        DB::raw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalentrada'),
+                        DB::raw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalsaida')
+                    )
+                    ->limit(1)
+                    ->get();
             }
-            $produtos = $produtos->get();
-            // dd($produtos);
-            $entradas = $entradas->get();
-            $saidas = $saidas->get();
-            // $resultados = $entradas - $saidas;
-            $sobra = $produtos === [] ? $produtos->producao - ($produtos->venda + $produtos->desperdicio) : 0;
-
             return view('home', [
                 'users' => $users,
-                'entradas' => $entradas,
-                'saidas' => $saidas,
-                'produtos' => $produtos,
-                'sobra' => $sobra,
+                'resultados' => $resultados,
                 'mes' => $mes
             ]);
         }
