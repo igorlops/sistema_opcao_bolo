@@ -126,32 +126,50 @@
         {{-- Cards com detalhes das saidas por usuário --}}
         <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
             <h2 class="text-center mt-4">Resumo</h2>
-            <div class="col-12 d-flex justify-content-around pt-5">
-                <div class="card bg-dark">
-                    <div class="card-header">Tipos de pagamentos</div>
-                    @foreach ($filtro_pagamentos as $tipopagamento)
-                        <div class="card-body">
-                            <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? $tipopagamento->soma_valores : '0.00'}}</span></p>
+                <div class="d-flex justify-content-between flex-column">
+                    <div class="col-12 d-flex justify-content-around pt-5 px-0">
+                        <div class="col-6">
+                            <div class="card bg-dark">
+                                <div class="card-header">Tipos de pagamentos</div>
+                                <div class="card-body">
+                                    @foreach ($filtro_pagamentos as $tipopagamento)
+                                        <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? $tipopagamento->soma_valores : '0.00'}}</span></p>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                    @endforeach
-                </div>
-
-                <div class="card bg-dark">
-                    <div class="card-header">Tipos de saidas</div>
-                    @foreach ($filtro_saida as $tiposaida)
-                        <div class="card-body">
-                            <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? $tiposaida->soma_saidas : '0.00'}}</span></p>
+                        <div class="col-6">
+                            <div class="card bg-dark">
+                                <div class="card-header">Tipos de saidas</div>
+                                <div class="card-body">
+                                    @foreach ($filtro_saida as $tiposaida)
+                                        <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? $tiposaida->soma_saidas : '0.00'}}</span></p>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                    @endforeach
-                </div>
-
-                <div class="card bg-dark">
-                    <div class="card-header">Produtos mais vendidos</div>
-                    @foreach ($filtro_vendas as $produto)
-                        <div class="card-body">
-                            <p><strong>{{$produto->nome}}:</strong> R$ <span>{{$produto->contador_produtos ? $produto->contador_produtos : '0.00'}}</span></p>
+                    </div>
+                    <div class="col-12">
+                        <div class="card bg-dark">
+                            <div class="card-header">Produtos mais vendidos</div>
+                            <div class="card-body">
+                                <table class="table table-hover table-dark">
+                                    <thead>
+                                    @foreach ($filtro_vendas as $produto)
+                                        <th>{{$produto->nome}}</th>
+                                    @endforeach
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($filtro_vendas as $produto)
+                                                <td>{{$produto->contador_produtos ? $produto->contador_produtos : '0'}}</td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>

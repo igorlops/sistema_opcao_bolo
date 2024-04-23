@@ -14,13 +14,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Estoques</div>
+                    <div class="card-header"><h3>Relatório de estoque atual</h3></div>
                     <div class="card-body">
                         <a href="{{ route('estoques.create') }}" class="btn btn-success btn-sm" title="Novo Estoque">
                             <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
-                        <form method="GET" 
+                        <form method="GET"
                             action="{{ url('/estoques') }}"
                             accept-charset="UTF-8"
                             class="form-inline my-2 my-lg-0 float-right">
@@ -76,9 +76,48 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{-- <div class="pagination-wrapper"> {!! $estoques->appends(['search' => Request::get('search')])->render() !!} </div>  --}}
                         </div>
+                    </div>
+                </div>
 
+                <div class="card bg-dark">
+                    <div class="card-header">
+                        <h3>Histórico de estoque</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                               <thead>
+                                   <tr>
+                                       <th>#</th>
+                                       <th>Usuário</th>
+                                       <th>Produto</th>
+                                       <th>Tipo</th>
+                                       <th>Quantidade</th>
+                                       <th>Data</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                               @foreach($estoques as $estoque)
+                                   <tr>
+                                       <td>{{ $loop->iteration }}</td>
+                                       <td>{{ $estoque->user->name }}</td>
+                                       <td>{{ $estoque->produto->nome}}</td>
+                                       <td>{{ $estoque->tipo_estoque === "p" ? "Produção" : "Desperdício"}}</td>
+                                       <td>{{ $estoque->quantidade}}</td>
+                                       <td>{{ data_iso_para_br($estoque->created_at) }}</td>
+                                   </tr>
+                               @endforeach
+                               </tbody>
+                            </table>
+                            <div class="pagination-wrapper">
+                                {!! $estoques->appends([
+                                    'user_selected' => Request::get('user_selected'),
+                                    'data_ini' => Request::get('data_ini'),
+                                    'data_fin' => Request::get('data_fin')
+                                    ])->render() !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

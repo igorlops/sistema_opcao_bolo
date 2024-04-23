@@ -73,53 +73,38 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
 
+                <div class="card bg-dark">
+                    <div class="card-body">
                         <h3>Resumo do fechamento:</h3>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover">
-                               <tbody>
-                                   <tr>
-                                       <th>ID</th><td>{{ $fechamento->id }}</td>
-                                   </tr>
-                                   <tr>
-                                       <th> Vendas Extras </th>
-                                       <td> {{ $fechamento->vendas_extras }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Desconto </th>
-                                       <td> {{ $fechamento->desconto }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Vendas ABC </th>
-                                       <td> {{ $fechamento->vendas_abc }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Env.: </th>
-                                       <td> {{ $fechamento->env }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Cartão de crédito </th>
-                                       <td> {{ $fechamento->cartao_cred }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Cartão de débito </th>
-                                       <td> {{ $fechamento->cartao_deb }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Pix </th>
-                                       <td> {{ $fechamento->pix }} </td>
-                                   </tr>
-                                   <tr>
-                                       <th> Total caixa</th>
-                                       <td> {{ $fechamento->total_caixa }} </td>
-                                   </tr>
-                               </tbody>
-                           </table>
-                       </div>
-                        @foreach ($produtos_fechamentos as $produto)
-
-                        @endforeach
-
+                        <table class="table table-dark table-hover">
+                            <div class="table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Produto</th>
+                                        <th>Produção</th>
+                                        <th>Desperdício</th>
+                                        <th>Vendas</th>
+                                        <th>Sobra</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($produtos_fechamentos as $produto)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $produto->produto->nome }}</td>
+                                            <td>{{ $produto->producao}}</td>
+                                            <td>{{ $produto->desperdicio}}</td>
+                                            <td>{{ $produto->bolos_vendidos}}</td>
+                                            <td>{{ $produto->sobra}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </div>
+                        </table>
                     </div>
                 </div>
             </div>

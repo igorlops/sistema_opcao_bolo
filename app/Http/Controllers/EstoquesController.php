@@ -28,21 +28,23 @@ class EstoquesController extends Controller
                 ->format('d/m/Y')
             ]);
         }
-        $user_id = null;
-        if($request->user_selected){
-            $user_id = $request->user_selected;
-        }
+        $user_id = $request->get('user_selected');
+        $perPage = 10;
         $users = User::all();
         $produtos = new Produto();
-
-        if(auth()->user()->type_user == 1){
-            $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini),data_br_to_iso($request->data_fin));
-
-        } else if (auth()->user()->type_user == 2 || $user_id){
+        $estoques = Estoque::query();
+        if (auth()->user()->type_user == 2 || !empty($user_id)){
+            $estoques = $estoques
+                ->where('user_id','=',auth()->user()->type_user == 2 ? auth()->user()->id : $user_id)
+                ->whereBetween('created_at',[data_br_to_iso($request->data_ini),data_br_to_iso($request->data_fin)])->latest()->paginate($perPage);
             $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini),data_br_to_iso($request->data_fin), auth()->user()->type_user == 2 ? auth()->user()->id : $user_id);
         }
+        else if(auth()->user()->type_user == 1){
+            $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini),data_br_to_iso($request->data_fin));
+            $estoques = $estoques->whereBetween('created_at',[data_br_to_iso($request->data_ini),data_br_to_iso($request->data_fin)])->latest()->paginate($perPage);
+        }
         // dd("Entrei aqui");
-        return view('estoques.index',compact('produtos','users'));
+        return view('estoques.index',compact('produtos','users','estoques'));
     }
 
     /**
