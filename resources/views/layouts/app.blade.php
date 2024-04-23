@@ -15,6 +15,7 @@
 
 
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/jquery.mask.min.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -134,7 +135,28 @@
             </div>
             <strong>Copyright &copy; 2024 | Todos os direitos reservados.
         </footer>
+        <script>
 
+            $('.cpf_cnpj').mask('999.999.999-99')
+            $('.celular').mask('(99) 9 9999-9999')
+            $('.phone').mask('(99) 9999-9999')
+            $('.cep').mask('99999-999')
+            $('.data').mask('00/00/0000')
+            $('.money').mask('000.000.000.000.000.000,00',{reverse:true})
+
+            function diferencaCaixa(){
+                let env = document.getElementById('env');
+                let diferenca = document.getElementById('diferenca');
+                let totalCaixa = document.getElementById('total_caixa');
+
+                let valorEnvolope = parseFloat(env.value);
+                let valorTotal = parseFloat(totalCaixa.value);
+                let total =  valorEnvolope - valorTotal
+                if(total){
+                    diferenca.value = total;
+                }
+            }
+        </script>
     </div>
 </body>
 </html>

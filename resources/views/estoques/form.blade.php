@@ -11,7 +11,7 @@
 <div class="form-group row {{ $errors->has('quantidade') ? 'has-error' : ''}}">
     <label for="quantidade" class="col-form-label col-sm-2 required">{{ 'Quantidade' }}</label>
     <div class="col-sm-10">
-        <input class="form-control" name="quantidade" type="number" id="quantidade" value="{{ isset($estoque->quantidade) ? $estoque->quantidade : ''}}" required>
+        <input class="form-control money" name="quantidade" type="number" id="quantidade" value="{{ isset($estoque->quantidade) ? $estoque->quantidade : ''}}" required>
         {!! $errors->first('quantidade', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

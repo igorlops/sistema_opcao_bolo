@@ -30,7 +30,7 @@
 <div class="form-group row {{ $errors->has('valor') ? 'has-error' : ''}}">
     <label for="valor" class="col-form-label col-sm-2 required">{{ 'Valor' }}</label>
     <div class="col-sm-10">
-        <input class="form-control" name="valor" type="text" id="valor" value="{{ isset($entrada->valor) ? $entrada->valor : ''}}" required>
+        <input class="form-control money" name="valor" type="text" id="valor" value="{{ isset($entrada->valor) ? $entrada->valor : ''}}" required>
         {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

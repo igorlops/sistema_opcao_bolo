@@ -202,7 +202,7 @@
                         @endforeach --}}
                     </tbody>
                 </table>
-                {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div>
             </div>
 
             <h2 class="pt-5">Saídas</h2>
@@ -231,26 +231,21 @@
                         @endforeach --}}
                     </tbody>
                 </table>
-                {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div>
             </div>
         </div>
         <div class="tab-pane fade" id="totais-tab-pane" role="tabpanel" aria-labelledby="totais-tab" tabindex="0">
             <div class="pt-5">
-                {{-- <div class="card bg-dark">
+                <div class="card bg-dark">
                     <div class="card-body">
                         <h5>
-                            Totais acumulados
+                            Estimativa de lucros
                         </h5>
-                        <h5>Total de entrada: R$ {{$total_entradas}}</h5>
-                        <h5>Total saída: R$: {{$total_saidas}}</h5>
-                        <h5>Diferença entre total e saída: R$ {{$diferenca}}</h5>
+                        <h5>Receita: R$ {{$total_entradas}}</h5>
+                        <h5>Despesas: R$ {{$total_saidas}}</h5>
+                        <h5>Custo fixos: R$ {{$diferenca}}</h5>
                     </div>
-
-                    <div class="p-3">
-                        <h4>Relatórios gráficos</h4>
-                        {{-- <canvas id="graficoEntradas"></canvas>
-                    </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
