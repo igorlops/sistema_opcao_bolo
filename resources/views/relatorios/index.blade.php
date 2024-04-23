@@ -133,7 +133,7 @@
                                 <div class="card-header">Tipos de pagamentos</div>
                                 <div class="card-body">
                                     @foreach ($filtro_pagamentos as $tipopagamento)
-                                        <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? $tipopagamento->soma_valores : '0.00'}}</span></p>
+                                        <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? numero_iso_para_br($tipopagamento->soma_valores) : '0.00'}}</span></p>
                                     @endforeach
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                 <div class="card-header">Tipos de saidas</div>
                                 <div class="card-body">
                                     @foreach ($filtro_saida as $tiposaida)
-                                        <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? $tiposaida->soma_saidas : '0.00'}}</span></p>
+                                        <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? numero_iso_para_br($tiposaida->soma_saidas) : '0.00'}}</span></p>
                                     @endforeach
                                 </div>
                             </div>
@@ -241,9 +241,9 @@
                         <h5>
                             Estimativa de lucros
                         </h5>
-                        <h5>Receita: R$ {{$total_entradas}}</h5>
-                        <h5>Despesas: R$ {{$total_saidas}}</h5>
-                        <h5>Custo fixos: R$ {{$diferenca}}</h5>
+                        <h5>Receita: R$ {{numero_iso_para_br($total_entradas)}}</h5>
+                        <h5>Despesas: R$ {{numero_iso_para_br($total_saidas)}}</h5>
+                        <h5>Custo fixos: R$ {{numero_iso_para_br($diferenca)}}</h5>
                     </div>
                 </div>
             </div>

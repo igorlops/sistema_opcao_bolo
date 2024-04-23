@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <th> Valor </th>
-                                        <td> {{ $saida->valor }} </td>
+                                        <td> {{ numero_iso_para_br($saida->valor) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Observação </th>

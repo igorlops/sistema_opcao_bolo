@@ -53,12 +53,12 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ data_iso_para_br($item->created_at) }}</td>
-                                        <td>{{ $item->cartao_cred }}</td>
-                                        <td>{{ $item->cartao_deb }}</td>
-                                        <td>{{ $item->pix }}</td>
-                                        <td>{{ $item->vendas_extras }}</td>
-                                        <td>{{ $item->desconto }}</td>
-                                        <td>{{ $item->vendas_abc }}</td>
+                                        <td>{{ numero_iso_para_br($item->cartao_cred) }}</td>
+                                        <td>{{ numero_iso_para_br($item->cartao_deb) }}</td>
+                                        <td>{{ numero_iso_para_br($item->pix) }}</td>
+                                        <td>{{ numero_iso_para_br($item->vendas_extras) }}</td>
+                                        <td>{{ numero_iso_para_br($item->desconto) }}</td>
+                                        <td>{{ numero_iso_para_br($item->vendas_abc) }}</td>
                                         <td>
                                             <a href="{{ url('/fechamentos/' . $item->id) }}" title="View Fechamento"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
                                             <a href="{{ url('/fechamentos/' . $item->id . '/edit') }}" title="Edit Fechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>

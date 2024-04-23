@@ -57,7 +57,7 @@
                                     </tr>
                                     <tr>
                                         <th> Valor </th>
-                                        <td> {{ $entrada->valor }} </td>
+                                        <td> {{ numero_iso_para_br($entrada->valor) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Metade </th>

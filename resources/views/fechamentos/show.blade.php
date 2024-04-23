@@ -40,35 +40,35 @@
                                     </tr>
                                     <tr>
                                         <th> Vendas Extras </th>
-                                        <td> {{ $fechamento->vendas_extras }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->vendas_extras) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Desconto </th>
-                                        <td> {{ $fechamento->desconto }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->desconto) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Vendas ABC </th>
-                                        <td> {{ $fechamento->vendas_abc }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->vendas_abc) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Env.: </th>
-                                        <td> {{ $fechamento->env }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->env) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Cartão de crédito </th>
-                                        <td> {{ $fechamento->cartao_cred }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->cartao_cred) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Cartão de débito </th>
-                                        <td> {{ $fechamento->cartao_deb }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->cartao_deb) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Pix </th>
-                                        <td> {{ $fechamento->pix }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->pix) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Total caixa</th>
-                                        <td> {{ $fechamento->total_caixa }} </td>
+                                        <td> {{ numero_iso_para_br($fechamento->total_caixa) }} </td>
                                     </tr>
                                 </tbody>
                             </table>
