@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h1 class="text-white text-center pb-3">Resumo do mês de {{$mes}}</h1>
-            <div class="card p-3">
+            <div class="card p-3 bg-dark">
                 <div class="card-title py-3">
                     <h5>Filtrar pesquisa</h5>
                 </div>
@@ -58,7 +58,7 @@
                 </button>
                 </form>
             </div>
-            <div class="card p-3 mt-3">
+            <div class="card p-3 mt-3 bg-dark">
                 <div class="card-title py-3 text-center">
                     <h4>Resumo</h4>
                 </div>

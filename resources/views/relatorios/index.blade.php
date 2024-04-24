@@ -133,7 +133,7 @@
                                 <div class="card-header">Tipos de pagamentos</div>
                                 <div class="card-body">
                                     @foreach ($filtro_pagamentos as $tipopagamento)
-                                        <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? $tipopagamento->soma_valores : '0.00'}}</span></p>
+                                        <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? numero_iso_para_br($tipopagamento->soma_valores) : '0.00'}}</span></p>
                                     @endforeach
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                 <div class="card-header">Tipos de saidas</div>
                                 <div class="card-body">
                                     @foreach ($filtro_saida as $tiposaida)
-                                        <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? $tiposaida->soma_saidas : '0.00'}}</span></p>
+                                        <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? numero_iso_para_br($tiposaida->soma_saidas) : '0.00'}}</span></p>
                                     @endforeach
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                         @endforeach --}}
                     </tbody>
                 </table>
-                {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div>
             </div>
 
             <h2 class="pt-5">Saídas</h2>
@@ -231,26 +231,21 @@
                         @endforeach --}}
                     </tbody>
                 </table>
-                {{-- <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div>
             </div>
         </div>
         <div class="tab-pane fade" id="totais-tab-pane" role="tabpanel" aria-labelledby="totais-tab" tabindex="0">
             <div class="pt-5">
-                {{-- <div class="card bg-dark">
+                <div class="card bg-dark">
                     <div class="card-body">
                         <h5>
-                            Totais acumulados
+                            Estimativa de lucros
                         </h5>
-                        <h5>Total de entrada: R$ {{$total_entradas}}</h5>
-                        <h5>Total saída: R$: {{$total_saidas}}</h5>
-                        <h5>Diferença entre total e saída: R$ {{$diferenca}}</h5>
+                        <h5>Receita: R$ {{numero_iso_para_br($total_entradas)}}</h5>
+                        <h5>Despesas: R$ {{numero_iso_para_br($total_saidas)}}</h5>
+                        <h5>Custo fixos: R$ {{numero_iso_para_br($diferenca)}}</h5>
                     </div>
-
-                    <div class="p-3">
-                        <h4>Relatórios gráficos</h4>
-                        {{-- <canvas id="graficoEntradas"></canvas>
-                    </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

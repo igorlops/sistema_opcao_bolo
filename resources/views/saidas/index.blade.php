@@ -44,7 +44,7 @@
                                 @foreach($saidas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->valor }}</td>
+                                        <td>{{ numero_iso_para_br($item->valor) }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>{{ $item->tipo_saida->descricao }}</td>
