@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
+use App\Http\Requests\SaidaRequest;
 use App\Models\Saida;
 use App\Models\TipoSaida;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class SaidasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(SaidaRequest $request)
     {
         $keyword = $request->get('search');
         $perPage = 10;
@@ -48,17 +49,12 @@ class SaidasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\SaidaRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(SaidaRequest $request)
     {
-        $this->validate($request, [
-			'valor' => 'required|string|max:100',
-			'user_id' => 'required',
-			'id_descricao' => 'required'
-		]);
         $requestData = $request->all();
 
         Saida::create($requestData);
@@ -99,12 +95,12 @@ class SaidasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\SaidaRequest $request
      * @param  int  $id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(SaidaRequest $request, $id)
     {
         $this->validate($request, [
 			'valor' => 'required|string|max:100',

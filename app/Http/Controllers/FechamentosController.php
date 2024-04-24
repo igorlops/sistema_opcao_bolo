@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FechamentoRequest;
 use App\Models\Entrada;
 use App\Models\Estoque;
 use App\Models\Produto;
@@ -19,7 +20,7 @@ class FechamentosController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(FechamentoRequest $request)
     {
         $keyword = $request->get('search');
         $perPage = 10;
@@ -64,20 +65,12 @@ class FechamentosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\FechamentoRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(FechamentoRequest $request)
     {
-        $this->validate($request, [
-			'vendas_abc' => 'required',
-			'total_caixa' => 'required',
-			'env' => 'required',
-			'cartao_cred' => 'required',
-			'cartao_deb' => 'required',
-			'pix' => 'required'
-		]);
         $requestData = $request->all();
 
         $data = new \DateTime();
@@ -135,12 +128,12 @@ class FechamentosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\FechamentoRequest $request
      * @param  int  $id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(FechamentoRequest $request, $id)
     {
         $this->validate($request, [
 			'vendas_abc' => 'required',

@@ -15,10 +15,10 @@ class CreateProdutosFechamentosTable extends Migration
         Schema::create('produtos_fechamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('producao')->nullable();
-            $table->decimal('desperdicio',10,2)->nullable();
-            $table->decimal('sobra',10,2)->nullable();
-            $table->decimal('bolos_vendidos',10,2)->nullable();
+            $table->string('producao');
+            $table->decimal('desperdicio',10,2);
+            $table->decimal('sobra',10,2);
+            $table->decimal('bolos_vendidos',10,2);
             $table->bigInteger('id_produto')->unsigned();
             $table->bigInteger('id_fechamento')->unsigned();
             $table->foreign('id_produto')->references('id')->on('produtos')->onDelete('cascade')->onUpdate('cascade');

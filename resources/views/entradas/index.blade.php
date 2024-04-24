@@ -55,7 +55,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->tipo_entrada }}</td>
                                         <td>{{ $item->produto->nome }}</td>
-                                        <td>{{ $item->valor }}</td>
+                                        <td>{{ numero_iso_para_br($item->valor) }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>{{ $item->tipo_pagamento->nome }}</td>

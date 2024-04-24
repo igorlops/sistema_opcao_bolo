@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
+use App\Http\Requests\EntradaRequest;
 use App\Models\Entrada;
 use App\Models\Produto;
 use App\Models\TipoPagamento;
@@ -17,7 +18,7 @@ class EntradasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(EntradaRequest $request)
     {
         $keyword = $request->get('search');
         $perPage = 10;
@@ -51,19 +52,12 @@ class EntradasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\EntradaRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(EntradaRequest $request)
     {
-        $this->validate($request, [
-			'tipo_entrada' => 'required|string',
-			'id_tipo_pagamento' => 'required',
-			'user_id' => 'required',
-			'id_produto' => 'required'
-		]);
-
         $requestData = $request->all();
         Entrada::create($requestData);
 
@@ -104,19 +98,13 @@ class EntradasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\EntradaRequest $request
      * @param  int  $id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(EntradaRequest $request, $id)
     {
-        $this->validate($request, [
-			'tipo_entrada' => 'required|string',
-			'id_tipo_pagamento' => 'required',
-			'user_id' => 'required',
-			'id_produto' => 'required'
-		]);
         $requestData = $request->all();
 
         $entrada = Entrada::findOrFail($id);
