@@ -82,8 +82,8 @@
         </div>
         <div class="form-group row {{ $errors->has('pix') ? 'has-error' : ''}}">
             <label for="pix" class="col-form-label col-sm-3 required">{{ 'Pix' }}</label>
-            <div class="col-sm-8 money">
-                <input class="form-control"
+            <div class="col-sm-8 ">
+                <input class="form-control money"
                     name="pix"
                     type="text"
                     id="pix"

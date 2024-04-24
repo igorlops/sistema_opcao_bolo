@@ -82,6 +82,8 @@ class RelatorioFinanceiro extends Controller
                 ->groupBy('produtos.nome','produtos.id')
                 ->get();
 
+        $lucro = Fechamento::select('','');
+
         return view('relatorios.index', [
             'users'=>$users,
             'pagamentos' => $formaPagamentos,

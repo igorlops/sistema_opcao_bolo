@@ -39,8 +39,8 @@
                                             @endforeach
                                     </select>
                                 @endif
-                                <input type="text" class="form-control" name="data_ini" placeholder="Data Inicial" value="{{ request('data_ini') }}">
-                                <input type="text" class="form-control" name="data_fin" placeholder="Data final" value="{{ request('data_fin') }}">
+                                <input type="text" class="form-control data" name="data_ini" placeholder="Data Inicial" value="{{ request('data_ini') }}">
+                                <input type="text" class="form-control data" name="data_fin" placeholder="Data final" value="{{ request('data_fin') }}">
                                 <span class="input-group-append">
                                     <button class="btn btn-secondary" type="submit">
                                         <i class="bi bi-search"></i>

@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label for="data_ini_home" class="control-label">Data inicial</label>
                             <div class="input-group">
-                                <input class="form-control date" type="text" name="data_ini_home" value="{{request('data_ini_home')}}" id="data_ini_home">
+                                <input class="form-control data" type="text" name="data_ini_home" value="{{request('data_ini_home')}}" id="data_ini_home">
                             </div>
 
                         </div>
@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label class="control-label" for="data_fin_home">Data final</label>
                             <div class="input-group">
-                                <input class="form-control date" type="text" name="data_fin_home" value="{{request('data_fin_home')}}" id="data_fin_home">
+                                <input class="form-control data" type="text" name="data_fin_home" value="{{request('data_fin_home')}}" id="data_fin_home">
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@ class FechamentosController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(FechamentoRequest $request)
+    public function index( Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 10;
@@ -135,14 +135,6 @@ class FechamentosController extends Controller
      */
     public function update(FechamentoRequest $request, $id)
     {
-        $this->validate($request, [
-			'vendas_abc' => 'required',
-			'total_caixa' => 'required',
-			'env' => 'required',
-			'cartao_cred' => 'required',
-			'cartao_deb' => 'required',
-			'pix' => 'required'
-		]);
         $requestData = $request->all();
 
         $fechamento = Fechamento::findOrFail($id);

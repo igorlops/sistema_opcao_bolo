@@ -24,6 +24,8 @@ class CreateFechamentosTable extends Migration
             $table->decimal('cartao_deb',10,2);
             $table->decimal('pix',10,2);
             $table->decimal('diferenca',10,2);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id');
             });
     }
 

@@ -17,7 +17,7 @@ class SaidasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(SaidaRequest $request)
+    public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 10;

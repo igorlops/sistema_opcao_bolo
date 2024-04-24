@@ -15,7 +15,7 @@
                         <div class="form-group">
                             <label for="data_inicial" class="control-label">Data inicial</label>
                             <div class="input-group">
-                                <input class="form-control date" type="text" name="data_inicial" value="{{request('data_inicial')}}" id="data_inicial">
+                                <input class="form-control data" type="text" name="data_inicial" value="{{request('data_inicial')}}" id="data_inicial">
                             </div>
 
                         </div>
@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label class="control-label" for="data_final">Data final</label>
                             <div class="input-group">
-                                <input class="form-control date" type="text" name="data_final" value="{{request('data_final')}}" id="data_final">
+                                <input class="form-control data" type="text" name="data_final" value="{{request('data_final')}}" id="data_final">
                             </div>
                         </div>
                     </div>
@@ -113,9 +113,6 @@
             <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user-tab-pane" type="button" role="tab" aria-controls="user-tab-pane" aria-selected="true">Resumo</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="in-out-tab" data-bs-toggle="tab" data-bs-target="#in-out-tab-pane" type="button" role="tab" aria-controls="in-out-tab-pane" aria-selected="false">Totais</button>
-        </li>
-        <li class="nav-item" role="presentation">
             <button class="nav-link" id="totais-tab" data-bs-toggle="tab" data-bs-target="#totais-tab-pane" type="button" role="tab" aria-controls="totais-tab-pane" aria-selected="false">Lucros</button>
         </li>
     </ul>
@@ -173,67 +170,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Entradas e saidas --}}
-        <div class="tab-pane fade" id="in-out-tab-pane" role="tabpanel" aria-labelledby="in-out-tab" tabindex="0">
-            <h2 class="pt-5">Entradas</h2>
-            <div class="table-responsive">
-                 <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tipo</th>
-                            <th>Usuário</th>
-                            <th>Descricao</th>
-                            <th>Valor</th>
-                            <th>Data/Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach($entradas as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td><span class="badge badge-success">Saídas</span></td>
-                                <td>{{ $item->user->name}} </td>
-                                <td>{{ $item->observacao }}</td>
-                                <td>{{ numero_iso_para_br($item->valor) }}</td>
-                                <td>{{ data_iso_para_br($item->created_at) }}</td>
-                            </tr>
-                        @endforeach --}}
-                    </tbody>
-                </table>
-                <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div>
-            </div>
-
-            <h2 class="pt-5">Saídas</h2>
-            <div class="table-responsive">
-                 <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tipo</th>
-                            <th>Usuário</th>
-                            <th>Descricao</th>
-                            <th>Valor</th>
-                            <th>Data/Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach($saidas as $saida)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td><span class="badge badge-danger">Saída</span></td>
-                                <td>{{ $saida->user->name }} </td>
-                                <td>{{ $saida->observacao }}</td>
-                                <td>{{ numero_iso_para_br($saida->valor) }}</td>
-                                <td>{{ data_iso_para_br($saida->created_at) }}</td>
-                            </tr>
-                        @endforeach --}}
-                    </tbody>
-                </table>
-                <div class="pagination-wrapper"> {!! $entrada->appends(['search' => Request::get('search')])->render() !!} </div>
-            </div>
-        </div>
         <div class="tab-pane fade" id="totais-tab-pane" role="tabpanel" aria-labelledby="totais-tab" tabindex="0">
             <div class="pt-5">
                 <div class="card bg-dark">
@@ -241,9 +177,9 @@
                         <h5>
                             Estimativa de lucros
                         </h5>
-                        <h5>Receita: R$ {{numero_iso_para_br($total_entradas)}}</h5>
+                        {{-- <h5>Receita: R$ {{numero_iso_para_br($total_entradas)}}</h5>
                         <h5>Despesas: R$ {{numero_iso_para_br($total_saidas)}}</h5>
-                        <h5>Custo fixos: R$ {{numero_iso_para_br($diferenca)}}</h5>
+                        <h5>Custo fixos: R$ {{numero_iso_para_br($diferenca)}}</h5> --}}
                     </div>
                 </div>
             </div>

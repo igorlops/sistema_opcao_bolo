@@ -18,7 +18,7 @@ class EntradasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(EntradaRequest $request)
+    public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 10;
