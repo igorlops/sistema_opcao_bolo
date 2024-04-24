@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrada;
+use App\Models\Fechamento;
 use App\Models\Produto;
 use App\Models\Saida;
 use App\Models\TipoPagamento;
@@ -91,7 +92,8 @@ class RelatorioFinanceiro extends Controller
             'produtos' => $produtos,
             'filtro_pagamentos' => $pagamentos,
             'filtro_saida' => $saida,
-            'filtro_vendas' => $produto_vendidos
+            'filtro_vendas' => $produto_vendidos,
+            'fechamento' => $lucro
         ]);
 
     }
