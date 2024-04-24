@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($produtosfechamentos as $item)
+                                @forelse($produtosfechamentos as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->producao }}</td><td>{{ $item->desperdicio }}</td><td>{{ $item->sobra }}</td>
@@ -56,7 +56,14 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $produtosfechamentos->appends(['search' => Request::get('search')])->render() !!} </div>

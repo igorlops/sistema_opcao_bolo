@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($tiposaidas as $item)
+                                @forelse($tiposaidas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->descricao }}</td>
@@ -56,7 +56,14 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $tiposaidas->appends(['search' => Request::get('search')])->render() !!} </div>

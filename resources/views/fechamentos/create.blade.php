@@ -46,7 +46,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($produtos as $produto)
+                                @forelse($produtos as $produto)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $produto->nome }}</td>
@@ -55,7 +55,17 @@
                                         <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
                                         <td>{{ $produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio) }}</td>
                                     </tr>
-                                @endforeach
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             {{-- <div class="pagination-wrapper"> {!! $estoques->appends(['search' => Request::get('search')])->render() !!} </div>  --}}

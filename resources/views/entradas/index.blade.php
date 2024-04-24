@@ -50,7 +50,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($entradas as $item)
+                                @forelse($entradas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->tipo_entrada }}</td>
@@ -73,7 +73,21 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $entradas->appends(['search' => Request::get('search')])->render() !!} </div>

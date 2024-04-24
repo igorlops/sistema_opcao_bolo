@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($saidas as $item)
+                                @forelse($saidas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ numero_iso_para_br($item->valor) }}</td>
@@ -59,7 +59,17 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $saidas->appends(['search' => Request::get('search')])->render() !!} </div>

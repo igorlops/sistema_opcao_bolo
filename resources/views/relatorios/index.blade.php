@@ -36,14 +36,24 @@
                         <select class="form-select" name="usuario_select" id="usuario_select">
                             @if (request('usuario_select'))
                                 <option value="">Selecione um usuário</option>
-                                @foreach ($users as $user)
+                                @forelse ($users as $user)
                                     <option value="{{$user->id}}" @if ($user->id == request('usuario_select'))  selected @endif>{{$user->name}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @else
                                 <option value="" selected>Selecione um usuário</option>
-                                @foreach ($users as $user)
+                                @forelse ($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @endif
                         </select>
                     </div>
@@ -52,14 +62,24 @@
                         <select class="form-select" name="formaPagamento" id="formaPagamento">
                             @if (request('formaPagamento'))
                                 <option value="">Selecione uma forma de pagamento</option>
-                                @foreach ($pagamentos as $pagamento)
+                                @forelse ($pagamentos as $pagamento)
                                     <option value="{{$pagamento->id}}" @if ($pagamento->id == request('formaPagamento'))  selected @endif>{{$pagamento->nome}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @else
                                 <option value="">Selecione uma forma de pagamento</option>
-                                @foreach ($pagamentos as $pagamento)
+                                @forelse ($pagamentos as $pagamento)
                                     <option value="{{$pagamento->id}}">{{$pagamento->nome}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @endif
                         </select>
                     </div>
@@ -68,14 +88,24 @@
                         <select class="form-select" name="tipoSaida" id="tipoSaida">
                             @if (request('tipoSaida'))
                                 <option value="">Selecione um usuário</option>
-                                @foreach ($tipoSaidas as $saida)
+                                @forelse ($tipoSaidas as $saida)
                                     <option value="{{$saida->id}}" @if ($saida->id == request('tipoSaida'))  selected @endif>{{$saida->descricao}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @else
                                 <option value="" selected>Selecione um usuário</option>
-                                @foreach ($tipoSaidas as $saida)
+                                @forelse ($tipoSaidas as $saida)
                                     <option value="{{$saida->id}}">{{$saida->descricao}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @endif
                         </select>
                     </div>
@@ -85,14 +115,24 @@
                         <select class="form-select" name="produto" id="produto">
                             @if (request('produto'))
                                 <option value="">Selecione um produto</option>
-                                @foreach ($produtos as $produto)
+                                @forelse ($produtos as $produto)
                                     <option value="{{$produto->id}}" @if ($produto->id == request('produto'))  selected @endif>{{$produto->nome}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @else
                                 <option value="" selected>Selecione um produto</option>
-                                @foreach ($produtos as $produto)
+                                @forelse ($produtos as $produto)
                                     <option value="{{$produto->id}}">{{$produto->nome}}</option>
-                                @endforeach
+                                                                       @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                @endforelse
                             @endif
                         </select>
                     </div>
@@ -129,9 +169,14 @@
                             <div class="card bg-dark">
                                 <div class="card-header">Tipos de pagamentos</div>
                                 <div class="card-body">
-                                    @foreach ($filtro_pagamentos as $tipopagamento)
+                                    @forelse ($filtro_pagamentos as $tipopagamento)
                                         <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? numero_iso_para_br($tipopagamento->soma_valores) : '0.00'}}</span></p>
-                                    @endforeach
+                                                                           @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -139,9 +184,14 @@
                             <div class="card bg-dark">
                                 <div class="card-header">Tipos de saidas</div>
                                 <div class="card-body">
-                                    @foreach ($filtro_saida as $tiposaida)
+                                    @forelse ($filtro_saida as $tiposaida)
                                         <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? numero_iso_para_br($tiposaida->soma_saidas) : '0.00'}}</span></p>
-                                    @endforeach
+                                                                           @empty
+
+                                   <tr>
+                                       <td>Não há dados cadastrados</td>
+                                   </tr>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -152,9 +202,13 @@
                             <div class="card-body">
                                 <table class="table table-hover table-dark">
                                     <thead>
-                                    @foreach ($filtro_vendas as $produto)
+                                    @forelse ($filtro_vendas as $produto)
                                         <th>{{$produto->nome}}</th>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td>Nenhum produto cadastrado</td>
+                                    </tr>
+                                    @endforelse
                                     </thead>
                                     <tbody>
                                         <tr>

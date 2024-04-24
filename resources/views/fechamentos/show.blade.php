@@ -92,7 +92,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($produtos_fechamentos as $produto)
+                                    @forelse($produtos_fechamentos as $produto)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $produto->produto->nome }}</td>
@@ -101,7 +101,17 @@
                                             <td>{{ $produto->bolos_vendidos}}</td>
                                             <td>{{ $produto->sobra}}</td>
                                         </tr>
-                                    @endforeach
+                                        @empty
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Não há dados cadastrados</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </div>
                         </table>

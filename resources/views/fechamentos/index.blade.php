@@ -49,7 +49,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($fechamentos as $item)
+                                @forelse($fechamentos as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ data_iso_para_br($item->created_at) }}</td>
@@ -70,7 +70,21 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $fechamentos->appends(['search' => Request::get('search')])->render() !!} </div>
