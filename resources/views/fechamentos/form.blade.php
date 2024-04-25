@@ -42,7 +42,7 @@
         <div class="form-group row {{ $errors->has('env') ? 'has-error' : ''}}">
             <label for="env" class="col-form-label col-sm-3 required">{{ 'Envelope:' }}</label>
             <div class="col-sm-8">
-                <input class="form-control money" name="env" type="text" id="env" oninput="diferencaCaixa()" value="{{ isset($fechamento->env) ? $fechamento->env : ''}}">
+                <input class="form-control money" name="env" type="text" id="env" onchange="diferencaCaixa()" value="{{ isset($fechamento->env) ? $fechamento->env : ''}}">
                 {!! $errors->first('env', '<p class="help-block">:message</p>') !!}
             </div>
         </div>

@@ -147,16 +147,36 @@
             $('.data').mask('00/00/0000')
             $('.money').mask('000.000.000.000.000.000,00',{reverse:true})
 
-            function diferencaCaixa(){
 
-                let valorEnvolope = env.value.replace('.','');
-                let valorTotal = parseFloat(totalCaixa.value.replace('.',''));
+            function formatarValorParaCalculo(valor) {
+                // Remove pontos e substitui vírgula por ponto para conversão em número
+                return parseFloat(valor.replace(/\./g, '').replace(',', '.'));
+            }
 
-                console.log("Valor convertido: "+valorEnvolope," - Valor env: "+env.value.replace('.',''))
-                let total =  valorEnvolope - valorTotal
-                if(total){
-                    diferenca.value = total;
-                }
+            function formatarValorParaDinheiro(valor) {
+                // Primeiro, converte o número para uma string com duas casas decimais
+                let valorString = valor.toFixed(2);
+
+                // Substitui o ponto decimal por vírgula
+                valorString = valorString.replace('.', ',');
+
+                // Adiciona os pontos como separadores de milhar
+                return valorString.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+            }
+
+            function diferencaCaixa() {
+                // Obtem os valores dos inputs
+                let valorEnvolope = formatarValorParaCalculo(env.value);
+                let valorTotalCaixa = formatarValorParaCalculo(totalCaixa.value);
+
+                // Calcula a diferença
+                let diferencaCaixa = valorEnvolope - valorTotalCaixa;
+
+                // Formata o resultado para o formato de dinheiro
+                let diferencaCaixaFormatada = formatarValorParaDinheiro(diferencaCaixa);
+
+                // Aqui você pode definir o valor formatado onde precisar, por exemplo:
+                diferenca.value = diferencaCaixaFormatada;
             }
         </script>
     </div>
