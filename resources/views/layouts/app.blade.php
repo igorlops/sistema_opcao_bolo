@@ -136,6 +136,9 @@
             <strong>Copyright &copy; 2024 | Todos os direitos reservados.
         </footer>
         <script>
+            let env = document.getElementById('env');
+            let diferenca = document.getElementById('diferenca');
+            let totalCaixa = document.getElementById('total_caixa');
 
             $('.cpf_cnpj').mask('999.999.999-99')
             $('.celular').mask('(99) 9 9999-9999')
@@ -145,12 +148,11 @@
             $('.money').mask('000.000.000.000.000.000,00',{reverse:true})
 
             function diferencaCaixa(){
-                let env = document.getElementById('env');
-                let diferenca = document.getElementById('diferenca');
-                let totalCaixa = document.getElementById('total_caixa');
 
-                let valorEnvolope = parseFloat(env.value);
-                let valorTotal = parseFloat(totalCaixa.value);
+                let valorEnvolope = env.value.replace('.','');
+                let valorTotal = parseFloat(totalCaixa.value.replace('.',''));
+
+                console.log("Valor convertido: "+valorEnvolope," - Valor env: "+env.value.replace('.',''))
                 let total =  valorEnvolope - valorTotal
                 if(total){
                     diferenca.value = total;

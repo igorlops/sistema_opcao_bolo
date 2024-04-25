@@ -62,7 +62,7 @@
                 <div class="card-title py-3 text-center">
                     <h4>Resumo</h4>
                 </div>
-                @foreach ($resultados as $resultado)
+                @forelse ($resultados as $resultado)
                 <div class="d-flex justify-content-around">
                     <a class="btn btn-primary p-3 my-3 flex-wrap text-center" href="{{route('estoques.index')}}">
                         <i class="bi bi-boxes"></i>
@@ -85,7 +85,9 @@
                         {{-- <h5>{{$produtos->venda}}</h5> --}}
                     </a>
                 </div>
-                @endforeach
+                @empty
+                    <p class="text-center">Não há dados para serem apresentados</p>
+                @endforelse
             </div>
         </div>
     </div>

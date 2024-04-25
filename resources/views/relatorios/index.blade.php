@@ -186,11 +186,10 @@
                                 <div class="card-body">
                                     @forelse ($filtro_saida as $tiposaida)
                                         <p><strong>{{$tiposaida->descricao}}:</strong> R$ <span>{{$tiposaida->soma_saidas ? numero_iso_para_br($tiposaida->soma_saidas) : '0.00'}}</span></p>
-                                                                           @empty
-
-                                   <tr>
-                                       <td>Não há dados cadastrados</td>
-                                   </tr>
+                                        @empty
+                                        <tr>
+                                            <td>Não há dados cadastrados</td>
+                                        </tr>
                                     @endforelse
                                 </div>
                             </div>
@@ -204,10 +203,10 @@
                                     <thead>
                                     @forelse ($filtro_vendas as $produto)
                                         <th>{{$produto->nome}}</th>
-                                    @empty
-                                    <tr>
-                                        <td>Nenhum produto cadastrado</td>
-                                    </tr>
+                                        @empty
+                                        <tr>
+                                            <td>Nenhum produto cadastrado</td>
+                                        </tr>
                                     @endforelse
                                     </thead>
                                     <tbody>
@@ -228,7 +227,7 @@
             <div class="pt-5">
                 <div class="card bg-dark">
                     <div class="card-body">
-                        <h5>
+                        <h5 class="text-center">
                             Estimativa de lucros
                         </h5>
                         {{-- <h5>Receita: R$ {{numero_iso_para_br($total_entradas)}}</h5>

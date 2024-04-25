@@ -83,7 +83,7 @@ class RelatorioFinanceiro extends Controller
                 ->groupBy('produtos.nome','produtos.id')
                 ->get();
 
-        $lucro = Fechamento::select('','');
+        $lucro = Fechamento::selectRaw('(SELECT SUM()');
 
         return view('relatorios.index', [
             'users'=>$users,

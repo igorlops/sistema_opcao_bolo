@@ -27,5 +27,8 @@ class Fechamento extends Model
      */
     protected $fillable = ['vendas_extras', 'desconto', 'vendas_abc', 'total_caixa', 'env', 'cartao_cred', 'cartao_deb', 'pix'];
 
-    
+    public function vendasCaixa()
+    {
+        return $this->belongsTo(Caixa::class,'',    '');
+    }
 }
