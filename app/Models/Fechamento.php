@@ -65,12 +65,12 @@ class Fechamento extends Model
         $diferenca = $this->sum('diferenca');
 
         return [
-            $total_caixa,
-            $env,
-            $pix,
-            $cartao_cred,
-            $cartao_deb,
-            $diferenca
+            "total_caixa"=>$total_caixa,
+            "env"=>$env,
+            "pix"=>$pix,
+            "cartao_cred"=>$cartao_cred,
+            "cartao_deb"=>$cartao_deb,
+            "diferenca"=>$diferenca
         ];
     }
 }

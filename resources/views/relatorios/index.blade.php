@@ -230,9 +230,9 @@
                         <h5 class="text-center">
                             Estimativa de lucros
                         </h5>
-                        {{-- <h5>Receita: R$ {{numero_iso_para_br($total_entradas)}}</h5>
+                        <h5>Receita: R$ {{numero_iso_para_br($fechamento->)}}</h5>
                         <h5>Despesas: R$ {{numero_iso_para_br($total_saidas)}}</h5>
-                        <h5>Custo fixos: R$ {{numero_iso_para_br($diferenca)}}</h5> --}}
+                        <h5>Custo fixos: R$ {{numero_iso_para_br($diferenca)}}</h5>
                     </div>
                 </div>
             </div>
