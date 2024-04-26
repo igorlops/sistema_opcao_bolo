@@ -5,10 +5,11 @@
             <div class="col-sm-8">
                 <input class="form-control money" onchange="vendasABC()" name="vendas_extras" type="text" id="vendas_extras"
                 @if ($formMode === 'edit')
-                    value="{{ isset($fechamento->vendas_extras) ? $fechamento->vendas_extras : ''}}" >
+                    value="{{ isset($fechamento->vendas_extras) ? $fechamento->vendas_extras : ''}}"
                 @else
                     value="{{isset($vendas_extras) ? numero_iso_para_br($vendas_extras) : '0'}}"
                 @endif
+                >
                 {!! $errors->first('vendas_extras', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
