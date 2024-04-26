@@ -47,7 +47,7 @@ class FechamentoRequest extends FormRequest
 
         $this->replace($campos);
 
-        // dd($this->all());
+        // dd($campos);
         return $campos;
     }
 }

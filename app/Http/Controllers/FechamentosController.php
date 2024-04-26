@@ -79,14 +79,15 @@ class FechamentosController extends Controller
         $produtos = new Produto();
         $produtos = $produtos->relacaoProdutos($data_atual,$data_atual, auth()->user()->id);
         $fechamento = Fechamento::create($requestData);
+        // dd($produtos);
 
         foreach ($produtos as $produto) {
             ProdutosFechamento::create([
                 'id_fechamento'=>$fechamento->id,
-                'producao'=>$produto->producao ? $produto->producao : '0',
-                'desperdicio'=>$produto->desperdicio ? $produto->desperdicio : '0',
+                'producao'=>$produto->producao ? $produto->producao : 0,
+                'desperdicio'=>$produto->desperdicio ? $produto->desperdicio : 0,
                 'sobra'=> $produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio),
-                'bolos_vendidos'=>$produto->venda ? $produto->venda : '0',
+                'bolos_vendidos'=>$produto->venda ? $produto->venda : 0,
                 'id_produto'=>$produto->id
             ]);
         }
