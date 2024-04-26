@@ -171,11 +171,11 @@
                                 <div class="card-body">
                                     @forelse ($filtro_pagamentos as $tipopagamento)
                                         <p><strong>{{$tipopagamento->nome}}:</strong> R$ <span>{{$tipopagamento->soma_valores ? numero_iso_para_br($tipopagamento->soma_valores) : '0.00'}}</span></p>
-                                                                           @empty
 
-                                   <tr>
-                                       <td>Não há dados cadastrados</td>
-                                   </tr>
+                                        @empty
+                                        <tr>
+                                            <td>Não há dados cadastrados</td>
+                                        </tr>
                                     @endforelse
                                 </div>
                             </div>

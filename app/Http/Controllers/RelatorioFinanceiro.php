@@ -83,8 +83,9 @@ class RelatorioFinanceiro extends Controller
                 ->groupBy('produtos.nome','produtos.id')
                 ->get();
 
-        $lucro = Fechamento::selectRaw('(SELECT SUM()');
-
+        $lucro = new Fechamento();
+        $lucro = $lucro->relatorioFinanceiro($data_inicial,$data_final,$user_id == '' || $user_id ? $user_id : null);
+        dd($lucro);
         return view('relatorios.index', [
             'users'=>$users,
             'pagamentos' => $formaPagamentos,

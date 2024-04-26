@@ -139,6 +139,13 @@
             let env = document.getElementById('env');
             let diferenca = document.getElementById('diferenca');
             let totalCaixa = document.getElementById('total_caixa');
+            let vendasAbc = document.getElementById('vendas_abc');
+            let desconto = document.getElementById('desconto');
+            let vendasExtras = document.getElementById('vendas_extras');
+            let total_caixa = document.getElementById('total_caixa')
+            let cartao_cred = document.getElementById('cartao_cred')
+            let cartao_deb = document.getElementById('cartao_deb')
+            let pix = document.getElementById('pix')
 
             $('.cpf_cnpj').mask('999.999.999-99')
             $('.celular').mask('(99) 9 9999-9999')
@@ -164,6 +171,34 @@
                 return valorString.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
             }
 
+
+            function vendasABC(){
+                // Obtem os valores dos inputs
+                let totalABC = formatarValorParaCalculo(vendasAbc.value);
+
+                let totaldinheiro = formatarValorParaCalculo(total_caixa.value);
+                let totalcartao_cred = formatarValorParaCalculo(cartao_cred.value);
+                let totalcartao_deb = formatarValorParaCalculo(cartao_deb.value);
+                let totalpix = formatarValorParaCalculo(pix.value);
+
+                let valorInicial = totaldinheiro+totalcartao_cred+totalcartao_deb+totalpix;
+                let totalDesconto = formatarValorParaCalculo(desconto.value);
+                let totalExtras = formatarValorParaCalculo(vendasExtras.value);
+                if(isNaN(totalDesconto)) {
+                    totalDesconto = 0;
+                }
+                if(isNaN(totalExtras)) {
+                    totalExtras = 0;
+                }
+
+                totalABC = (valorInicial + totalExtras) - totalDesconto;
+
+                // Formata o resultado para o formato de dinheiro
+                let totalVendas = formatarValorParaDinheiro(totalABC);
+
+                // Aqui você pode definir o valor formatado onde precisar, por exemplo:
+                vendasAbc.value = totalVendas;
+            }
             function diferencaCaixa() {
                 // Obtem os valores dos inputs
                 let valorEnvolope = formatarValorParaCalculo(env.value);

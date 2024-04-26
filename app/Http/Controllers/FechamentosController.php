@@ -58,8 +58,9 @@ class FechamentosController extends Controller
         $cartaoDebito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',4)->where('user_id','=',auth()->user()->id)->sum('valor');
         $pix = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',1)->where('user_id','=',auth()->user()->id)->sum('valor');
         $dinheiro = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',2)->where('user_id','=',auth()->user()->id)->sum('valor');
-
-        return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro'));
+        $venda_total = $cartaoCredito+$cartaoDebito+$pix+$dinheiro;
+        // dd($venda_total);
+        return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro','venda_total'));
     }
 
     /**
