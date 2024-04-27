@@ -68,10 +68,10 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $produto->nome }}</td>
-                                        <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
-                                        <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
-                                        <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
-                                        <td>{{ $produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio) }}</td>
+                                        <td>{{ $produto->producao ? numero_iso_para_br($produto->producao) : '0,00'}}</td>
+                                        <td>{{ $produto->desperdicio ? numero_iso_para_br($produto->desperdicio) : '0,00'}}</td>
+                                        <td>{{ $produto->venda ? numero_iso_para_br($produto->venda) : '0,00'}}</td>
+                                        <td>{{ numero_iso_para_br($produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio)) }}</td>
                                     </tr>
                                     @empty
 
@@ -114,7 +114,7 @@
                                        <td>{{ $estoque->user->name }}</td>
                                        <td>{{ $estoque->produto->nome}}</td>
                                        <td>{{ $estoque->tipo_estoque === "p" ? "Produção" : "Desperdício"}}</td>
-                                       <td>{{ $estoque->quantidade}}</td>
+                                       <td>{{ numero_iso_para_br($estoque->quantidade) }}</td>
                                        <td>{{ data_iso_para_br($estoque->created_at) }}</td>
                                    </tr>
                                    @empty

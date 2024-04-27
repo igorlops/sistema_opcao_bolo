@@ -48,7 +48,7 @@ class RelatorioFinanceiro extends Controller
                 ->selectRaw('(SELECT SUM(entradas.valor)
                     FROM entradas
                     WHERE entradas.id_tipo_pagamento = tipo_pagamentos.id
-                    '.($user_id || $user_id != '' ? "AND entradas.user_id = '$user_id'" : '').'
+                    '.($user_id ? "AND entradas.user_id = '$user_id'" : '').'
                     '.($formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento" : '').'
                     '.($produto || $produto != '' ? "AND entradas.id_produto = $produto" : '').'
                     AND entradas.created_at
@@ -62,7 +62,7 @@ class RelatorioFinanceiro extends Controller
                 ->selectRaw('(SELECT SUM(saidas.valor)
                     FROM saidas
                     WHERE saidas.id_descricao = tipo_saidas.id
-                    '.($user_id || $user_id != '' ? "AND saidas.user_id = $user_id " : '').'
+                    '.($user_id ? "AND saidas.user_id = $user_id " : '').'
                     '.($tipoSaida || $tipoSaida != '' ? "AND saidas.id_descricao = $tipoSaida " : '').'
                     AND saidas.created_at BETWEEN "'.$data_inicial.' 00:00:00"
                                             AND "'.$data_final.' 23:59:59") as soma_saidas')
@@ -74,7 +74,7 @@ class RelatorioFinanceiro extends Controller
                 ->selectRaw('(SELECT COUNT("*")
                 FROM entradas
                 WHERE entradas.id_produto = produtos.id
-                '.($user_id || $user_id != '' ? "AND entradas.user_id = $user_id" : '' ).'
+                '.($user_id ? "AND entradas.user_id = $user_id" : '' ).'
                 '.($formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento " : '').'
                 '.($produto || $produto != '' ? "AND entradas.id_produto = $produto " : '').'
                 AND entradas.created_at BETWEEN "'.$data_inicial.' 00:00:00"
@@ -84,8 +84,8 @@ class RelatorioFinanceiro extends Controller
                 ->get();
 
         $lucro = new Fechamento();
-        $lucro = $lucro->relatorioFinanceiro($data_inicial,$data_final,$user_id == '' || $user_id ? $user_id : null);
-
+        $lucro = $lucro->relatorioFinanceiro($data_inicial,$data_final,$user_id);
+        // dd($lucro);
         return view('relatorios.index', [
             'users'=>$users,
             'pagamentos' => $formaPagamentos,

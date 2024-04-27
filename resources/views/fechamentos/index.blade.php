@@ -39,6 +39,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Data</th>
+                                        <th>Usuário</th>
                                         <th>Cartão de crédito</th>
                                         <th>Cartão de débito</th>
                                         <th>Pix</th>
@@ -53,6 +54,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ data_iso_para_br($item->created_at) }}</td>
+                                        <td>{{ data_iso_para_br($item->user->name) }}</td>
                                         <td>{{ numero_iso_para_br($item->cartao_cred) }}</td>
                                         <td>{{ numero_iso_para_br($item->cartao_deb) }}</td>
                                         <td>{{ numero_iso_para_br($item->pix) }}</td>
