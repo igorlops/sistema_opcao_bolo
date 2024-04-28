@@ -35,4 +35,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('fechamentos', App\Http\Controllers\FechamentosController::class);
     Route::resource('produtos-fechamentos', App\Http\Controllers\ProdutosFechamentosController::class);
     Route::resource('estoques', App\Http\Controllers\EstoquesController::class);
+
+    Route::get('/excel-exports', [App\Http\Controllers\RelatorioFinanceiro::class,'exportExcel'])->name('exportExcel');
+
 });

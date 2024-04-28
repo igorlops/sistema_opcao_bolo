@@ -228,7 +228,7 @@
                 <div class="card bg-dark">
                     <div class="card-body">
                         <h5 class="text-center">
-                            Estimativa de lucros
+                            Informações gerais
                         </h5>
                         {{-- @dd($item) --}}
                         <div class="table-responsive">
@@ -240,10 +240,11 @@
                                         <th>Taxa débito</th>
                                         <th>Total Caixa</th>
                                         <th>Envelope</th>
+                                        <th>Diferença de caixa</th>
                                         <th>Pix</th>
                                         <th>Cartão de crédito</th>
                                         <th>Cartão de débito</th>
-                                        <th>Diferença</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                <tbody>
@@ -277,6 +278,9 @@
                            </table>
                            {{-- <div class="pagination-wrapper"> {!! $produtos->appends(['search' => Request::get('search')])->render() !!} </div> --}}
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success" href="{{route('exportExcel')}}"><i class="bi bi-download"></i> Exportar relatório</a>
                     </div>
                 </div>
             </div>

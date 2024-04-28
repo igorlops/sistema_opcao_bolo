@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Entrada;
+use App\Exports\RelatoryDataExport;
 use App\Models\Fechamento;
 use App\Models\Produto;
-use App\Models\Saida;
 use App\Models\TipoPagamento;
 use App\Models\TipoSaida;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Excel;
+
 class RelatorioFinanceiro extends Controller
 {
     /**
@@ -97,5 +97,10 @@ class RelatorioFinanceiro extends Controller
             'fechamento' => $lucro
         ]);
 
+    }
+
+    public function exportExcel()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExport, 'relatorio_mensal.xlsx');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Fechamento extends Model
 {
@@ -83,12 +84,68 @@ class Fechamento extends Model
                     ->groupBy('users.name', 'users.perc_cred', 'users.perc_deb')
                     ->get();
                 foreach ($fechamentos as $fechamento) {
+
+                    $taxa_cred = $fechamento->getAttribute('perc_cred');
+                    $taxa_deb = $fechamento->getAttribute('perc_deb');
+                    $valor_cred = $fechamento->getAttribute('cartao_cred');
+                    $valor_deb = $fechamento->getAttribute('cartao_deb');
+                    $valor_env = $fechamento->getAttribute('env');
+                    $valor_pix = $fechamento->getAttribute('pix');
+                    $new_cred = $taxa_cred
+
+                    $fechamento->setAttribute('total',100);
+                    dd($taxa_cred,$taxa_deb,$valor_cred,$valor_deb,$valor_env,$valor_pix);
                     $results[] = $fechamento->getAttributes();
                 }
             }
         }
         return $results;
     }
+
+    public static function exportRelatory()
+    {
+        $results = collect();
+        $users = User::all();
+        $data_ini = (new \DateTime('first day of this month'))->format('Y-m-d');
+        $data_fin = (new \DateTime('last day of this month'))->format('Y-m-d');
+
+        foreach ($users as $user) {
+            $fechamentos = DB::table('fechamentos')
+                ->select('users.name','users.perc_cred','users.perc_deb');
+            $params = [$data_ini . " 00:00:00", $data_fin . " 23:59:59", $user->id];
+
+            $total_caixa = "(SELECT SUM(fechamentos.total_caixa) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS total_caixa";
+            $env = "(SELECT SUM(fechamentos.env) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS env";
+            $pix = "(SELECT SUM(fechamentos.pix) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS pix";
+            $cartao_cred = "(SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_cred";
+            $cartao_deb = "(SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_deb";
+            $diferenca = "(SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS diferenca";
+            $fechamentos = $fechamentos
+                ->selectRaw($total_caixa, $params)
+                ->selectRaw($env, $params)
+                ->selectRaw($pix, $params)
+                ->selectRaw($cartao_cred, $params)
+                ->selectRaw($cartao_deb, $params)
+                ->selectRaw($diferenca, $params)
+                ->join('users','users.id','=','fechamentos.user_id')
+                ->where('users.id', $user->id)
+                ->groupBy('users.name', 'users.perc_cred', 'users.perc_deb')
+                ->get();
+
+                $fechamentos[0]->cartao_cred =
+                numero_iso_para_br($fechamentos[0]->cartao_cred - (
+                    $fechamentos[0]->cartao_cred * $fechamentos[0]->perc_cred
+                ));
+                // dd($fechamentos[0]->cartao_cred);
+                // $fechamentos[0]->total
+
+            $results->push($fechamentos[0]);
+        }
+            // dd($results);
+
+        return $results;
+    }
+
 
 }
 
