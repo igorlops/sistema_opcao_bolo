@@ -11,7 +11,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.3",
-        "lucascudo/laravel-pt-br-localization": "^2.0"
+        "lucascudo/laravel-pt-br-localization": "^2.0",
+        "maatwebsite/excel": "^1.1"
     },
     "require-dev": {
         "appzcoder/crud-generator": "^3.3",
