@@ -91,10 +91,11 @@ class Fechamento extends Model
                     $valor_deb = $fechamento->getAttribute('cartao_deb');
                     $valor_env = $fechamento->getAttribute('env');
                     $valor_pix = $fechamento->getAttribute('pix');
-                    $new_cred = $taxa_cred
-
+                    $new_cred = $valor_cred - ($taxa_cred * $valor_cred);
+                    $new_deb = $valor_deb - ($taxa_deb * $valor_deb);
                     $fechamento->setAttribute('total',100);
-                    dd($taxa_cred,$taxa_deb,$valor_cred,$valor_deb,$valor_env,$valor_pix);
+                    dd("Taxa crédito: "+$taxa_cred  + "; Valor crédito: " + $valor_cred + "; Valor real: "+ $new_cred);
+
                     $results[] = $fechamento->getAttributes();
                 }
             }
