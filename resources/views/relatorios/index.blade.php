@@ -260,6 +260,7 @@
                                         <td>{{numero_iso_para_br($item["cartao_cred"])}}</td>
                                         <td>{{numero_iso_para_br($item["cartao_deb"])}}</td>
                                         <td>{{numero_iso_para_br($item["diferenca"])}}</td>
+                                        <td>{{numero_iso_para_br($item["total"])}}</td>
                                     </tr>
                                    @empty
                                    <tr>

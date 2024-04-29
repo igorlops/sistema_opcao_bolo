@@ -91,11 +91,11 @@ class Fechamento extends Model
                     $valor_deb = $fechamento->getAttribute('cartao_deb');
                     $valor_env = $fechamento->getAttribute('env');
                     $valor_pix = $fechamento->getAttribute('pix');
-                    $new_cred = $valor_cred - ($taxa_cred * $valor_cred);
-                    $new_deb = $valor_deb - ($taxa_deb * $valor_deb);
-                    $fechamento->setAttribute('total',100);
-                    dd("Taxa crédito: "+$taxa_cred  + "; Valor crédito: " + $valor_cred + "; Valor real: "+ $new_cred);
+                    $new_cred = $valor_cred - (($taxa_cred / 100) * $valor_cred);
+                    $new_deb = $valor_deb - (($taxa_deb / 100)* $valor_deb);
 
+                    $total_definitivo = $valor_env + $valor_pix + $new_cred + $new_deb;
+                    $fechamento->setAttribute('total',$total_definitivo);
                     $results[] = $fechamento->getAttributes();
                 }
             }
@@ -132,7 +132,6 @@ class Fechamento extends Model
                 ->where('users.id', $user->id)
                 ->groupBy('users.name', 'users.perc_cred', 'users.perc_deb')
                 ->get();
-
                 $fechamentos[0]->cartao_cred =
                 numero_iso_para_br($fechamentos[0]->cartao_cred - (
                     $fechamentos[0]->cartao_cred * $fechamentos[0]->perc_cred

@@ -29,11 +29,11 @@ class ProdutosFechamento extends Model
 
     public function produto()
     {
-        return $this->belongsTo('App\Models\Produto','id');
+        return $this->belongsTo('App\Models\Produto','id_produto');
     }
     public function fechamento()
     {
-        return $this->belongsTo('App\Models\Fechamento','id');
+        return $this->belongsTo('App\Models\Fechamento','id_fechamento');
     }
 
 }
