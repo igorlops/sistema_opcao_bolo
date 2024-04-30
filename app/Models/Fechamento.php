@@ -91,12 +91,28 @@ class Fechamento extends Model
                     $valor_deb = $fechamento->getAttribute('cartao_deb');
                     $valor_env = $fechamento->getAttribute('env');
                     $valor_pix = $fechamento->getAttribute('pix');
+
                     $new_cred = $valor_cred - (($taxa_cred / 100) * $valor_cred);
                     $new_deb = $valor_deb - (($taxa_deb / 100)* $valor_deb);
 
-                    $total_definitivo = $valor_env + $valor_pix + $new_cred + $new_deb;
+                    $valor_env = number_format(floatval(str_replace(',', '.', $valor_env)), 2, '.', '');
+                    $valor_pix = number_format(floatval(str_replace(',', '.', $valor_pix)), 2, '.', '');
+                    $new_cred = number_format(floatval(str_replace(',', '.', $new_cred)), 2, '.', '');
+                    $new_deb = number_format(floatval(str_replace(',', '.', $new_deb)), 2, '.', '');
+                    $total_definitivo = ($valor_env) + ($valor_pix) + ($new_cred) + ($new_deb);
+
+                    // Reatribuindo os valores
+
                     $fechamento->setAttribute('total',$total_definitivo);
+                    $fechamento->setAttribute('perc_cred',$taxa_cred);
+                    $fechamento->setAttribute('perc_deb',$taxa_deb);
+                    $fechamento->setAttribute('cartao_cred',$new_cred);
+                    $fechamento->setAttribute('cartao_deb',$new_deb);
+                    $fechamento->setAttribute('env',$valor_env);
+                    $fechamento->setAttribute('pix',$valor_pix);
+
                     $results[] = $fechamento->getAttributes();
+
                 }
             }
         }
@@ -134,9 +150,24 @@ class Fechamento extends Model
                 ->get();
                 $fechamentos[0]->cartao_cred =
                 numero_iso_para_br($fechamentos[0]->cartao_cred - (
-                    $fechamentos[0]->cartao_cred * $fechamentos[0]->perc_cred
+                    ($fechamentos[0]->cartao_cred / 100) * $fechamentos[0]->perc_cred
                 ));
-                // dd($fechamentos[0]->cartao_cred);
+                $fechamentos[0]->cartao_deb =
+                numero_iso_para_br($fechamentos[0]->cartao_deb - (
+                    ($fechamentos[0]->cartao_deb / 100) * $fechamentos[0]->perc_deb
+                ));
+                $fechamentos[0]->diferenca = numero_iso_para_br($fechamentos[0]->diferenca);
+                $fechamentos[0]->total_caixa = numero_iso_para_br($fechamentos[0]->total_caixa);
+                $fechamentos[0]->env = numero_iso_para_br($fechamentos[0]->env);
+                $fechamentos[0]->pix = numero_iso_para_br($fechamentos[0]->pix);
+
+                $total = numero_br_para_iso($fechamentos[0]->env) +
+                numero_br_para_iso($fechamentos[0]->pix) +
+                numero_br_para_iso($fechamentos[0]->cartao_cred) +
+                numero_br_para_iso($fechamentos[0]->cartao_deb);
+
+                $fechamentos[0]->total_definitivo = numero_iso_para_br($total);
+                // dd($fechamentos[0]);
                 // $fechamentos[0]->total
 
             $results->push($fechamentos[0]);

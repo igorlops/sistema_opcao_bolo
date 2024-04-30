@@ -26,6 +26,7 @@ class RelatoryDataExport implements FromCollection,WithHeadings
             'Cartão de crédito',
             'Cartão de débito',
             'Diferença',
+            'Total'
         ];
     }
 

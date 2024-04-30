@@ -39,5 +39,4 @@ class Entrada extends Model
     {
         return $this->belongsTo('App\Models\Produto','id_produto');
     }
-
 }

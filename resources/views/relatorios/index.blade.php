@@ -236,12 +236,12 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Taxa crédito</th>
-                                        <th>Taxa débito</th>
                                         <th>Total Caixa</th>
                                         <th>Envelope</th>
-                                        <th>Diferença de caixa</th>
                                         <th>Pix</th>
+                                        <th>Diferença de caixa</th>
+                                        <th>Taxa crédito</th>
+                                        <th>Taxa débito</th>
                                         <th>Cartão de crédito</th>
                                         <th>Cartão de débito</th>
                                         <th>Total</th>
@@ -252,14 +252,74 @@
                                {{-- @dd($fechamento) --}}
                                     <tr>
                                         <td>{{$item["name"]}}</td>
-                                        <td>{{numero_iso_para_br($item["perc_cred"])}}</td>
-                                        <td>{{numero_iso_para_br($item["perc_deb"])}}</td>
                                         <td>{{numero_iso_para_br($item["total_caixa"])}}</td>
                                         <td>{{numero_iso_para_br($item["env"])}}</td>
                                         <td>{{numero_iso_para_br($item["pix"])}}</td>
+                                        <td>{{numero_iso_para_br($item["diferenca"])}}</td>
+                                        <td>{{numero_iso_para_br($item["perc_cred"])}}</td>
+                                        <td>{{numero_iso_para_br($item["perc_deb"])}}</td>
                                         <td>{{numero_iso_para_br($item["cartao_cred"])}}</td>
                                         <td>{{numero_iso_para_br($item["cartao_deb"])}}</td>
+                                        <td>{{numero_iso_para_br($item["total"])}}</td>
+                                    </tr>
+                                   @empty
+                                   <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não houve fechamentos de caixa</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                               @endforelse
+                               </tbody>
+                           </table>
+                           {{-- <div class="pagination-wrapper"> {!! $produtos->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success" href="{{route('exportExcel')}}"><i class="bi bi-download"></i> Exportar relatório</a>
+                    </div>
+                </div>
+
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <h5 class="text-center">
+                            Estimativa de lucro
+                        </h5>
+                        {{-- @dd($item) --}}
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Total Caixa</th>
+                                        <th>Envelope</th>
+                                        <th>Pix</th>
+                                        <th>Diferença de caixa</th>
+                                        <th>Taxa crédito</th>
+                                        <th>Taxa débito</th>
+                                        <th>Cartão de crédito</th>
+                                        <th>Cartão de débito</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                               @forelse($fechamento as $item)
+                               {{-- @dd($fechamento) --}}
+                                    <tr>
+                                        <td>{{$item["name"]}}</td>
+                                        <td>{{numero_iso_para_br($item["total_caixa"])}}</td>
+                                        <td>{{numero_iso_para_br($item["env"])}}</td>
+                                        <td>{{numero_iso_para_br($item["pix"])}}</td>
                                         <td>{{numero_iso_para_br($item["diferenca"])}}</td>
+                                        <td>{{numero_iso_para_br($item["perc_cred"])}}</td>
+                                        <td>{{numero_iso_para_br($item["perc_deb"])}}</td>
+                                        <td>{{numero_iso_para_br($item["cartao_cred"])}}</td>
+                                        <td>{{numero_iso_para_br($item["cartao_deb"])}}</td>
                                         <td>{{numero_iso_para_br($item["total"])}}</td>
                                     </tr>
                                    @empty

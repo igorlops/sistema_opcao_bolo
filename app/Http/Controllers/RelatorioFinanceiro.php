@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RelatoryDataExport;
+use App\Models\Entrada;
 use App\Models\Fechamento;
 use App\Models\Produto;
 use App\Models\TipoPagamento;
@@ -83,9 +84,13 @@ class RelatorioFinanceiro extends Controller
                 ->groupBy('produtos.nome','produtos.id')
                 ->get();
 
-        $lucro = new Fechamento();
-        $lucro = $lucro->relatorioFinanceiro($data_inicial,$data_final,$user_id);
-        // dd($lucro);
+        $fechamento = new Fechamento();
+        $fechamento = $fechamento->relatorioFinanceiro($data_inicial,$data_final,$user_id);
+
+        $lucro = new Entrada();
+
+
+        // dd($fechamento);
         return view('relatorios.index', [
             'users'=>$users,
             'pagamentos' => $formaPagamentos,
@@ -94,7 +99,7 @@ class RelatorioFinanceiro extends Controller
             'filtro_pagamentos' => $pagamentos,
             'filtro_saida' => $saida,
             'filtro_vendas' => $produto_vendidos,
-            'fechamento' => $lucro
+            'fechamento' => $fechamento
         ]);
 
     }
