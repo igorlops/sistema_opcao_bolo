@@ -70,8 +70,28 @@
                                         <td>{{ $produto->nome }}</td>
                                         <td>{{ $produto->producao ? numero_iso_para_br($produto->producao) : '0,00'}}</td>
                                         <td>{{ $produto->desperdicio ? numero_iso_para_br($produto->desperdicio) : '0,00'}}</td>
-                                        <td>{{ $produto->venda ? numero_iso_para_br($produto->venda) : '0,00'}}</td>
-                                        <td>{{ numero_iso_para_br($produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio)) }}</td>
+                                        {{-- @dd( ) --}}
+                                        <td>{{ $produto->vendaMetade || $produto->vendaCompleta ?
+                                                numero_iso_para_br(
+                                                    ($produto->vendaMetade ? ($produto->vendaMetade / 2) : 0) + ($produto->vendaCompleta ? $produto->vendaCompleta : 0)
+                                                )
+                                                :
+                                            '0,00'}}
+                                        </td>
+                                        <td>{{ numero_iso_para_br(
+                                            $produto->totalproducao - (
+                                                (
+                                                    (
+                                                        ($produto->totalvendacompleta ? $produto->totalvendacompleta : 0)
+                                                    ) + (
+                                                        $produto->totalvendametade ? ($produto->totalvendametade / 2) : 0
+                                                    )
+                                                )
+                                                    + $produto->totaldesperdicio
+                                                    )
+                                                )
+                                            }}
+                                        </td>
                                     </tr>
                                     @empty
 
