@@ -91,29 +91,46 @@ class HomeController extends Controller
 
             if($user_id){
                 $resultados = $resultados
-                    ->select(
-                        DB::raw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.') AS venda'),
-                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d" AND user_id = '.$user_id.') AS totaldesperdicio'),
-                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p" AND user_id = '.$user_id.') AS totalproducao'),
-                        DB::raw('(SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.') AS totalvenda'),
-                        DB::raw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.') AS totalentrada'),
-                        DB::raw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.') AS totalsaida')
-                    )
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.' AND metade IS NULL) AS totalvendacompleta')
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.' AND metade IS NOT NULL) AS totalvendametade')
+                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d" AND user_id = '.$user_id.' ) AS totaldesperdicio')
+                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p" AND user_id = '.$user_id.' ) AS totalproducao')
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' AND entradas.metade IS NULL) AS vendacompleta')
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' AND entradas.metade IS NOT NULL) AS vendametade')
+                        ->selectRaw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' ) AS totalentrada')
+                        ->selectRaw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' ) AS totalsaida')
                     ->limit(1)
                     ->get();
 
             }else {
+
                 $resultados = $resultados
-                    ->select(
-                        DB::raw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS venda'),
-                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d") AS totaldesperdicio'),
-                        DB::raw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p") AS totalproducao'),
-                        DB::raw('(SELECT COUNT(*) FROM entradas) AS totalvenda'),
-                        DB::raw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalentrada'),
-                        DB::raw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalsaida')
-                    )
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE metade IS NULL) AS totalvendacompleta')
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE metade IS NOT NULL) AS totalvendametade')
+                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d") AS totaldesperdicio')
+                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p") AS totalproducao')
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND entradas.metade IS NOT NULL) AS vendametade')
+                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND entradas.metade IS NULL) AS vendacompleta')
+                        ->selectRaw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalentrada')
+                        ->selectRaw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalsaida')
                     ->limit(1)
                     ->get();
+            }
+
+            foreach ($resultados as $resultado) {
+                // Total das vendas
+                $totalVendaCompleta = $resultado->totalvendacompleta ? $resultado->totalvendacompleta : 0;
+                $totalVendaMetade = $resultado->totalvendametade ? $resultado->totalvendametade : 0;
+
+                $resultado->totalvenda = ($totalVendaMetade / 2) + $totalVendaCompleta;
+
+
+                // vendas
+                $vendaCompleta = $resultado->vendacompleta ? $resultado->vendacompleta : 0;
+                $vendaMetade = $resultado->vendametade ? $resultado->vendametade : 0;
+
+                $resultado->venda = ($vendaMetade / 2) + $vendaCompleta;
+                // dd($resultado);
             }
             return view('home', [
                 'users' => $users,

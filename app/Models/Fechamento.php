@@ -72,13 +72,15 @@ class Fechamento extends Model
                 $cartao_cred = "(SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_cred";
                 $cartao_deb = "(SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_deb";
                 $diferenca = "(SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS diferenca";
-                $fechamentos = $fechamentos
+                $saidas = "(SELECT SUM(saidas.valor) FROM saidas WHERE created_at BETWEEN ? AND ? AND saidas.user_id = ? ) AS saidas";
+            $fechamentos = $fechamentos
                     ->selectRaw($total_caixa, $params)
                     ->selectRaw($env, $params)
                     ->selectRaw($pix, $params)
                     ->selectRaw($cartao_cred, $params)
                     ->selectRaw($cartao_deb, $params)
                     ->selectRaw($diferenca, $params)
+                    ->selectRaw($saidas, $params)
                     ->join('users','users.id','=','fechamentos.user_id')
                     ->where('users.id', $user->id)
                     ->groupBy('users.name', 'users.perc_cred', 'users.perc_deb')
@@ -101,9 +103,12 @@ class Fechamento extends Model
                     $new_deb = number_format(floatval(str_replace(',', '.', $new_deb)), 2, '.', '');
                     $total_definitivo = ($valor_env) + ($valor_pix) + ($new_cred) + ($new_deb);
 
+                    $previsao_lucro = $total_definitivo - $fechamento->getAttribute('saidas');
+
                     // Reatribuindo os valores
 
                     $fechamento->setAttribute('total',$total_definitivo);
+                    $fechamento->setAttribute('lucro',$previsao_lucro);
                     $fechamento->setAttribute('perc_cred',$taxa_cred);
                     $fechamento->setAttribute('perc_deb',$taxa_deb);
                     $fechamento->setAttribute('cartao_cred',$new_cred);
@@ -136,6 +141,7 @@ class Fechamento extends Model
             $cartao_cred = "(SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_cred";
             $cartao_deb = "(SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_deb";
             $diferenca = "(SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS diferenca";
+            $saidas = "(SELECT SUM(saidas.valor) FROM saidas WHERE created_at BETWEEN ? AND ? AND saidas.user_id = ? ) AS saidas";
             $fechamentos = $fechamentos
                 ->selectRaw($total_caixa, $params)
                 ->selectRaw($env, $params)
@@ -143,6 +149,7 @@ class Fechamento extends Model
                 ->selectRaw($cartao_cred, $params)
                 ->selectRaw($cartao_deb, $params)
                 ->selectRaw($diferenca, $params)
+                ->selectRaw($saidas, $params)
                 ->join('users','users.id','=','fechamentos.user_id')
                 ->where('users.id', $user->id)
                 ->groupBy('users.name', 'users.perc_cred', 'users.perc_deb')
@@ -150,7 +157,7 @@ class Fechamento extends Model
 
             if($fechamentos->isNotEmpty()) {
                 // dd($fechamentos[0]->cartao_cred);
-                
+
                 $fechamentos[0]->cartao_cred =
                 numero_iso_para_br($fechamentos[0]->cartao_cred - (
                     ($fechamentos[0]->perc_cred / 100) * $fechamentos[0]->cartao_cred
@@ -173,13 +180,12 @@ class Fechamento extends Model
                 numero_br_para_iso($fechamentos[0]->cartao_deb);
 
                 $fechamentos[0]->total_definitivo = numero_iso_para_br($total);
-                    // dd($fechamentos[0]);
-                    // $fechamentos[0]->total
+                $fechamentos[0]->receita = $total;
 
                 $results->push($fechamentos[0]);
             }
         }
-        
+
         return $results;
     }
 }

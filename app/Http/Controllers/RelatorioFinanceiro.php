@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RelatoryDataExport;
+use App\Exports\RelatoryDataExportLucro;
 use App\Models\Entrada;
 use App\Models\Fechamento;
 use App\Models\Produto;
@@ -73,21 +74,19 @@ class RelatorioFinanceiro extends Controller
 
         $produto_vendidos = Produto::select('produtos.id','produtos.nome')
                 ->selectRaw('(SELECT COUNT("*")
-                FROM entradas
-                WHERE entradas.id_produto = produtos.id
-                '.($user_id ? "AND entradas.user_id = $user_id" : '' ).'
-                '.($formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento " : '').'
-                '.($produto || $produto != '' ? "AND entradas.id_produto = $produto " : '').'
-                AND entradas.created_at BETWEEN "'.$data_inicial.' 00:00:00"
-                                        AND "'.$data_final.' 23:59:59") as contador_produtos')
+                    FROM entradas
+                    WHERE entradas.id_produto = produtos.id
+                    '.($user_id ? "AND entradas.user_id = $user_id" : '' ).'
+                    '.($formaPagamento || $formaPagamento != '' ? "AND entradas.id_tipo_pagamento = $formaPagamento " : '').'
+                    '.($produto || $produto != '' ? "AND entradas.id_produto = $produto " : '').'
+                    AND entradas.created_at BETWEEN "'.$data_inicial.' 00:00:00"
+                    AND "'.$data_final.' 23:59:59") as contador_produtos')
                 ->whereBetween('created_at',[$data_inicial,$data_final])
                 ->groupBy('produtos.nome','produtos.id')
                 ->get();
 
         $fechamento = new Fechamento();
         $fechamento = $fechamento->relatorioFinanceiro($data_inicial,$data_final,$user_id);
-
-        $lucro = new Entrada();
 
 
         // dd($fechamento);
@@ -104,8 +103,14 @@ class RelatorioFinanceiro extends Controller
 
     }
 
-    public function exportExcel()
+    public function exportExcelResume()
     {
         return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExport, 'relatorio_mensal.xlsx');
     }
+
+    public function exportExcelLucro()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExportLucro, 'lucro_mensal.xlsx');
+    }
+
 }
