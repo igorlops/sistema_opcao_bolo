@@ -94,7 +94,16 @@
                             {{ csrf_field() }}
 
                             @include ('fechamentos.form', ['formMode' => 'create'])
-
+                            <div class="d-flex flex-row justify-content-around">
+                                <div class="col-6 input-group mb-3">
+                                    <input type="file" name="file_cartao_cred" class="form-control" id="file_card_cred">
+                                    <label class="input-group-text" for="file_card_cred">Cartão crédito</label>
+                                </div>
+                                <div class="col-6 input-group mb-3">
+                                    <input type="file" name="file_cartao_deb" class="form-control" id="file_card_deb">
+                                    <label class="input-group-text" for="file_card_deb">Cartão débito</label>
+                                </div>
+                            </div>
                         </form>
 
                     </div>
