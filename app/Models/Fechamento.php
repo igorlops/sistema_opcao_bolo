@@ -34,14 +34,15 @@ class Fechamento extends Model
     }
     public function relatorioFinanceiro($data_ini, $data_fin, $user_id)
     {
+        $results = [];
         $users = User::all();
 
-        $total_caixa = "(SELECT SUM(fechamentos.total_caixa) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS total_caixa";
-        $env = "(SELECT SUM(fechamentos.env) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS env";
-        $pix = "(SELECT SUM(fechamentos.pix) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS pix";
-        $cartao_cred = "(SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_cred";
-        $cartao_deb = "(SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_deb";
-        $diferenca = "(SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS diferenca";
+        $total_caixa = "COALESCE((SELECT SUM(fechamentos.total_caixa) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0) AS total_caixa";
+        $env = "COALESCE((SELECT SUM(fechamentos.env) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0) AS env";
+        $pix = "COALESCE((SELECT SUM(fechamentos.pix) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0) AS pix";
+        $cartao_cred = "COALESCE((SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0) AS cartao_cred";
+        $cartao_deb = "COALESCE((SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0) AS cartao_deb";
+        $diferenca = "COALESCE((SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0) AS diferenca";
 
         if ($user_id) {
             $fechamentos = $this->select('users.name','users.perc_cred','users.perc_deb');
@@ -66,13 +67,13 @@ class Fechamento extends Model
                 $fechamentos = $this->select('users.name','users.perc_cred','users.perc_deb');
                 $params = [$data_ini . " 00:00:00", $data_fin . " 23:59:59", $user->id];
 
-                $total_caixa = "(SELECT SUM(fechamentos.total_caixa) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS total_caixa";
-                $env = "(SELECT SUM(fechamentos.env) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS env";
-                $pix = "(SELECT SUM(fechamentos.pix) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS pix";
-                $cartao_cred = "(SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_cred";
-                $cartao_deb = "(SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS cartao_deb";
-                $diferenca = "(SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ) AS diferenca";
-                $saidas = "(SELECT SUM(saidas.valor) FROM saidas WHERE created_at BETWEEN ? AND ? AND saidas.user_id = ? ) AS saidas";
+                $total_caixa = "COALESCE((SELECT SUM(fechamentos.total_caixa) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0 ) AS total_caixa";
+                $env = "COALESCE((SELECT SUM(fechamentos.env) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0 ) AS env";
+                $pix = "COALESCE((SELECT SUM(fechamentos.pix) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0 ) AS pix";
+                $cartao_cred = "COALESCE((SELECT SUM(fechamentos.cartao_cred) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0 ) AS cartao_cred";
+                $cartao_deb = "COALESCE((SELECT SUM(fechamentos.cartao_deb) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0 ) AS cartao_deb";
+                $diferenca = "COALESCE((SELECT SUM(fechamentos.diferenca) FROM fechamentos WHERE created_at BETWEEN ? AND ? AND fechamentos.user_id = ? ), 0 ) AS diferenca";
+                $saidas = "COALESCE((SELECT SUM(saidas.valor) FROM saidas WHERE created_at BETWEEN ? AND ? AND saidas.user_id = ? ), 0 ) AS saidas";
             $fechamentos = $fechamentos
                     ->selectRaw($total_caixa, $params)
                     ->selectRaw($env, $params)

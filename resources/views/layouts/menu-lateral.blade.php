@@ -42,6 +42,41 @@
             </li>
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
+                    <i class="bi bi-folder-plus nav-icon"></i>
+                    <p>
+                        Cadastros
+                        <i class="right bi bi-caret-left-fill"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('produtos.index')}}" class="nav-link">
+                            <i class="bi bi-boxes nav-icon"></i>
+                            <p>Produtos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('users.index')}}" class="nav-link">
+                            <i class="bi bi-person-plus nav-icon"></i>
+                            <p>Usuarios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('tipo-pagamentos.index')}}" class="nav-link">
+                            <i class="bi bi-credit-card-fill nav-icon"></i>
+                            <p>Tipos de pagamentos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('tipo-saidas.index')}}" class="nav-link">
+                            <i class="bi bi-arrow-up-right-square-fill nav-icon"></i>
+                            <p>Tipos de saídas</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
                     <i class="bi bi-box-arrow-up nav-icon"></i>
                     <p>
                         Entrada
@@ -149,41 +184,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item menu-open">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-folder-plus nav-icon"></i>
-                    <p>
-                        Cadastros
-                        <i class="right bi bi-caret-left-fill"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('produtos.index')}}" class="nav-link">
-                            <i class="bi bi-boxes nav-icon"></i>
-                            <p>Produtos</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('users.index')}}" class="nav-link">
-                            <i class="bi bi-person-plus nav-icon"></i>
-                            <p>Usuarios</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('tipo-pagamentos.index')}}" class="nav-link">
-                            <i class="bi bi-credit-card-fill nav-icon"></i>
-                            <p>Tipos de pagamentos</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('tipo-saidas.index')}}" class="nav-link">
-                            <i class="bi bi-arrow-up-right-square-fill nav-icon"></i>
-                            <p>Tipos de saídas</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
@@ -358,6 +359,39 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-folder-plus nav-icon"></i>
+                                Cadastros
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li class="nav-item">
+                                    <a href="{{route('produtos.index')}}" class="dropdown-item">
+                                        <i class="bi bi-boxes nav-icon"></i>
+                                        Produtos
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('users.index')}}" class="dropdown-item">
+                                        <i class="bi bi-person-plus nav-icon"></i>
+                                        Usuarios
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('tipo-pagamentos.index')}}" class="dropdown-item">
+                                        <i class="bi bi-credit-card-fill nav-icon"></i>
+                                        Tipos de pagamentos
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('tipo-saidas.index')}}" class="dropdown-item">
+                                        <i class="bi bi-arrow-up-right-square-fill nav-icon"></i>
+                                        Tipos de saídas
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-box-arrow-up nav-icon"></i>
                                 Entrada
                             </a>
@@ -441,39 +475,6 @@
                                     <a href="{{route('estoques.index')}}" class="dropdown-item">
                                         <i class="bi bi-ui-checks"></i>
                                         Relatório de estoque
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-folder-plus nav-icon"></i>
-                                Cadastros
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li class="nav-item">
-                                    <a href="{{route('produtos.index')}}" class="dropdown-item">
-                                        <i class="bi bi-boxes nav-icon"></i>
-                                        Produtos
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('users.index')}}" class="dropdown-item">
-                                        <i class="bi bi-person-plus nav-icon"></i>
-                                        Usuarios
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('tipo-pagamentos.index')}}" class="dropdown-item">
-                                        <i class="bi bi-credit-card-fill nav-icon"></i>
-                                        Tipos de pagamentos
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('tipo-saidas.index')}}" class="dropdown-item">
-                                        <i class="bi bi-arrow-up-right-square-fill nav-icon"></i>
-                                        Tipos de saídas
                                     </a>
                                 </li>
                             </ul>

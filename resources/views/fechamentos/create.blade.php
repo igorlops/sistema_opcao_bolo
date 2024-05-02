@@ -52,8 +52,27 @@
                                         <td>{{ $produto->nome }}</td>
                                         <td>{{ $produto->producao ? $produto->producao : '0'}}</td>
                                         <td>{{ $produto->desperdicio ? $produto->desperdicio : '0'}}</td>
-                                        <td>{{ $produto->venda ? $produto->venda : '0'}}</td>
-                                        <td>{{ $produto->totalproducao - ($produto->totalvenda + $produto->totaldesperdicio) }}</td>
+                                        <td>{{ $produto->vendaMetade || $produto->vendaCompleta ?
+                                            numero_iso_para_br(
+                                                ($produto->vendaMetade ? ($produto->vendaMetade / 2) : 0) + ($produto->vendaCompleta ? $produto->vendaCompleta : 0)
+                                            )
+                                            :
+                                        '0,00'}}
+                                    </td>
+                                    <td>{{ numero_iso_para_br(
+                                        $produto->totalproducao - (
+                                            (
+                                                (
+                                                    ($produto->totalvendacompleta ? $produto->totalvendacompleta : 0)
+                                                ) + (
+                                                    $produto->totalvendametade ? ($produto->totalvendametade / 2) : 0
+                                                )
+                                            )
+                                                + $produto->totaldesperdicio
+                                                )
+                                            )
+                                        }}
+                                    </td>
                                     </tr>
                                     @empty
 
