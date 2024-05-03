@@ -17179,4 +17179,20 @@ textarea.form-control-lg {
   .background-login img {
     height: 100%;
   }
+  .inputs-fechamento {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .inputs-fechamento .w-50 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .file-fechamentos {
+    flex-direction: column !important;
+  }
+  .file-fechamentos .col-6 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
 }

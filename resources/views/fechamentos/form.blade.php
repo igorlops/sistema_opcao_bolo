@@ -1,4 +1,4 @@
-<div class="d-flex flex-row">
+<div class="inputs-fechamento d-flex flex-row">
     <div class="d-flex justify-content-center flex-column w-50">
         <div class="form-group row {{ $errors->has('vendas_extras') ? 'has-error' : ''}}">
             <label for="vendas_extras" class="col-form-label col-sm-3 required">{{ 'Vendas Extras/Embalagens (B)' }}</label>
@@ -125,7 +125,7 @@
 </div>
 <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{auth()->user()->id}}" >
 @if ($formMode === 'create')
-<div class="d-flex flex-row justify-content-around">
+<div class="file-fechamentos d-flex flex-row justify-content-around">
     <div class="col-6 input-group mb-3">
         <input type="file" name="file_cartao_cred" class="form-control" id="file_card_cred" accept="image/jpeg, image/png, image/gif">
         <label class="input-group-text" for="file_card_cred">Cartão crédito</label>
