@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FechamentoRequest;
 use App\Models\Entrada;
 use App\Models\Estoque;
+use App\Models\ImagensFechamento;
 use App\Models\Produto;
 
 use App\Models\Fechamento;
@@ -72,7 +73,7 @@ class FechamentosController extends Controller
      */
     public function store(FechamentoRequest $request)
     {
-        $requestData = $request->all();
+        $requestData = $request->except('file_cartao_deb','file_cartao_cred');
 
         $data = new \DateTime();
         $data_atual = $data->format('Y-m-d');
@@ -92,6 +93,32 @@ class FechamentosController extends Controller
             ]);
         }
 
+        $comprovanteCredito = "";
+        $comprovanteDebito = "";
+
+        if ($request->hasFile('file_cartao_cred')) {
+            $comprovanteCredito = file_get_contents($request->file('file_cartao_cred'));
+        }
+
+        if ($request->hasFile('file_cartao_deb')) {
+            $comprovanteDebito = file_get_contents($request->file('file_cartao_deb'));
+        }
+
+
+        // dd($comprovanteCredito, $comprovanteDebito);
+        if(!empty($comprovanteCredito)) {
+            ImagensFechamento::create([
+                'id_fechamento' => $fechamento->id,
+                'imagem' => $comprovanteCredito
+            ]);
+        }
+
+        if(!empty($comprovanteDebito)) {
+            ImagensFechamento::create([
+                'id_fechamento' => $fechamento->id,
+                'imagem' => $comprovanteDebito
+            ]);
+        }
         if(auth()->user()->type_user == 2){
             return redirect()->route('fechamentos.create')->with('success', 'Fechamento adicionado!');
         }

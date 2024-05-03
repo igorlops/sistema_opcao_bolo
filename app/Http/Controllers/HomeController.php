@@ -91,28 +91,28 @@ class HomeController extends Controller
 
             if($user_id){
                 $resultados = $resultados
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.' AND metade IS NULL) AS totalvendacompleta')
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.' AND metade IS NOT NULL) AS totalvendametade')
-                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d" AND user_id = '.$user_id.' ) AS totaldesperdicio')
-                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p" AND user_id = '.$user_id.' ) AS totalproducao')
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' AND entradas.metade IS NULL) AS vendacompleta')
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' AND entradas.metade IS NOT NULL) AS vendametade')
-                        ->selectRaw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' ) AS totalentrada')
-                        ->selectRaw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' ) AS totalsaida')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.' AND metade IS NULL),0) AS totalvendacompleta')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE user_id = '.$user_id.' AND metade IS NOT NULL),0) AS totalvendametade')
+                        ->selectRaw('COALESCE((SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d" AND user_id = '.$user_id.' ),0) AS totaldesperdicio')
+                        ->selectRaw('COALESCE((SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p" AND user_id = '.$user_id.' ),0) AS totalproducao')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' AND entradas.metade IS NULL),0) AS vendacompleta')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' AND entradas.metade IS NOT NULL),0) AS vendametade')
+                        ->selectRaw('COALESCE((SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' ),0) AS totalentrada')
+                        ->selectRaw('COALESCE((SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND user_id = '.$user_id.' ),0) AS totalsaida')
                     ->limit(1)
                     ->get();
 
             }else {
 
                 $resultados = $resultados
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE metade IS NULL) AS totalvendacompleta')
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE metade IS NOT NULL) AS totalvendametade')
-                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d") AS totaldesperdicio')
-                        ->selectRaw('(SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p") AS totalproducao')
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND entradas.metade IS NOT NULL) AS vendametade')
-                        ->selectRaw('(SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND entradas.metade IS NULL) AS vendacompleta')
-                        ->selectRaw('(SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalentrada')
-                        ->selectRaw('(SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59") AS totalsaida')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE metade IS NULL),0) AS totalvendacompleta')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE metade IS NOT NULL),0) AS totalvendametade')
+                        ->selectRaw('COALESCE((SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "d"),0) AS totaldesperdicio')
+                        ->selectRaw('COALESCE((SELECT SUM(quantidade) FROM estoques WHERE tipo_estoque = "p"),0) AS totalproducao')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND entradas.metade IS NOT NULL),0) AS vendametade')
+                        ->selectRaw('COALESCE((SELECT COUNT(*) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59" AND entradas.metade IS NULL),0) AS vendacompleta')
+                        ->selectRaw('COALESCE((SELECT SUM(valor) FROM entradas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59"),0) AS totalentrada')
+                        ->selectRaw('COALESCE((SELECT SUM(valor) FROM saidas WHERE created_at BETWEEN "'.data_br_to_iso($data_ini).' 00:00:00" AND "'.data_br_to_iso($data_fin).' 23:59:59"),0) AS totalsaida')
                     ->limit(1)
                     ->get();
             }

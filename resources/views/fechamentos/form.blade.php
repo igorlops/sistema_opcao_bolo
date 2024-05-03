@@ -124,6 +124,18 @@
     </div>
 </div>
 <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{auth()->user()->id}}" >
+@if ($formMode === 'create')
+<div class="d-flex flex-row justify-content-around">
+    <div class="col-6 input-group mb-3">
+        <input type="file" name="file_cartao_cred" class="form-control" id="file_card_cred" accept="image/jpeg, image/png, image/gif">
+        <label class="input-group-text" for="file_card_cred">Cartão crédito</label>
+    </div>
+    <div class="col-6 input-group mb-3">
+        <input type="file" name="file_cartao_deb" class="form-control" id="file_card_deb" accept="image/jpeg, image/png, image/gif">
+        <label class="input-group-text" for="file_card_deb">Cartão débito</label>
+    </div>
+</div>
+@endif
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Atualizar' : 'Criar' }}">
