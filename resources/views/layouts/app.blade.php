@@ -213,6 +213,18 @@
                 // Aqui você pode definir o valor formatado onde precisar, por exemplo:
                 diferenca.value = diferencaCaixaFormatada;
             }
+
+
+            function abrirImagemNovaJanela(event, img){
+                event.preventDefault();
+                const novaJanela = window.open("", "_blank");
+
+                novaJanela.document.write(`<img src="${img}" style="width:100%" alt="Descrição da imagem">`);
+
+                window.addEventListener("beforeunload", () => {
+                    novaJanela.close();
+                });
+            }
         </script>
     </div>
 </body>

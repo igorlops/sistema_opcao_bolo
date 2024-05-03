@@ -117,6 +117,30 @@
                         </table>
                     </div>
                 </div>
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <div class="py-2 d-flex justify-content-around">
+                            @forelse ($imagens_fechamentos as $item)
+                                <div class="">
+                                    @if ($item->tipo === 'deb')
+                                        <h3>Cartão de débito</h3>
+                                        <a onclick="abrirImagemNovaJanela(event,'{{$item->imagem}}')" href="#" target="_blank">
+                                            <img src="{{$item->imagem}}" width="100" alt="Comprovante de débito">
+                                        </a>
+                                    @endif
+                                    @if ($item->tipo === 'cred')
+                                        <h3>Cartão de crédito</h3>
+                                        <a onclick="abrirImagemNovaJanela(event,'{{$item->imagem}}')" href="#" target="_blank">
+                                            <img src="{{$item->imagem}}" width="100" alt="Comprovante de crédito">
+                                        </a>
+                                    @endif
+                                </div>
+                            @empty
+                                <h2>Fechamento não possui comprovante</h2>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

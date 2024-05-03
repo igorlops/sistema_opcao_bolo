@@ -93,32 +93,38 @@ class FechamentosController extends Controller
             ]);
         }
 
+        // Controller
         $comprovanteCredito = "";
         $comprovanteDebito = "";
 
         if ($request->hasFile('file_cartao_cred')) {
-            $comprovanteCredito = file_get_contents($request->file('file_cartao_cred'));
+            $mimeType = $request->file('file_cartao_cred')->getMimeType();
+            $comprovanteCredito = 'data:' . $mimeType . ';base64,' . base64_encode(file_get_contents($request->file('file_cartao_cred')));
         }
 
         if ($request->hasFile('file_cartao_deb')) {
-            $comprovanteDebito = file_get_contents($request->file('file_cartao_deb'));
+            $mimeType = $request->file('file_cartao_deb')->getMimeType();
+            $comprovanteDebito = 'data:' . $mimeType . ';base64,' . base64_encode(file_get_contents($request->file('file_cartao_deb')));
         }
 
-
-        // dd($comprovanteCredito, $comprovanteDebito);
+        // dd($fechamento->id,
+        //     $comprovanteCredito,
+        // 'cred');
         if(!empty($comprovanteCredito)) {
             ImagensFechamento::create([
                 'id_fechamento' => $fechamento->id,
+                'tipo'=>'cred',
                 'imagem' => $comprovanteCredito
             ]);
         }
-
         if(!empty($comprovanteDebito)) {
             ImagensFechamento::create([
                 'id_fechamento' => $fechamento->id,
+                'tipo' => 'deb',
                 'imagem' => $comprovanteDebito
             ]);
         }
+
         if(auth()->user()->type_user == 2){
             return redirect()->route('fechamentos.create')->with('success', 'Fechamento adicionado!');
         }
@@ -137,7 +143,8 @@ class FechamentosController extends Controller
     {
         $fechamento = Fechamento::findOrFail($id);
         $produtos_fechamentos = ProdutosFechamento::where('id_fechamento','=',$id)->get();
-        return view('fechamentos.show', compact('fechamento','produtos_fechamentos'));
+        $imagens_fechamentos = ImagensFechamento::where('id_fechamento','=',$id)->get();
+        return view('fechamentos.show', compact('fechamento','produtos_fechamentos','imagens_fechamentos'));
     }
 
     /**

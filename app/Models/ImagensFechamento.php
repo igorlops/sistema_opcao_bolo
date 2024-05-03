@@ -25,7 +25,7 @@ class ImagensFechamento extends Model
      *
      * @var array
      */
-    protected $fillable = ['imagem', 'id_fechamento'];
+    protected $fillable = ['imagem', 'id_fechamento','tipo'];
 
     public function fechamento()
     {

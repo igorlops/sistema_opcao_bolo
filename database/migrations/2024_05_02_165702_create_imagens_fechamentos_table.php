@@ -15,7 +15,8 @@ class CreateImagensFechamentosTable extends Migration
         Schema::create('imagens_fechamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->binary('imagem');
+            $table->longText('imagem');
+            $table->string('tipo');
             $table->bigInteger('id_fechamento')->unsigned();
             $table->foreign('id_fechamento')->references('id')->on('fechamentos')->onDelete('cascade')->onUpdate('cascade');
             });
