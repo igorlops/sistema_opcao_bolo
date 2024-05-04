@@ -281,7 +281,11 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-success" href="{{route('exportExcel')}}"><i class="bi bi-download"></i> Exportar relatório</a>
+                        <form action="{{route('exportExcel')}}" method="GET">
+                            <input type="hidden" name="data_ini_export_relatory"  value="{{request('data_inicial')}}">
+                            <input type="hidden" name="data_fin_export_relatory"  value="{{request('data_final')}}">
+                            <button type="submit" class="btn btn-success" ><i class="bi bi-download"></i> Exportar relatório</button>
+                        </form>
                     </div>
                 </div>
 
@@ -324,7 +328,11 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-success" href="{{route('exportExcel')}}"><i class="bi bi-download"></i> Exportar relatório</a>
+                        <form action="{{route('exportExcelLucro')}}" method="GET">
+                            <input type="hidden" name="data_ini_export"  value="{{request('data_inicial')}}">
+                            <input type="hidden" name="data_fin_export"  value="{{request('data_final')}}">
+                            <button type="submit" class="btn btn-success"><i class="bi bi-download"></i> Exportar relatório</button>
+                        </form>
                     </div>
                 </div>
             </div>

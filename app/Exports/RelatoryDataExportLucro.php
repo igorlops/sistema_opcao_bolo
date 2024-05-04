@@ -2,16 +2,32 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Collection;
 use App\Models\Fechamento;
-use Maatwebsite\Excel\Concerns\FromView;
-use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class RelatoryDataExportLucro implements FromView
+class RelatoryDataExportLucro implements FromCollection,WithHeadings
 {
-    public function view(): View
+    protected $data_ini;
+    protected $data_fin;
+
+    public function __construct($data_ini, $data_fin)
     {
-        $teste = Fechamento::all();
-        // dd($teste);
-        return view('relatorios.index', compact('teste'));
+        $this->data_ini = $data_ini;
+        $this->data_fin = $data_fin;
+    }
+    public function collection(): Collection
+    {
+        return collect(Fechamento::exportLucroRelatory($this->data_ini, $this->data_fin));
+    }
+
+    public function headings() : array
+    {
+        return [
+            'Receita',
+            'Saídas',
+            'Lucro final'
+        ];
     }
 }

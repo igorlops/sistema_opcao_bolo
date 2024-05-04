@@ -103,14 +103,18 @@ class RelatorioFinanceiro extends Controller
 
     }
 
-    public function exportExcelResume()
+    public function exportExcelResume(Request $request)
     {
-        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExport, 'relatorio_mensal.xlsx');
+        $data_inicial = data_br_to_iso($request->input('data_ini_export_relatory'));
+        $data_final = data_br_to_iso($request->input('data_fin_export_relatory'));
+        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExport($data_inicial,$data_final), 'relatorio_mensal.xlsx');
     }
 
-    public function exportExcelLucro()
+    public function exportExcelLucro(Request $request)
     {
-        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExportLucro, 'lucro_mensal.xlsx');
+        $data_inicial = data_br_to_iso($request->input('data_ini_export'));
+        $data_final = data_br_to_iso($request->input('data_fin_export'));
+        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExportLucro($data_inicial,$data_final), 'lucro_mensal.xlsx');
     }
 
 }
