@@ -67,7 +67,7 @@
                     <a class="btn btn-primary p-3 my-3 flex-wrap text-center" href="{{route('estoques.index')}}">
                         <i class="bi bi-boxes"></i>
                         <h4>Estoques</h4>
-                        <h5>R$ {{
+                        <h5>{{
                             numero_iso_para_br($resultado->totalproducao - ($resultado->totaldesperdicio + $resultado->totalvenda))
                         }}
                         </h5>
@@ -81,7 +81,7 @@
                     <a class="btn btn-warning p-3 my-3 flex-wrap text-center " href="{{route('entradas.index')}}">
                         <i class="bi bi-cash-coin"></i>
                         <h4>Vendas</h4>
-                        <h5>R$ {{numero_iso_para_br($resultado->venda)}}</h5>
+                        <h5>{{numero_iso_para_br($resultado->venda)}}</h5>
                         {{-- <h5>{{$produtos->venda}}</h5> --}}
                     </a>
                 </div>
