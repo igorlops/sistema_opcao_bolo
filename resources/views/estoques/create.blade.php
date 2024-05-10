@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('titulo_site','Novo estoque')
+@section('titulo_site','Cadastro de bolos')
 @section('title')
-    <h1>Novo Estoque</h1>
+    <h1>Cadastro de bolos</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/estoques')}}">Listagem de Estoque</a>
+        <a href="{{url('/estoques')}}">Lista de Cadastro de bolos</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/estoques/create')}}">Novo Estoque</a>
+        <a href="{{url('/estoques/create')}}">Cadastro de bolos</a>
     </li>
 @endsection
 @section('content')
@@ -18,7 +18,7 @@
 
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Novo Estoque</div>
+                    <div class="card-header">Cadastro de bolos</div>
                     <div class="card-body">
                         <a href="{{ url('/estoques') }}" title="Back">@if(auth()->user()->type_user == 1) <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />

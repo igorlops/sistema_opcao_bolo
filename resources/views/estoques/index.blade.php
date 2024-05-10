@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('titulo_site','Estoques')
+@section('titulo_site','Produção')
 @section('title')
-    <h1>Listagem de Estoque</h1>
+    <h1>Listagem de produção</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/estoques')}}">Listagem Estoque</a>
+        <a href="{{url('/estoques')}}">Listagem produção</a>
     </li>
 @endsection
 @section('content')
@@ -14,9 +14,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header"><h3>Relatório de estoque atual</h3></div>
+                    <div class="card-header"><h3>Relatório de produção atual</h3></div>
                     <div class="card-body">
-                        <a href="{{ route('estoques.create') }}" class="btn btn-success btn-sm" title="Novo Estoque">
+                        <a href="{{ route('estoques.create') }}" class="btn btn-success btn-sm" title="Nova produção">
                             <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
@@ -112,7 +112,7 @@
 
                 <div class="card bg-dark">
                     <div class="card-header">
-                        <h3>Histórico de estoque</h3>
+                        <h3>Histórico de produção</h3>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

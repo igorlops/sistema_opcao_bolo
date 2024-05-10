@@ -66,7 +66,7 @@
                 <div class="d-flex justify-content-around">
                     <a class="btn btn-primary p-3 my-3 flex-wrap text-center" href="{{route('estoques.index')}}">
                         <i class="bi bi-boxes"></i>
-                        <h4>Estoques</h4>
+                        <h4>Qtde Bolos</h4>
                         <h5>{{
                             numero_iso_para_br($resultado->totalproducao - ($resultado->totaldesperdicio + $resultado->totalvenda))
                         }}
