@@ -63,13 +63,13 @@
                                         <td>{{ $item->metade == 'on' ? 'Sim' : 'Não'}}</td>
 
                                         <td>
-                                            <a href="{{ url('/entradas/' . $item->id) }}" title="Ver Entrada"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/entradas/' . $item->id) }}" title="Ver  Entrada"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
                                             <a href="{{ url('/entradas/' . $item->id . '/edit') }}" title="Editar Entrada"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/entradas' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar Entrada" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar Entrada" onclick="return confirm(&quot;Confirma exclusão?&quot;)"><i class="bi bi-trash"></i> Deletar</button>
                                             </form>
                                         </td>
                                     </tr>

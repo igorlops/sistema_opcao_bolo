@@ -46,13 +46,13 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td><td>{{ $item->email }}</td>
                                         <td>
-                                            <a href="{{ url('/users/' . $item->id) }}" title="View User"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
-                                            <a href="{{ url('/users/' . $item->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                                            <a href="{{ url('/users/' . $item->id) }}" title="Ver User"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/users/' . $item->id . '/edit') }}" title="Editar User"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/users' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete User" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar User" onclick="return confirm(&quot;Confirma exclusão?&quot;)"><i class="bi bi-trash"></i> Deletar</button>
                                             </form>
                                         </td>
                                     </tr>

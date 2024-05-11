@@ -46,13 +46,13 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->descricao }}</td>
                                         <td>
-                                            <a href="{{ url('/tipo-saidas/' . $item->id) }}" title="View Tipo Saida"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
-                                            <a href="{{ url('/tipo-saidas/' . $item->id . '/edit') }}" title="Edit Tipo Saida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                                            <a href="{{ url('/tipo-saidas/' . $item->id) }}" title="Ver Tipo Saida"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/tipo-saidas/' . $item->id . '/edit') }}" title="Editar Tipo Saida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/tipo-saidas' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete TipoSaida" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar TipoSaida" onclick="return confirm(&quot;Confirma exclusão?&quot;)"><i class="bi bi-trash"></i> Deletar</button>
                                             </form>
                                         </td>
                                     </tr>

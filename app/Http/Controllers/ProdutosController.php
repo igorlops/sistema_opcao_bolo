@@ -23,12 +23,19 @@ class ProdutosController extends Controller
         if (!empty($keyword)) {
             $produtos = Produto::where('nome', 'LIKE', "%$keyword%")
                 ->orWhere('is_bolo_extra', 'LIKE', "%$keyword%")
+                ->where('type_product','=','p')
+                ->latest()->paginate($perPage);
+
+            $produtos_estoque = Produto::where('nome', 'LIKE', "%$keyword%")
+                ->orWhere('is_bolo_extra', 'LIKE', "%$keyword%")
+                ->where('type_product','=','e')
                 ->latest()->paginate($perPage);
         } else {
-            $produtos = Produto::latest()->paginate($perPage);
+            $produtos = Produto::where('type_product','=','p')->latest()->paginate($perPage);
+            $produtos_estoque = Produto::where('type_product','=','e')->latest()->paginate($perPage);
         }
 
-        return view('produtos.index', compact('produtos'));
+        return view('produtos.index', compact('produtos','produtos_estoque'));
     }
 
     /**
@@ -52,7 +59,8 @@ class ProdutosController extends Controller
     {
         $this->validate($request, [
 			'nome' => 'required|string|max:255',
-			'is_bolo_extra' => 'required'
+			'is_bolo_extra' => 'required',
+            'type_product' => 'required'
 		]);
         $requestData = $request->all();
 

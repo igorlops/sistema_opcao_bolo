@@ -1,9 +1,9 @@
 <div class="inputs-fechamento d-flex flex-row">
     <div class="d-flex justify-content-center flex-column w-50">
-        <div class="form-group row {{ $errors->has('vendas_extras') ? 'has-error' : ''}}">
+        {{-- <div class="form-group row {{ $errors->has('vendas_extras') ? 'has-error' : ''}}">
             <label for="vendas_extras" class="col-form-label col-sm-3 required">{{ 'Vendas Extras/Embalagens (B)' }}</label>
             <div class="col-sm-8">
-                <input class="form-control money" onchange="vendasABC()" name="vendas_extras" type="text" id="vendas_extras"
+                <input class="form-control money" onchange="vendasABC()" name="vendas_extras" disabled readonly type="text" id="vendas_extras"
                 @if ($formMode === 'edit')
                     value="{{ isset($fechamento->vendas_extras) ? $fechamento->vendas_extras : ''}}"
                 @else
@@ -12,7 +12,7 @@
                 >
                 {!! $errors->first('vendas_extras', '<p class="help-block">:message</p>') !!}
             </div>
-        </div>
+        </div> --}}
         <div class="form-group row {{ $errors->has('desconto') ? 'has-error' : ''}}">
             <label for="desconto" class="col-form-label col-sm-3 required">{{ 'Desconto (C)' }}</label>
             <div class="col-sm-8">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group row {{ $errors->has('total_caixa') ? 'has-error' : ''}}">
-            <label for="total_caixa" class="col-form-label col-sm-3 required">{{ 'Total Caixa:' }}</label>
+            <label for="total_caixa" class="col-form-label col-sm-3 required">{{ 'Dinheiro:' }}</label>
             <div class="col-sm-8">
                 <input class="form-control money" name="total_caixa" type="text" id="total_caixa"
                 @if ($formMode === 'edit')
@@ -53,8 +53,6 @@
                 {!! $errors->first('total_caixa', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
-    </div>
-    <div class="d-flex justify-content-center flex-column w-50">
 
         <div class="form-group row {{ $errors->has('env') ? 'has-error' : ''}}">
             <label for="env" class="col-form-label col-sm-3 required">{{ 'Envelope:' }}</label>
@@ -63,6 +61,17 @@
                 {!! $errors->first('env', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
+
+        <div class="form-group row {{ $errors->has('diferenca') ? 'has-error' : ''}}">
+            <label for="diferenca" class="col-form-label col-sm-3 required">{{ 'Diferença de caixa' }}</label>
+            <div class="col-sm-8">
+                <input class="form-control money" name="diferenca" type="text" id="diferenca" value="{{ isset($fechamento->diferenca) ? $fechamento->diferenca : ''}}" >
+                {!! $errors->first('diferenca', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div>
+
+    </div>
+    <div class="d-flex justify-content-center flex-column w-50">
         <div class="form-group row {{ $errors->has('cartao_cred') ? 'has-error' : ''}}">
             <label for="cartao_cred" class="col-form-label col-sm-3 required">{{ 'Cartão Crédito' }}</label>
             <div class="col-sm-8">
@@ -114,17 +123,19 @@
                 {!! $errors->first('pix', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
-        <div class="form-group row {{ $errors->has('diferenca') ? 'has-error' : ''}}">
-            <label for="diferenca" class="col-form-label col-sm-3 required">{{ 'Diferença de caixa' }}</label>
-            <div class="col-sm-8">
-                <input class="form-control money" name="diferenca" type="text" id="diferenca" value="{{ isset($fechamento->diferenca) ? $fechamento->diferenca : ''}}" >
-                {!! $errors->first('diferenca', '<p class="help-block">:message</p>') !!}
-            </div>
-        </div>
+    </div>
+</div>
+<div class="form-group {{ $errors->has('observacao') ? 'has-error' : ''}}">
+    <label for="observacao" class="col-form-label col-sm-2 required">{{ 'Observação' }}</label>
+    <div class="col-sm-12">
+        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao">{{ isset($entrada->observacao) ? $entrada->observacao : ''}}</textarea>
+        {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{auth()->user()->id}}" >
+
 @if ($formMode === 'create')
+<input type="hidden" name="ativo" value="n">
 <div class="file-fechamentos d-flex flex-row justify-content-around">
     <div class="col-6 input-group mb-3">
         <input type="file" name="file_cartao_cred" class="form-control" id="file_card_cred" accept="image/jpeg, image/png, image/gif">

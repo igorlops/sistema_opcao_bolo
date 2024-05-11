@@ -22,16 +22,30 @@
                     <div class="card-body">
 
                         <a href="{{ url('/fechamentos') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
-                        <a href="{{ url('/fechamentos/' . $fechamento->id . '/edit') }}" title="Edit Fechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                        <a href="{{ url('/fechamentos/' . $fechamento->id . '/edit') }}" title="Editar Fechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                         <form method="POST" action="{{ url('fechamentos' . '/' . $fechamento->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Fechamento" onclick="return confirm(&quot;Tem certeza?&quot;)"><i class="bi bi-trash"></i> Apagar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Deletar Fechamento" onclick="return confirm(&quot;Tem certeza?&quot;)"><i class="bi bi-trash"></i> Apagar</button>
                         </form>
                         <br/>
                         <br/>
-
+                        @if ($fechamento->ativo === 's')
+                            <div class="alert alert-success">
+                                Fechamento aprovado
+                            </div>
+                        @else
+                            <div class="alert alert-danger">
+                                Fechamento pendente
+                            </div>
+                            <form method="POST" action="{{ url('/fechamentos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                {{ method_field('POST') }}
+                                {{ csrf_field() }}
+                                <input type="hidden" name="ativo" value="s">
+                                <button type="submit" class="btn btn-success btn-sm" title="Aprovar Fechamento" onclick="return confirm(&quot;Confirma aprovação?&quot;)"><i class="bi bi-check"></i></button>
+                            </form>
+                        @endif
                         <div class="table-responsive">
                              <table class="table table-dark table-hover">
                                 <tbody>
@@ -51,7 +65,7 @@
                                         <td> {{ numero_iso_para_br($fechamento->vendas_abc) }} </td>
                                     </tr>
                                     <tr>
-                                        <th> Env.: </th>
+                                        <th> Envelope: </th>
                                         <td> {{ numero_iso_para_br($fechamento->env) }} </td>
                                     </tr>
                                     <tr>

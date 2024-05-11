@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Produtos</div>
+                    <div class="card-header">Produtos para produção</div>
                     <div class="card-body">
                         <a href="{{ url('/produtos/create') }}" class="btn btn-success btn-sm" title="Novo Produto">
                             <i class="bi bi-plus-lg"></i> Novo
@@ -47,13 +47,13 @@
                                         <td>{{ $item->nome }}</td><td>{{ $item->is_bolo_extra === 's' ? "Sim" : "Não"}}</td>
                                         <td>{{ data_iso_para_br($item->created_at) }}</td>
                                         <td>
-                                            <a href="{{ url('/produtos/' . $item->id) }}" title="View Produto"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
-                                            <a href="{{ url('/produtos/' . $item->id . '/edit') }}" title="Edit Produto"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                                            <a href="{{ url('/produtos/' . $item->id) }}" title="Ver Produto"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/produtos/' . $item->id . '/edit') }}" title="Editar Produto"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                                             <form method="POST" action="{{ url('/produtos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Produto" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="bi bi-trash"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar Produto" onclick="return confirm(&quot;Confirma exclusão?&quot;)"><i class="bi bi-trash"></i> Deletar</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -70,7 +70,49 @@
                             </table>
                             <div class="pagination-wrapper"> {!! $produtos->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
+                    </div>
+                </div>
 
+                <div class="card bg-dark">
+                    <div class="card-header">Produtos estoque</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                             <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th><th>Nome</th><th>Data</th><th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($produtos_estoque as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->nome }}</td>
+                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
+                                        <td>
+                                            <a href="{{ url('/produtos/' . $item->id) }}" title="Ver Produto"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
+                                            <a href="{{ url('/produtos/' . $item->id . '/edit') }}" title="Editar Produto"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+
+                                            <form method="POST" action="{{ url('/produtos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Deletar Produto" onclick="return confirm(&quot;Confirma exclusão?&quot;)"><i class="bi bi-trash"></i> Deletar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não há dados cadastrados</td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                            <div class="pagination-wrapper"> {!! $produtos->appends(['search' => Request::get('search')])->render() !!} </div>
+                        </div>
                     </div>
                 </div>
             </div>

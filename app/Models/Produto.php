@@ -25,7 +25,7 @@ class Produto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome', 'is_bolo_extra'];
+    protected $fillable = ['nome', 'is_bolo_extra','type_product'];
 
     public function relacaoProdutos($data_ini,$data_fin, $user_id = null) {
 
@@ -42,8 +42,8 @@ class Produto extends Model
             ->leftJoin('users', 'estoques.user_id', '=', 'users.id')
             ->groupBy('produtos.id','produtos.nome')
             ->get();
-    
+
     return $produtos;
-    
+
     }
 }

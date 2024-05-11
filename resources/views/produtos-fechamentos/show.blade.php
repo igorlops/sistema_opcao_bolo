@@ -22,12 +22,12 @@
                     <div class="card-body">
 
                         <a href="{{ url('/produtos-fechamentos') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
-                        <a href="{{ url('/produtos-fechamentos/' . $produtosfechamento->id . '/edit') }}" title="Edit ProdutosFechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
+                        <a href="{{ url('/produtos-fechamentos/' . $produtosfechamento->id . '/edit') }}" title="Editar ProdutosFechamento"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                         <form method="POST" action="{{ url('produtosfechamentos' . '/' . $produtosfechamento->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete ProdutosFechamento" onclick="return confirm(&quot;Tem certeza?&quot;)"><i class="bi bi-trash"></i> Apagar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Deletar ProdutosFechamento" onclick="return confirm(&quot;Tem certeza?&quot;)"><i class="bi bi-trash"></i> Apagar</button>
                         </form>
                         <br/>
                         <br/>
