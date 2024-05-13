@@ -21,18 +21,34 @@ class SaidasController extends Controller
     {
         $keyword = $request->get('search');
         $perPage = 10;
+        $tipo = $request->get('tipo');
 
-        if (!empty($keyword)) {
-            $saidas = Saida::where('valor', 'LIKE', "%$keyword%")
+        if($tipo === "variavel") {
+            if (!empty($keyword)) {
+                $saidas = Saida::where('valor', 'LIKE', "%$keyword%")
                 ->orWhere('observacao', 'LIKE', "%$keyword%")
                 ->orWhere('user_id', 'LIKE', "%$keyword%")
                 ->orWhere('id_descricao', 'LIKE', "%$keyword%")
+                ->where('tipo','=','variavel')
                 ->latest()->paginate($perPage);
-        } else {
-            $saidas = Saida::latest()->paginate($perPage);
-        }
+            } else {
+                $saidas = Saida::where('tipo','=','variavel')->latest()->paginate($perPage);
+            }
 
-        return view('saidas.index', compact('saidas'));
+            return view('saidas.index', compact('saidas'));
+        }elseif($tipo === "fixo") {
+            if (!empty($keyword)) {
+                $saidas = Saida::where('valor', 'LIKE', "%$keyword%")
+                ->orWhere('observacao', 'LIKE', "%$keyword%")
+                ->orWhere('user_id', 'LIKE', "%$keyword%")
+                ->orWhere('id_descricao', 'LIKE', "%$keyword%")
+                ->where('tipo', '=', "fixo")
+                ->latest()->paginate($perPage);
+            } else {
+                $saidas = Saida::where('tipo', '=', "fixo")->latest()->paginate($perPage);
+            }
+            return view('saidas-fixas.index', compact('saidas'));
+        }
     }
 
     /**
@@ -40,10 +56,17 @@ class SaidasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        $descricoes = TipoSaida::all();
-        return view('saidas.create', compact('descricoes'));
+        $tipo = $request->get('tipo');
+        if($tipo === 'fixo') {
+            $descricoes = TipoSaida::where('is_fixo','=','s')->get();
+            return view('saidas-fixas.create', compact('descricoes'));
+        }
+        elseif($tipo === 'variavel') {
+            $descricoes = TipoSaida::where('is_fixo','=','n')->get();
+            return view('saidas.create', compact('descricoes'));
+        }
     }
 
     /**
@@ -56,12 +79,19 @@ class SaidasController extends Controller
     public function store(SaidaRequest $request)
     {
         $requestData = $request->all();
-
+        // dd($requestData["tipo"]);
         Saida::create($requestData);
         if(auth()->user()->type_user == 2){
-            return redirect()->route('saidas.create')->with('success', 'Saida cadastrada!');
+            return redirect()->to(route('saidas.create'). "?tipo=".$requestData["tipo"])->with('tipo',$requestData["tipo"])->with('success', 'Saida cadastrada!');
         }
-        return redirect()->route('saidas.index')->with('success', 'Saida cadastrada!');
+        elseif(auth()->user()->type_user == 1) {
+            if($requestData["tipo"] === "variavel") {
+                return redirect()->to(route('saidas.index'). "?tipo=".$requestData["tipo"])->with('tipo',$requestData["tipo"])->with('success', 'Saida cadastrada!');
+            }
+            elseif($requestData["tipo"] === "fixo") {
+                return redirect()->to(route('saidas.index'). "?tipo=".$requestData["tipo"])->with('tipo',$requestData["tipo"])->with('success', 'Saida cadastrada!');
+            }
+        }
     }
 
     /**
@@ -88,7 +118,7 @@ class SaidasController extends Controller
     public function edit($id)
     {
         $saida = Saida::findOrFail($id);
-
+        dd($saida);
         return view('saidas.edit', compact('saida'));
     }
 
@@ -102,17 +132,12 @@ class SaidasController extends Controller
      */
     public function update(SaidaRequest $request, $id)
     {
-        $this->validate($request, [
-			'valor' => 'required|string|max:100',
-			'user_id' => 'required',
-			'id_descricao' => 'required'
-		]);
         $requestData = $request->all();
 
         $saida = Saida::findOrFail($id);
         $saida->update($requestData);
 
-        return redirect()->route('saidas.index')->with('success', 'Saida atualizada!');
+        return redirect()->route('saidas.index')->with('tipo',$request->tipo)->with('success', 'Saida atualizada!');
     }
 
     /**

@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('titulo_site','Editar saída')
+@section('titulo_site','Edita estoque')
 @section('title')
-    <h1>Editar Saida</h1>
+    <h1>Editar estoque</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{url('/saidas')}}">Listagem de Saida</a>
+        <a href="{{url('/estoque-produtos')}}">Listagem de estoque</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/saidas/' . $saida->id. '/edit')}}">Editar Saida</a>
+        <a href="{{url('/estoque-produtos/' . $estoque->id. '/edit')}}">Editar estoque</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Editar Saida #{{ $saida->id }}</div>
+                    <div class="card-header">Editar estoque #{{ $estoque->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/saidas') . '?tipo=variavel'  }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
+                        <a href="{{ url('/estoque-produtos') }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />
                         <br />
 
@@ -32,11 +32,11 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/saidas/' . $saida->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/estoque-produtos/' . $estoque->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
-                            @include ('saidas.form', ['formMode' => 'edit'])
+                            @include ('estoque-produtos.form', ['formMode' => 'edit'])
 
                         </form>
 

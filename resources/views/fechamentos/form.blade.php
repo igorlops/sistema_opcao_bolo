@@ -1,18 +1,5 @@
 <div class="inputs-fechamento d-flex flex-row">
     <div class="d-flex justify-content-center flex-column w-50">
-        {{-- <div class="form-group row {{ $errors->has('vendas_extras') ? 'has-error' : ''}}">
-            <label for="vendas_extras" class="col-form-label col-sm-3 required">{{ 'Vendas Extras/Embalagens (B)' }}</label>
-            <div class="col-sm-8">
-                <input class="form-control money" onchange="vendasABC()" name="vendas_extras" disabled readonly type="text" id="vendas_extras"
-                @if ($formMode === 'edit')
-                    value="{{ isset($fechamento->vendas_extras) ? $fechamento->vendas_extras : ''}}"
-                @else
-                    value="{{isset($vendas_extras) ? numero_iso_para_br($vendas_extras) : '0'}}"
-                @endif
-                >
-                {!! $errors->first('vendas_extras', '<p class="help-block">:message</p>') !!}
-            </div>
-        </div> --}}
         <div class="form-group row {{ $errors->has('desconto') ? 'has-error' : ''}}">
             <label for="desconto" class="col-form-label col-sm-3 required">{{ 'Desconto (C)' }}</label>
             <div class="col-sm-8">

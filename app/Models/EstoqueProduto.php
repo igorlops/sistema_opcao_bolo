@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Saida extends Model
+class EstoqueProduto extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'saidas';
+    protected $table = 'estoque_produtos';
 
     /**
     * The database primary key value.
@@ -25,15 +25,15 @@ class Saida extends Model
      *
      * @var array
      */
-    protected $fillable = ['valor', 'observacao', 'user_id', 'id_descricao','tipo'];
+    protected $fillable = ['tipo_estoque', 'quantidade', 'id_produto','user_id'];
 
+    public function produto()
+    {
+        return $this->belongsTo('App\Models\Produto', 'id_produto');
+    }
     public function user()
     {
-        return $this->belongsTo('App\Models\User','user_id');
-    }
-    public function tipo_saida()
-    {
-        return $this->belongsTo('App\Models\TipoSaida','id_descricao');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
 }

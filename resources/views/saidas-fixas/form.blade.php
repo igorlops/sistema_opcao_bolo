@@ -24,7 +24,8 @@
         {!! $errors->first('id_descricao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<input type="hidden" name="tipo" value="variavel">
+<input type="hidden" name="tipo" value="fixo">
+
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Atualizar' : 'Criar' }}">
 </div>

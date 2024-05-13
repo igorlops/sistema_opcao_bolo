@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('titulo_site','Editar saída')
+@section('titulo_site','Nova saída')
 @section('title')
-    <h1>Editar Saida</h1>
+    <h1>Novo Saida</h1>
 @endsection
 
 @section('breadcrumb')
@@ -9,7 +9,7 @@
         <a href="{{url('/saidas')}}">Listagem de Saida</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{url('/saidas/' . $saida->id. '/edit')}}">Editar Saida</a>
+        <a href="{{url('/saidas/create')}}">Novo Saida</a>
     </li>
 @endsection
 @section('content')
@@ -18,9 +18,9 @@
 
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Editar Saida #{{ $saida->id }}</div>
+                    <div class="card-header">Novo Saida</div>
                     <div class="card-body">
-                        <a href="{{ url('/saidas') . '?tipo=variavel'  }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
+                        <a href="{{ url('/saidas') . '?tipo=fixo' }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />
                         <br />
 
@@ -32,11 +32,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/saidas/' . $saida->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ url('/saidas') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('saidas.form', ['formMode' => 'edit'])
+                            @include ('saidas-fixas.form', ['formMode' => 'create'])
 
                         </form>
 

@@ -26,7 +26,8 @@ class SaidaRequest extends FormRequest
         return [
 			'valor' => 'required|string|max:100',
 			'user_id' => 'required',
-			'id_descricao' => 'required'
+			'id_descricao' => 'required',
+            'tipo' => 'required'
         ];
     }
 

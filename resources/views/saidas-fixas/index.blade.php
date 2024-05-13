@@ -16,7 +16,7 @@
                 <div class="card bg-dark">
                     <div class="card-header">Saidas</div>
                     <div class="card-body">
-                        <a href="{{ url('/saidas/create') . '?tipo=variavel' }}" class="btn btn-success btn-sm" title="Novo Saida">
+                        <a href="{{ url('/saidas/create') . '?tipo=fixo' }}" class="btn btn-success btn-sm" title="Novo Saida">
                             <i class="bi bi-plus-lg"></i> Novo
                         </a>
 
@@ -37,7 +37,7 @@
                              <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Valor</th><th>Usuário</th><th>Observação</th><th>Tipo de saída</th><th>Ações</th>
+                                        <th>#</th><th>Valor</th><th>Usuário</th><th>Observação</th><th>Tipo de saída</th><th>Data</th><th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +48,7 @@
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>{{ $item->tipo_saida->descricao }}</td>
+                                        <td>{{ data_iso_para_br($item->created_at) }}</td>
                                         <td>
                                             <a href="{{ url('/saidas/' . $item->id) }}" title="Ver Saida"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detalhes</button></a>
                                             <a href="{{ url('/saidas/' . $item->id . '/edit') }}" title="Editar Saida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>

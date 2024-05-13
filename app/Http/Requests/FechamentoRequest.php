@@ -37,7 +37,6 @@ class FechamentoRequest extends FormRequest
     public function validationData(){
         $campos = $this->all();
 
-        // $campos['vendas_extras'] = numero_br_para_iso($campos['vendas_extras']);
         $campos['desconto'] = numero_br_para_iso($campos['desconto']);
         $campos['vendas_abc'] = numero_br_para_iso($campos['vendas_abc']);
         $campos['total_caixa'] = numero_br_para_iso($campos['total_caixa']);

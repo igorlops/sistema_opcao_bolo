@@ -141,7 +141,6 @@
             let totalCaixa = document.getElementById('total_caixa');
             let vendasAbc = document.getElementById('vendas_abc');
             let desconto = document.getElementById('desconto');
-            let vendasExtras = document.getElementById('vendas_extras');
             let total_caixa = document.getElementById('total_caixa')
             let cartao_cred = document.getElementById('cartao_cred')
             let cartao_deb = document.getElementById('cartao_deb')
@@ -183,15 +182,11 @@
 
                 let valorInicial = totaldinheiro+totalcartao_cred+totalcartao_deb+totalpix;
                 let totalDesconto = formatarValorParaCalculo(desconto.value);
-                let totalExtras = formatarValorParaCalculo(vendasExtras.value);
                 if(isNaN(totalDesconto)) {
                     totalDesconto = 0;
                 }
-                if(isNaN(totalExtras)) {
-                    totalExtras = 0;
-                }
 
-                totalABC = (valorInicial + totalExtras) - totalDesconto;
+                totalABC = (valorInicial) - totalDesconto;
 
                 // Formata o resultado para o formato de dinheiro
                 let totalVendas = formatarValorParaDinheiro(totalABC);

@@ -105,19 +105,43 @@
                 <a href="#" class="nav-link">
                     <i class="bi bi-box-arrow-down nav-icon"></i>
                     <p>
-                        Saídas
+                        Saídas variáveis
                         <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('saidas.create')}}" class="nav-link">
+                        <a href="{{route('saidas.create') . '?tipo=variavel'}}" class="nav-link">
                             <i class="bi bi-plus-square nav-icon"></i>
                             <p>Novo saída</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('saidas.index')}}" class="nav-link">
+                        <a href="{{route('saidas.index') . '?tipo=variavel'}}" class="nav-link">
+                            <i class="bi bi-card-list nav-icon"></i>
+                            <p>Lista de saídas</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-box-arrow-down nav-icon"></i>
+                    <p>
+                        Saídas fixas
+                        <i class="right bi bi-caret-left-fill"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('saidas.create') . '?tipo=fixo'}}" class="nav-link">
+                            <i class="bi bi-plus-square nav-icon"></i>
+                            <p>Novo saída</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('saidas.index'). '?tipo=fixo'}}" class="nav-link">
                             <i class="bi bi-card-list nav-icon"></i>
                             <p>Lista de saídas</p>
                         </a>
@@ -165,7 +189,7 @@
                 <a href="#" class="nav-link">
                     <i class="bi bi-boxes"></i>
                     <p>
-                        Controle de estoque
+                        Controle de produção
                         <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
@@ -173,18 +197,41 @@
                     <li class="nav-item">
                         <a href="{{route('estoques.create')}}" class="nav-link">
                             <i class="bi bi-box-arrow-in-left nav-icon"></i>
-                            Cadastro estoque
+                            Cadastro produção
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('estoques.index')}}" class="nav-link">
+                            <i class="bi bi-ui-checks"></i>
+                            Relatório de produção
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-boxes"></i>
+                    <p>
+                        Controle de estoque
+                        <i class="right bi bi-caret-left-fill"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('estoque-produtos.create')}}" class="nav-link">
+                            <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                            Cadastro de estoque
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('estoque-produtos.index')}}" class="nav-link">
                             <i class="bi bi-ui-checks"></i>
                             Relatório de estoque
                         </a>
                     </li>
                 </ul>
             </li>
-            
+
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
@@ -258,9 +305,9 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('saidas.create')}}" class="nav-link">
+                        <a href="{{route('saidas.create'). '?tipo=variavel'}}" class="nav-link">
                             <i class="bi bi-plus-square nav-icon"></i>
-                            <p>Novo lançamento</p>
+                            <p>Lançar saída</p>
                         </a>
                     </li>
                 </ul>
@@ -289,7 +336,7 @@
                 <a href="#" class="nav-link">
                     <i class="bi bi-boxes"></i>
                     <p>
-                        Controle de estoque
+                        Controle de produção
                         <i class="right bi bi-caret-left-fill"></i>
                     </p>
                 </a>
@@ -297,13 +344,13 @@
                     <li class="nav-item">
                         <a href="{{route('estoques.create')}}" class="nav-link">
                             <i class="bi bi-box-arrow-in-left nav-icon"></i>
-                            Cadastro estoque
+                            Cadastro produção
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('estoques.index')}}" class="nav-link">
                             <i class="bi bi-ui-checks"></i>
-                            Relatório de estoque
+                            Relatório de produção
                         </a>
                     </li>
                 </ul>
@@ -413,17 +460,37 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-box-arrow-down nav-icon"></i>
-                                Saídas
+                                Saídas variáveis
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
-                                    <a href="{{route('saidas.create')}}" class="dropdown-item">
+                                    <a href="{{route('saidas.create'). '?tipo=variavel'}}" class="dropdown-item">
                                         <i class="bi bi-plus-square nav-icon"></i>
                                         Novo saída
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{route('saidas.index')}}" class="dropdown-item">
+                                    <a href="{{route('saidas.index'). '?tipo=variavel'}}" class="dropdown-item">
+                                        <i class="bi bi-card-list nav-icon"></i>
+                                        Lista de saídas
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-box-arrow-down nav-icon"></i>
+                                Saídas fixas
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('saidas.create') . '?tipo=fixo'}}" class="dropdown-item">
+                                        <i class="bi bi-plus-square nav-icon"></i>
+                                        Novo saída
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('saidas.index'). '?tipo=fixo'}}" class="dropdown-item">
                                         <i class="bi bi-card-list nav-icon"></i>
                                         Lista de saídas
                                     </a>
@@ -462,17 +529,37 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-boxes"></i>
-                                Controle de estoque
+                                Controle de produção
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{{route('estoques.create')}}" class="dropdown-item">
                                         <i class="bi bi-box-arrow-in-left nav-icon"></i>
-                                        Cadastro estoque
+                                        Cadastro produção
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('estoques.index')}}" class="dropdown-item">
+                                        <i class="bi bi-ui-checks"></i>
+                                        Relatório de produção
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-boxes"></i>
+                                Controle de estoque
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{route('estoque-produtos.create')}}" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-in-left nav-icon"></i>
+                                        Cadastro estoque
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('estoque-produtos.index')}}" class="dropdown-item">
                                         <i class="bi bi-ui-checks"></i>
                                         Relatório de estoque
                                     </a>
@@ -540,9 +627,9 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
-                                    <a href="{{route('saidas.create')}}" class="dropdown-item">
+                                    <a href="{{route('saidas.create'). '?tipo=variavel'}}" class="dropdown-item">
                                         <i class="bi bi-plus-square nav-icon"></i>
-                                        Novo saída
+                                        Lançar saída
                                     </a>
                                 </li>
                             </ul>
@@ -551,19 +638,19 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-boxes"></i>
-                                Controle de estoque
+                                Controle de produção
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{{route('estoques.create')}}" class="dropdown-item">
                                         <i class="bi bi-box-arrow-in-left nav-icon"></i>
-                                        Cadastro estoque
+                                        Cadastro produção
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('estoques.index')}}" class="dropdown-item">
                                         <i class="bi bi-ui-checks"></i>
-                                        Relatório de estoque
+                                        Relatório de produção
                                     </a>
                                 </li>
                             </ul>

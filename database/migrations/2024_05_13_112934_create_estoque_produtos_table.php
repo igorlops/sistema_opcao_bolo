@@ -2,9 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-class CreateSaidasTable extends Migration
+class CreateEstoqueProdutosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +12,15 @@ class CreateSaidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('saidas', function (Blueprint $table) {
+        Schema::create('estoque_produtos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->decimal('valor',10,2);
-            $table->string('tipo');
-            $table->text('observacao')->nullable();
+            $table->string('tipo_estoque');
+            $table->decimal('quantidade',10,2);
+            $table->bigInteger('id_produto')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('id_descricao')->unsigned();
+            $table->foreign('id_produto')->references('id')->on('produtos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_descricao')->references('id')->on('tipo_saidas')->onDelete('cascade')->onUpdate('cascade');
             });
     }
 
@@ -33,6 +31,6 @@ class CreateSaidasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('saidas');
+        Schema::drop('estoque_produtos');
     }
 }

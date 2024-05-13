@@ -4,10 +4,7 @@
             "name": "tipo_estoque",
             "type": "select",
             "options": {
-                "p": "Produção",
-                "d": "Desperdício",
-                "s": "Sobra",
-                "v": "Venda"
+                "c": "Compra"
             }
         },
         {

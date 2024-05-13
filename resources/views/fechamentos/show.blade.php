@@ -51,10 +51,6 @@
                                     <tr>
                                         <th>ID</th><td>{{ $fechamento->id }}</td>
                                     </tr>
-                                    {{-- <tr>
-                                        <th> Vendas Extras </th>
-                                        <td> {{ numero_iso_para_br($fechamento->vendas_extras) }} </td>
-                                    </tr> --}}
                                     <tr>
                                         <th> Desconto </th>
                                         <td> {{ numero_iso_para_br($fechamento->desconto) }} </td>

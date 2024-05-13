@@ -15,7 +15,6 @@ class CreateFechamentosTable extends Migration
         Schema::create('fechamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            // $table->decimal('vendas_extras');
             $table->decimal('desconto',10,2);
             $table->decimal('vendas_abc',10,2);
             $table->decimal('total_caixa',10,2);

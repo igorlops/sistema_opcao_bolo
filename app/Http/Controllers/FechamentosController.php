@@ -27,8 +27,7 @@ class FechamentosController extends Controller
         $perPage = 10;
 
         if (!empty($keyword)) {
-            $fechamentosPendentes = Fechamento::where('vendas_extras', 'LIKE', "%$keyword%")
-                ->orWhere('desconto', 'LIKE', "%$keyword%")
+            $fechamentosPendentes = Fechamento::where('desconto', 'LIKE', "%$keyword%")
                 ->orWhere('vendas_abc', 'LIKE', "%$keyword%")
                 ->orWhere('total_caixa', 'LIKE', "%$keyword%")
                 ->orWhere('env', 'LIKE', "%$keyword%")
@@ -38,8 +37,7 @@ class FechamentosController extends Controller
                 ->where('ativo','=','n')
                 ->latest()->paginate($perPage,['*'],'pagina_pendente');
 
-            $fechamentosAprovados = Fechamento::where('vendas_extras', 'LIKE', "%$keyword%")
-                ->orWhere('desconto', 'LIKE', "%$keyword%")
+            $fechamentosAprovados = Fechamento::where('desconto', 'LIKE', "%$keyword%")
                 ->orWhere('vendas_abc', 'LIKE', "%$keyword%")
                 ->orWhere('total_caixa', 'LIKE', "%$keyword%")
                 ->orWhere('env', 'LIKE', "%$keyword%")

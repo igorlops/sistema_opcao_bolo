@@ -42,7 +42,6 @@
                                         <th>Cartão de débito</th>
                                         <th>Pix</th>
                                         <th>Desconto</th>
-                                        <th>Vendas Extras</th>
                                         <th>Vendas ABC</th>
                                         <th>Observação</th>
                                         <th>Ações</th>
@@ -57,7 +56,6 @@
                                         <td>{{ numero_iso_para_br($item->cartao_cred) }}</td>
                                         <td>{{ numero_iso_para_br($item->cartao_deb) }}</td>
                                         <td>{{ numero_iso_para_br($item->pix) }}</td>
-                                        <td>{{ numero_iso_para_br($item->vendas_extras) }}</td>
                                         <td>{{ numero_iso_para_br($item->desconto) }}</td>
                                         <td>{{ numero_iso_para_br($item->vendas_abc) }}</td>
                                         <td>{{ $item->observacao }}</td>
@@ -119,7 +117,6 @@
                                         <th>Cartão de débito</th>
                                         <th>Pix</th>
                                         <th>Desconto</th>
-                                        <th>Vendas Extras</th>
                                         <th>Vendas ABC</th>
                                         <th>Observação</th>
                                         <th>Ações</th>
@@ -134,9 +131,7 @@
                                         <td>{{ numero_iso_para_br($item->cartao_cred) }}</td>
                                         <td>{{ numero_iso_para_br($item->cartao_deb) }}</td>
                                         <td>{{ numero_iso_para_br($item->pix) }}</td>
-                                        <td>{{ numero_iso_para_br($item->vendas_extras) }}</td>
                                         <td>{{ numero_iso_para_br($item->desconto) }}</td>
-                                        <td>{{ numero_iso_para_br($item->vendas_abc) }}</td>
                                         <td>{{ numero_iso_para_br($item->vendas_abc) }}</td>
                                         <td>{{ $item->observacao }}</td>
                                         <td>

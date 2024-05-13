@@ -21,7 +21,7 @@
                     <div class="card-header">Saida {{ $saida->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/saidas') . '?tipo=variavel'  }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
+                        <a href="{{ url('/saidas') . '?tipo=fixo' }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <a href="{{ url('/saidas/' . $saida->id . '/edit') }}" title="Editar Saida"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Atualizar</button></a>
 
                         <form method="POST" action="{{ url('saidas' . '/' . $saida->id) }}" accept-charset="UTF-8" style="display:inline">

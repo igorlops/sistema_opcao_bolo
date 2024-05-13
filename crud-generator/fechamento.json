@@ -1,10 +1,6 @@
 {
     "fields": [
         {
-            "name": "vendas_extras",
-            "type": "double"
-        },
-        {
             "name": "desconto",
             "type": "double"
         },

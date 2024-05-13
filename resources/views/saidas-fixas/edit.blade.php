@@ -20,7 +20,7 @@
                 <div class="card bg-dark">
                     <div class="card-header">Editar Saida #{{ $saida->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/saidas') . '?tipo=variavel'  }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
+                        <a href="{{ url('/saidas') . '?tipo=fixo' }}" title="Back">@if(auth()->user()->type_user == "1") <button class="btn btn-warning btn-sm"><i class="bi bi-arrow-left"></i> Voltar</button>@endif</a>
                         <br />
                         <br />
 
@@ -36,7 +36,7 @@
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
-                            @include ('saidas.form', ['formMode' => 'edit'])
+                            @include ('saidas-fixas.form', ['formMode' => 'edit'])
 
                         </form>
 
