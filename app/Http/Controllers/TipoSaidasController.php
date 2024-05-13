@@ -22,6 +22,8 @@ class TipoSaidasController extends Controller
 
         if (!empty($keyword)) {
             $tiposaidas = TipoSaida::where('descricao', 'LIKE', "%$keyword%")
+                ->orWhere('is_fixo','=',"%$keyword%")
+                ->orWhere('created_at','=',"%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $tiposaidas = TipoSaida::latest()->paginate($perPage);
@@ -50,7 +52,8 @@ class TipoSaidasController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'descricao' => 'required|string'
+			'descricao' => 'required|string',
+			'is_fixo' => 'required|string'
 		]);
         $requestData = $request->all();
 
@@ -105,7 +108,7 @@ class TipoSaidasController extends Controller
         $tiposaida = TipoSaida::findOrFail($id);
         $tiposaida->update($requestData);
 
-        return redirect()->route('tipo-saidas.index')->with('success', 'TipoSaida updated!');
+        return redirect()->route('tipo-saidas.index')->with('success', 'TipoSaida atualizado!');
     }
 
     /**
@@ -119,6 +122,6 @@ class TipoSaidasController extends Controller
     {
         TipoSaida::destroy($id);
 
-        return redirect()->route('tipo-saidas.index')->with('success', 'TipoSaida deleted!');
+        return redirect()->route('tipo-saidas.index')->with('success', 'TipoSaida deletado!');
     }
 }

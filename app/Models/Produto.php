@@ -25,7 +25,7 @@ class Produto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome', 'is_bolo_extra','type_product'];
+    protected $fillable = ['nome', 'is_bolo_extra','tipo_produto'];
 
     public function relacaoProdutos($data_ini,$data_fin, $user_id = null) {
 

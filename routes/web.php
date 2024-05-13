@@ -30,12 +30,11 @@ Route::middleware('auth')->group(function(){
     Route::resource('produtos', App\Http\Controllers\ProdutosController::class);
     Route::resource('entradas', App\Http\Controllers\EntradasController::class);
     Route::resource('saidas', App\Http\Controllers\SaidasController::class);
-    Route::resource('fechamentos', App\Http\Controllers\FechamentosController::class);
     Route::get('relatorio-financeiro', [App\Http\Controllers\RelatorioFinanceiro::class, 'index'])->name('relatorios.index');
     Route::resource('fechamentos', App\Http\Controllers\FechamentosController::class);
     Route::resource('produtos-fechamentos', App\Http\Controllers\ProdutosFechamentosController::class);
     Route::resource('estoques', App\Http\Controllers\EstoquesController::class);
-
+    Route::post('/aprova-fechamento/{id}', [App\Http\Controllers\FechamentosController::class,'aprovaFechamento'])->name('aprovaFechamento');
     Route::get('/excel-exports-resume', [App\Http\Controllers\RelatorioFinanceiro::class,'exportExcelResume'])->name('exportExcel');
     Route::get('/excel-exports-lucros', [App\Http\Controllers\RelatorioFinanceiro::class,'exportExcelLucro'])->name('exportExcelLucro');
 

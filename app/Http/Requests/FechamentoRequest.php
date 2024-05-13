@@ -29,13 +29,15 @@ class FechamentoRequest extends FormRequest
 			'env' => 'required|numeric',
 			'cartao_cred' => 'required|numeric',
 			'cartao_deb' => 'required|numeric',
-			'pix' => 'required|numeric'
+			'pix' => 'required|numeric',
+            'ativo' => 'required'
         ];
     }
 
     public function validationData(){
         $campos = $this->all();
-        $campos['vendas_extras'] = numero_br_para_iso($campos['vendas_extras']);
+
+        // $campos['vendas_extras'] = numero_br_para_iso($campos['vendas_extras']);
         $campos['desconto'] = numero_br_para_iso($campos['desconto']);
         $campos['vendas_abc'] = numero_br_para_iso($campos['vendas_abc']);
         $campos['total_caixa'] = numero_br_para_iso($campos['total_caixa']);
@@ -44,7 +46,6 @@ class FechamentoRequest extends FormRequest
         $campos['cartao_deb'] = numero_br_para_iso($campos['cartao_deb']);
         $campos['pix'] = numero_br_para_iso($campos['pix']);
         $campos['diferenca'] = numero_br_para_iso($campos['diferenca']);
-
         $this->replace($campos);
 
         // dd($campos);

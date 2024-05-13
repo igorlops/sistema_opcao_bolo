@@ -15,7 +15,7 @@ class CreateFechamentosTable extends Migration
         Schema::create('fechamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->decimal('vendas_extras');
+            // $table->decimal('vendas_extras');
             $table->decimal('desconto',10,2);
             $table->decimal('vendas_abc',10,2);
             $table->decimal('total_caixa',10,2);
@@ -25,7 +25,7 @@ class CreateFechamentosTable extends Migration
             $table->decimal('pix',10,2);
             $table->decimal('diferenca',10,2);
             $table->text('observacao')->nullable();
-            $table->string('ativo',2);
+            $table->string('ativo',3);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->on('users')->references('id');
             });

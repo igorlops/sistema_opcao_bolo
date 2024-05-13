@@ -25,7 +25,7 @@ class TipoSaida extends Model
      *
      * @var array
      */
-    protected $fillable = ['descricao'];
+    protected $fillable = ['descricao','is_fixo'];
 
-    
+
 }

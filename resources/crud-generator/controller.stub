@@ -100,7 +100,7 @@ class DummyClass extends Controller
         ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
         ${{crudNameSingular}}->update($requestData);
 
-        return redirect()->route('{{routeGroup}}{{viewName}}')->with('success', '{{modelName}} updated!');
+        return redirect()->route('{{routeGroup}}{{viewName}}')->with('success', '{{modelName}} atualizado!');
     }
 
     /**
@@ -114,6 +114,6 @@ class DummyClass extends Controller
     {
         {{modelName}}::destroy($id);
 
-        return redirect()->route('{{routeGroup}}{{viewName}}')->with('success', '{{modelName}} deleted!');
+        return redirect()->route('{{routeGroup}}{{viewName}}')->with('success', '{{modelName}} deletado!');
     }
 }

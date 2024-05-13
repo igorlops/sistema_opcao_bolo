@@ -17,15 +17,15 @@
     </div>
 </div>
 
-<div class="form-group row {{ $errors->has('type_product') ? 'has-error' : ''}}">
-    <label for="type_product" class="col-form-label col-sm-2 required">{{ 'Qual o tipo de produto?' }}</label>
+<div class="form-group row {{ $errors->has('tipo_produto') ? 'has-error' : ''}}">
+    <label for="tipo_produto" class="col-form-label col-sm-2 required">{{ 'Qual o tipo de produto?' }}</label>
     <div class="col-sm-10">
-        <select name="type_product" class="form-control" id="type_product" required>
+        <select name="tipo_produto" class="form-control" id="tipo_produto" required>
             @foreach (json_decode('{"p":"Produção","e":"Estoque"}', true) as $optionKey => $optionValue)
-                <option value="{{ $optionKey }}" {{ (isset($produto->type_product) && $produto->type_product == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+                <option value="{{ $optionKey }}" {{ (isset($produto->tipo_produto) && $produto->tipo_produto == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
             @endforeach
         </select>
-        {!! $errors->first('type_product', '<p class="help-block">:message</p>') !!}
+        {!! $errors->first('tipo_produto', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

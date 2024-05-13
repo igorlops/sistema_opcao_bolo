@@ -27,7 +27,7 @@ class FechamentosController extends Controller
         $perPage = 10;
 
         if (!empty($keyword)) {
-            $fechamentos = Fechamento::where('vendas_extras', 'LIKE', "%$keyword%")
+            $fechamentosPendentes = Fechamento::where('vendas_extras', 'LIKE', "%$keyword%")
                 ->orWhere('desconto', 'LIKE', "%$keyword%")
                 ->orWhere('vendas_abc', 'LIKE', "%$keyword%")
                 ->orWhere('total_caixa', 'LIKE', "%$keyword%")
@@ -35,12 +35,24 @@ class FechamentosController extends Controller
                 ->orWhere('cartao_cred', 'LIKE', "%$keyword%")
                 ->orWhere('cartao_deb', 'LIKE', "%$keyword%")
                 ->orWhere('pix', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $fechamentos = Fechamento::latest()->paginate($perPage);
-        }
+                ->where('ativo','=','n')
+                ->latest()->paginate($perPage,['*'],'pagina_pendente');
 
-        return view('fechamentos.index', compact('fechamentos'));
+            $fechamentosAprovados = Fechamento::where('vendas_extras', 'LIKE', "%$keyword%")
+                ->orWhere('desconto', 'LIKE', "%$keyword%")
+                ->orWhere('vendas_abc', 'LIKE', "%$keyword%")
+                ->orWhere('total_caixa', 'LIKE', "%$keyword%")
+                ->orWhere('env', 'LIKE', "%$keyword%")
+                ->orWhere('cartao_cred', 'LIKE', "%$keyword%")
+                ->orWhere('cartao_deb', 'LIKE', "%$keyword%")
+                ->orWhere('pix', 'LIKE', "%$keyword%")
+                ->where('ativo','=','s')
+                ->latest()->paginate($perPage,['*'],'pagina_aprovado');
+        } else {
+            $fechamentosPendentes = Fechamento::where('ativo','=','n')->latest()->paginate($perPage,['*'],'pagina_pendente');
+            $fechamentosAprovados = Fechamento::where('ativo','=','s')->latest()->paginate($perPage,['*'],'pagina_aprovado');
+        }
+        return view('fechamentos.index', compact('fechamentosPendentes','fechamentosAprovados'));
     }
 
     /**
@@ -60,7 +72,6 @@ class FechamentosController extends Controller
         $pix = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',1)->where('user_id','=',auth()->user()->id)->sum('valor');
         $dinheiro = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',2)->where('user_id','=',auth()->user()->id)->sum('valor');
         $venda_total = $cartaoCredito+$cartaoDebito+$pix+$dinheiro;
-        // dd($venda_total);
         return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro','venda_total'));
     }
 
@@ -79,8 +90,8 @@ class FechamentosController extends Controller
         $data_atual = $data->format('Y-m-d');
         $produtos = new Produto();
         $produtos = $produtos->relacaoProdutos($data_atual,$data_atual, auth()->user()->id);
+        // dd($requestData);
         $fechamento = Fechamento::create($requestData);
-        // dd($produtos);
 
         foreach ($produtos as $produto) {
             ProdutosFechamento::create([
@@ -108,8 +119,8 @@ class FechamentosController extends Controller
         }
 
         // dd($fechamento->id,
-        //     $comprovanteCredito,
-        // 'cred');
+        //     $comprovanteDebito,
+        // 'deb');
         if(!empty($comprovanteCredito)) {
             ImagensFechamento::create([
                 'id_fechamento' => $fechamento->id,
@@ -117,6 +128,7 @@ class FechamentosController extends Controller
                 'imagem' => $comprovanteCredito
             ]);
         }
+        // dd($comprovanteDebito);
         if(!empty($comprovanteDebito)) {
             ImagensFechamento::create([
                 'id_fechamento' => $fechamento->id,
@@ -128,7 +140,6 @@ class FechamentosController extends Controller
         if(auth()->user()->type_user == 2){
             return redirect()->route('fechamentos.create')->with('success', 'Fechamento adicionado!');
         }
-
         return redirect()->route('fechamentos.index')->with('success', 'Fechamento adicionado!');
     }
 
@@ -191,5 +202,13 @@ class FechamentosController extends Controller
         Fechamento::destroy($id);
 
         return redirect()->route('fechamentos')->with('success', 'Fechamento deletado!');
+    }
+
+
+    public function aprovaFechamento($id, Request $request) {
+        $fechamento = Fechamento::findOrFail($id);
+        $fechamento->ativo = $request->ativo;
+        $fechamento->save();
+        return redirect()->route('fechamentos.index')->with('success','Fechamento aprovado!');
     }
 }

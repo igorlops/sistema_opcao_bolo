@@ -105,7 +105,7 @@ class TipoPagamentosController extends Controller
         $tipopagamento = TipoPagamento::findOrFail($id);
         $tipopagamento->update($requestData);
 
-        return redirect()->route('tipo-pagamentos.index')->with('success', 'TipoPagamento updated!');
+        return redirect()->route('tipo-pagamentos.index')->with('success', 'TipoPagamento atualizado!');
     }
 
     /**
@@ -119,6 +119,6 @@ class TipoPagamentosController extends Controller
     {
         TipoPagamento::destroy($id);
 
-        return redirect()->route('tipo-pagamentos.index')->with('success', 'TipoPagamento deleted!');
+        return redirect()->route('tipo-pagamentos.index')->with('success', 'TipoPagamento deletado!');
     }
 }

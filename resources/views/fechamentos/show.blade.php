@@ -15,7 +15,6 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-md-12">
                 <div class="card bg-dark">
                     <div class="card-header">Fechamento {{ $fechamento->id }}</div>
@@ -39,23 +38,23 @@
                             <div class="alert alert-danger">
                                 Fechamento pendente
                             </div>
-                            <form method="POST" action="{{ url('/fechamentos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                            <form method="POST" action="{{ url('/aprova-fechamento'. '/' . $fechamento->id) }}" accept-charset="UTF-8" style="display:inline">
                                 {{ method_field('POST') }}
                                 {{ csrf_field() }}
                                 <input type="hidden" name="ativo" value="s">
-                                <button type="submit" class="btn btn-success btn-sm" title="Aprovar Fechamento" onclick="return confirm(&quot;Confirma aprovação?&quot;)"><i class="bi bi-check"></i></button>
+                                <button type="submit" class="btn btn-success btn-sm" title="Aprovar Fechamento" onclick="return confirm(&quot;Confirma aprovação?&quot;)">Aprovar fechamento</button>
                             </form>
                         @endif
-                        <div class="table-responsive">
+                        <div class="table-responsive my-3">
                              <table class="table table-dark table-hover">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $fechamento->id }}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th> Vendas Extras </th>
                                         <td> {{ numero_iso_para_br($fechamento->vendas_extras) }} </td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <th> Desconto </th>
                                         <td> {{ numero_iso_para_br($fechamento->desconto) }} </td>
@@ -83,6 +82,14 @@
                                     <tr>
                                         <th> Total caixa</th>
                                         <td> {{ numero_iso_para_br($fechamento->total_caixa) }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Observação</th>
+                                        <td> {{ $fechamento->observacao }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Data</th>
+                                        <td> {{ data_iso_para_br($fechamento->created_at) }} </td>
                                     </tr>
                                 </tbody>
                             </table>

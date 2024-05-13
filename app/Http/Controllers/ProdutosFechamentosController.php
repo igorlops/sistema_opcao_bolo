@@ -116,7 +116,7 @@ class ProdutosFechamentosController extends Controller
         $produtosfechamento = ProdutosFechamento::findOrFail($id);
         $produtosfechamento->update($requestData);
 
-        return redirect()->route('produtos-fechamentos')->with('success', 'ProdutosFechamento updated!');
+        return redirect()->route('produtos-fechamentos')->with('success', 'ProdutosFechamento atualizado!');
     }
 
     /**
@@ -130,6 +130,6 @@ class ProdutosFechamentosController extends Controller
     {
         ProdutosFechamento::destroy($id);
 
-        return redirect()->route('produtos-fechamentos')->with('success', 'ProdutosFechamento deleted!');
+        return redirect()->route('produtos-fechamentos')->with('success', 'ProdutosFechamento deletado!');
     }
 }
