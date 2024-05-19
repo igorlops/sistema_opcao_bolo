@@ -55,7 +55,7 @@ class Entrada extends Model
             $entradas = $this->select('users.name','users.perc_cred','users.perc_deb');
             $params = [$data_ini . " 00:00:00", $data_fin . " 23:59:59", $user_id];
 
-            $results = $entradas
+            $entradas = $entradas
                 ->selectRaw($dinheiro, $params)
                 ->selectRaw($pix, $params)
                 ->selectRaw($cartao_cred, $params)
@@ -67,7 +67,47 @@ class Entrada extends Model
                 ->groupBy('users.name', 'users.perc_cred', 'users.perc_deb')
                 ->get();
 
-                // dd($results);
+                foreach ($entradas as $entrada) {
+
+                    $taxa_cred = $entrada->getAttribute('perc_cred');
+                    $taxa_deb = $entrada->getAttribute('perc_deb');
+                    $valor_cred = $entrada->getAttribute('cartao_cred');
+                    $valor_deb = $entrada->getAttribute('cartao_deb');
+                    $dinheiro = $entrada->getAttribute('dinheiro');
+                    $valor_pix = $entrada->getAttribute('pix');
+                    $saidas_variaveis = $entrada->getAttribute('saidasVariaveis');
+                    $saidas_fixas = $entrada->getAttribute('saidasFixas');
+
+                    $new_cred = $valor_cred - (($taxa_cred / 100) * $valor_cred);
+                    $new_deb = $valor_deb - (($taxa_deb / 100)* $valor_deb);
+
+                    $valor_pix = number_format(floatval(str_replace(',', '.', $valor_pix)), 2, '.', '');
+                    $dinheiro = number_format(floatval(str_replace(',', '.', $dinheiro)), 2, '.', '');
+                    $new_cred = number_format(floatval(str_replace(',', '.', $new_cred)), 2, '.', '');
+                    $new_deb = number_format(floatval(str_replace(',', '.', $new_deb)), 2, '.', '');
+                    $total_definitivo = (($dinheiro) + ($valor_pix) + ($new_cred) + ($new_deb));
+
+                    $saidas_total = $saidas_variaveis + $saidas_fixas;
+
+                    $previsao_lucro = $total_definitivo - $saidas_total;
+
+                    // Reatribuindo os valores
+
+                    $entrada->setAttribute('total',$total_definitivo);
+                    $entrada->setAttribute('lucro',$previsao_lucro);
+                    $entrada->setAttribute('perc_cred',$taxa_cred);
+                    $entrada->setAttribute('perc_deb',$taxa_deb);
+                    $entrada->setAttribute('cartao_cred',$new_cred);
+                    $entrada->setAttribute('cartao_deb',$new_deb);
+                    $entrada->setAttribute('pix',$valor_pix);
+                    $entrada->setAttribute('saidasVariaveis',$saidas_variaveis);
+                    $entrada->setAttribute('saidasFixas',$saidas_fixas);
+                    $entrada->setAttribute('saidasTotal',$saidas_total);
+
+                    $results[] = $entrada->getAttributes();
+                    // dd($results);
+                }
+                return $results;
 
         } else {
             foreach ($users as $user) {
