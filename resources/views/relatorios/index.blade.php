@@ -244,7 +244,7 @@
                                         <th>Taxa débito</th>
                                         <th>Cartão de crédito</th>
                                         <th>Cartão de débito</th>
-                                        <th>Total</th>
+                                        <th>Total Receita</th>
                                     </tr>
                                 </thead>
                                <tbody>
@@ -292,7 +292,7 @@
                 <div class="card bg-dark">
                     <div class="card-body">
                         <h5 class="text-center">
-                            Estimativa de lucro
+                            Estimativa de lucro real
                         </h5>
                         {{-- @dd($item) --}}
                         <div class="table-responsive">
@@ -301,7 +301,8 @@
                                     <tr>
                                         <th>Usuário</th>
                                         <th>Receita total</th>
-                                        <th>Saídas</th>
+                                        <th>Saídas variáveis</th>
+                                        <th>Saídas fixas</th>
                                         <th>Lucro</th>
                                     </tr>
                                 </thead>
@@ -311,7 +312,8 @@
                                     <tr>
                                         <td>{{$item["name"]}}</td>
                                         <td>{{numero_iso_para_br($item["total"])}}</td>
-                                        <td>{{numero_iso_para_br($item["saidas"])}}</td>
+                                        <td>{{numero_iso_para_br($item["saidasVariaveis"])}}</td>
+                                        <td>{{numero_iso_para_br($item["saidasFixas"])}}</td>
                                         <td>{{numero_iso_para_br($item["lucro"])}}</td>
                                     </tr>
                                    @empty
@@ -332,6 +334,69 @@
                             <input type="hidden" name="data_ini_export"  value="{{request('data_inicial')}}">
                             <input type="hidden" name="data_fin_export"  value="{{request('data_final')}}">
                             <button type="submit" class="btn btn-success"><i class="bi bi-download"></i> Exportar relatório</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <h5 class="text-center">
+                            Estimativa de lucro do sistema
+                        </h5>
+                        {{-- @dd($item) --}}
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Dinheiro</th>
+                                        <th>Pix</th>
+                                        <th>Cartão de crédito</th>
+                                        <th>Cartão de débito</th>
+                                        <th>Saídas variáveis</th>
+                                        <th>Saídas fixas</th>
+                                        <th>Total Saídas</th>
+                                        <th>Total Receita</th>
+                                        <th>Lucro</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                               @forelse($entrada as $item)
+                                    <tr>
+                                        <td>{{$item["name"]}}</td>
+                                        <td>{{numero_iso_para_br($item["dinheiro"])}}</td>
+                                        <td>{{numero_iso_para_br($item["pix"])}}</td>
+                                        <td>{{numero_iso_para_br($item["cartao_cred"])}}</td>
+                                        <td>{{numero_iso_para_br($item["cartao_deb"])}}</td>
+                                        <td>{{numero_iso_para_br($item["saidasVariaveis"])}}</td>
+                                        <td>{{numero_iso_para_br($item["saidasFixas"])}}</td>
+                                        <td>{{numero_iso_para_br($item["saidasTotal"])}}</td>
+                                        <td>{{numero_iso_para_br($item["total"])}}</td>
+                                        <td>{{numero_iso_para_br($item["lucro"])}}</td>
+                                    </tr>
+                                   @empty
+                                   <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Não houve fechamentos de caixa</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                               @endforelse
+                               </tbody>
+                           </table>
+                           {{-- <div class="pagination-wrapper"> {!! $produtos->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <form action="{{route('exportExcelSistema')}}" method="GET">
+                            <input type="hidden" name="data_ini_export_sistema"  value="{{request('data_inicial')}}">
+                            <input type="hidden" name="data_fin_export_sistema"  value="{{request('data_final')}}">
+                            <button type="submit" class="btn btn-success" ><i class="bi bi-download"></i> Exportar relatório</button>
                         </form>
                     </div>
                 </div>

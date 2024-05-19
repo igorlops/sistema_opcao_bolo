@@ -29,7 +29,7 @@
                                 @if (auth()->user()->type_user == 1)
                                     <select class="form-select" name="user_selected">
                                             <option value="" @unless (request()->has('user_selected')) selected @endunless>
-                                                Selecione o usuário
+                                                Selecione a loja
                                             </option>
                                             @foreach ($users as $user)
                                                 <option value="{{$user->id}}"
@@ -57,10 +57,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Produto</th>
-                                        <th>estoque</th>
-                                        <th>Desperdício</th>
-                                        <th>Vendas</th>
-                                        <th>Sobra</th>
+                                        <th>Estoque</th>
+                                        <th>Qtde cadastro de estoque</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,38 +66,13 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $produto->nome }}</td>
-                                        <td>{{ $produto->producao ? numero_iso_para_br($produto->producao) : '0,00'}}</td>
-                                        <td>{{ $produto->desperdicio ? numero_iso_para_br($produto->desperdicio) : '0,00'}}</td>
-                                        {{-- @dd( ) --}}
-                                        <td>{{ $produto->vendaMetade || $produto->vendaCompleta ?
-                                                numero_iso_para_br(
-                                                    ($produto->vendaMetade ? ($produto->vendaMetade / 2) : 0) + ($produto->vendaCompleta ? $produto->vendaCompleta : 0)
-                                                )
-                                                :
-                                            '0,00'}}
-                                        </td>
-                                        <td>{{ numero_iso_para_br(
-                                            $produto->totalproducao - (
-                                                (
-                                                    (
-                                                        ($produto->totalvendacompleta ? $produto->totalvendacompleta : 0)
-                                                    ) + (
-                                                        $produto->totalvendametade ? ($produto->totalvendametade / 2) : 0
-                                                    )
-                                                )
-                                                    + $produto->totaldesperdicio
-                                                    )
-                                                )
-                                            }}
-                                        </td>
+                                        <td>{{ numero_iso_para_br($produto->soma_produtos)}}</td>
+                                        <td>{{ numero_iso_para_br($produto->contador_produtos)}}</td>
                                     </tr>
-                                    @empty
-
+                                @empty
                                     <tr>
                                         <td></td>
-                                        <td></td>
                                         <td>Não há dados cadastrados</td>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -122,17 +95,19 @@
                                        <th>#</th>
                                        <th>Usuário</th>
                                        <th>Produto</th>
+                                       <th>Loja</th>
                                        <th>Tipo</th>
                                        <th>Quantidade</th>
                                        <th>Data</th>
                                    </tr>
                                </thead>
                                <tbody>
-                               @forelse($estoque-produtos as $estoque)
+                               @forelse($estoques as $estoque)
                                    <tr>
                                        <td>{{ $loop->iteration }}</td>
                                        <td>{{ $estoque->user->name }}</td>
                                        <td>{{ $estoque->produto->nome}}</td>
+                                       <td>{{ $estoque->user_produto->name}}</td>
                                        <td>{{ $estoque->tipo_estoque === "c" ? "Compra" : ""}}</td>
                                        <td>{{ numero_iso_para_br($estoque->quantidade) }}</td>
                                        <td>{{ data_iso_para_br($estoque->created_at) }}</td>
@@ -151,7 +126,7 @@
                                </tbody>
                             </table>
                             <div class="pagination-wrapper">
-                                {!! $estoque-produtos->appends([
+                                {!! $estoques->appends([
                                     'user_selected' => Request::get('user_selected'),
                                     'data_ini' => Request::get('data_ini'),
                                     'data_fin' => Request::get('data_fin')

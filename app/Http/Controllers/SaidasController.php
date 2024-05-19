@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportSaida;
+use App\Exports\ExportSaidaFixo;
+use App\Exports\ExportSaidaVariaveis;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
@@ -152,5 +155,13 @@ class SaidasController extends Controller
         Saida::destroy($id);
 
         return redirect()->route('saidas.index')->with('success', 'Saida deletada!');
+    }
+    public function exportSaidasVariavel(Request $request)
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download( new ExportSaidaVariaveis, 'saidas_variaveis.xlsx');
+    }
+    public function exportSaidasFixa(Request $request)
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download( new ExportSaidaFixo, 'saidas_fixas.xlsx');
     }
 }

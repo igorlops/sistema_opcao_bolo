@@ -77,6 +77,11 @@
                         </div>
 
                     </div>
+                    <div class="card-footer">
+                        <form action="{{route('exportSaidasFixa')}}" method="GET">
+                            <button type="submit" class="btn btn-success"><i class="bi bi-download"></i> Exportar saídas</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

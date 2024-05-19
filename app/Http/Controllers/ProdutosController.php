@@ -31,8 +31,8 @@ class ProdutosController extends Controller
                 ->where('tipo_produto','=','e')
                 ->latest()->paginate($perPage);
         } else {
-            $produtos = Produto::where('tipo_produto','=','p')->latest()->paginate($perPage);
-            $produtos_estoque = Produto::where('tipo_produto','=','e')->latest()->paginate($perPage);
+            $produtos = Produto::where('tipo_produto','=','p')->latest()->paginate($perPage,['*'],'page_producao');
+            $produtos_estoque = Produto::where('tipo_produto','=','e')->latest()->paginate($perPage,['*'],'page_estoque');
         }
 
         return view('produtos.index', compact('produtos','produtos_estoque'));

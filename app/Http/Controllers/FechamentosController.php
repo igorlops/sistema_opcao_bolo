@@ -63,12 +63,12 @@ class FechamentosController extends Controller
         $data = new \DateTime();
         $data_atual = $data->format('Y-m-d');
         $produtos = new Produto();
-        $produtos = $produtos->relacaoProdutos($data_atual,$data_atual, auth()->user()->id);
+        $produtos = $produtos->relacaoProdutosProducao($data_atual,$data_atual, auth()->user()->id);
 
-        $cartaoCredito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento', '=', 3)->where('user_id','=',auth()->user()->id)->sum('valor');
-        $cartaoDebito = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',4)->where('user_id','=',auth()->user()->id)->sum('valor');
-        $pix = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',1)->where('user_id','=',auth()->user()->id)->sum('valor');
-        $dinheiro = Entrada::where('created_at','LIKE',"%$data_atual%")->where('id_tipo_pagamento','=',2)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $cartaoCredito = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento', '=', CARTAO_CRED)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $cartaoDebito = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento','=',CARTAO_DEB)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $pix = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento','=',PIX)->where('user_id','=',auth()->user()->id)->sum('valor');
+        $dinheiro = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento','=',DINHEIRO)->where('user_id','=',auth()->user()->id)->sum('valor');
         $venda_total = $cartaoCredito+$cartaoDebito+$pix+$dinheiro;
         return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro','venda_total'));
     }
@@ -87,7 +87,7 @@ class FechamentosController extends Controller
         $data = new \DateTime();
         $data_atual = $data->format('Y-m-d');
         $produtos = new Produto();
-        $produtos = $produtos->relacaoProdutos($data_atual,$data_atual, auth()->user()->id);
+        $produtos = $produtos->relacaoProdutosProducao($data_atual,$data_atual, auth()->user()->id);
         // dd($requestData);
         $fechamento = Fechamento::create($requestData);
 

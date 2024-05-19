@@ -19,9 +19,11 @@ class CreateEstoqueProdutosTable extends Migration
             $table->decimal('quantidade',10,2);
             $table->bigInteger('id_produto')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('id_user_estoque')->unsigned();
             $table->foreign('id_produto')->references('id')->on('produtos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            });
+            $table->foreign('id_user_estoque')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**

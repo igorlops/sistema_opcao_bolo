@@ -38,5 +38,9 @@ Route::middleware('auth')->group(function(){
     Route::post('/aprova-fechamento/{id}', [App\Http\Controllers\FechamentosController::class,'aprovaFechamento'])->name('aprovaFechamento');
     Route::get('/excel-exports-resume', [App\Http\Controllers\RelatorioFinanceiro::class,'exportExcelResume'])->name('exportExcel');
     Route::get('/excel-exports-lucros', [App\Http\Controllers\RelatorioFinanceiro::class,'exportExcelLucro'])->name('exportExcelLucro');
+    Route::get('/excel-lucro-sistema', [App\Http\Controllers\RelatorioFinanceiro::class,'exportExcelSistema'])->name('exportExcelSistema');
+    Route::get('/excel-exports-saidas-variavel', [App\Http\Controllers\SaidasController::class,'exportSaidasVariavel'])->name('exportSaidasVariavel');
+    Route::get('/excel-exports-saidas-fixa', [App\Http\Controllers\SaidasController::class,'exportSaidasFixa'])->name('exportSaidasFixa');
+    Route::get('/excel-exports-entradas', [App\Http\Controllers\EntradasController::class,'exportEntradas'])->name('exportEntradas');
 
 });

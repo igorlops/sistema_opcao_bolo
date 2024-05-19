@@ -25,7 +25,7 @@ class EstoqueProduto extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipo_estoque', 'quantidade', 'id_produto','user_id'];
+    protected $fillable = ['tipo_estoque', 'quantidade', 'id_produto','user_id','id_user_estoque'];
 
     public function produto()
     {
@@ -34,6 +34,10 @@ class EstoqueProduto extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
+    }
+    public function user_produto()
+    {
+        return $this->belongsTo('App\Models\User', 'id_user_estoque');
     }
 
 }

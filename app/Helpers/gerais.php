@@ -50,3 +50,19 @@ if(!function_exists('numero_br_para_iso')){
         return \str_replace(['.',','],['','.'],$valor);
     }
 }
+
+if (!defined('PIX')) {
+    define('PIX', 1);
+}
+
+if (!defined('DINHEIRO')) {
+    define('DINHEIRO', 2);
+}
+
+if (!defined('CARTAO_CRED')) {
+    define('CARTAO_CRED', 3);
+}
+
+if (!defined('CARTAO_DEB')) {
+    define('CARTAO_DEB', 4);
+}

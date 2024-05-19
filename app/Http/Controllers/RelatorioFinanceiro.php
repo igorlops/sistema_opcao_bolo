@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\RelatoryDataExport;
 use App\Exports\RelatoryDataExportLucro;
+use App\Exports\RelatoryDataExportSistema;
 use App\Models\Entrada;
 use App\Models\Fechamento;
 use App\Models\Produto;
@@ -87,9 +88,9 @@ class RelatorioFinanceiro extends Controller
 
         $fechamento = new Fechamento();
         $fechamento = $fechamento->relatorioFinanceiro($data_inicial,$data_final,$user_id);
+        $entrada = new Entrada();
+        $entrada = $entrada->estimativaLucro($data_inicial,$data_final,$user_id);
 
-
-        // dd($fechamento);
         return view('relatorios.index', [
             'users'=>$users,
             'pagamentos' => $formaPagamentos,
@@ -98,7 +99,8 @@ class RelatorioFinanceiro extends Controller
             'filtro_pagamentos' => $pagamentos,
             'filtro_saida' => $saida,
             'filtro_vendas' => $produto_vendidos,
-            'fechamento' => $fechamento
+            'fechamento' => $fechamento,
+            'entrada' => $entrada
         ]);
 
     }
@@ -115,6 +117,12 @@ class RelatorioFinanceiro extends Controller
         $data_inicial = data_br_to_iso($request->input('data_ini_export'));
         $data_final = data_br_to_iso($request->input('data_fin_export'));
         return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExportLucro($data_inicial,$data_final), 'lucro_mensal.xlsx');
+    }
+    public function exportExcelSistema(Request $request)
+    {
+        $data_inicial = data_br_to_iso($request->input('data_ini_export_sistema'));
+        $data_final = data_br_to_iso($request->input('data_fin_export_sistema'));
+        return \Maatwebsite\Excel\Facades\Excel::download( new RelatoryDataExportSistema($data_inicial,$data_final), 'lucro_valores_sistemas.xlsx');
     }
 
 }

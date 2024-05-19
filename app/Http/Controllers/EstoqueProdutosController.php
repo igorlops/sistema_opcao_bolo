@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\EstoqueProduto;
 use App\Models\Produto;
-use App\Models\Estoque;
-use App\Models\Entrada;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,27 +20,17 @@ class EstoqueProdutosController extends Controller
 
         if(!$request->filled('data_ini') || !$request->filled('data_fin')){
             return redirect()->route('estoque-produtos.index',[
-                'data_ini'=>(new \DateTime())
+                'data_ini'=>(new \DateTime('first day of this month'))
                 ->format('d/m/Y'),
-                'data_fin'=>(new \DateTime())
+                'data_fin'=>(new \DateTime('last day of this month'))
                 ->format('d/m/Y')
             ]);
         }
-        $user_id = $request->get('user_selected');
         $perPage = 10;
         $users = User::all();
         $produtos = new Produto();
-        $estoques = Estoque::query();
-        if (auth()->user()->type_user == 2 || !empty($user_id)){
-            $estoques = $estoques
-                ->where('user_id','=',auth()->user()->type_user == 2 ? auth()->user()->id : $user_id)
-                ->whereBetween('created_at',[data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59'])->latest()->paginate($perPage);
-            $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59', auth()->user()->type_user == 2 ? auth()->user()->id : $user_id);
-        }
-        else if(auth()->user()->type_user == 1){
-            $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59');
-            $estoques = $estoques->whereBetween('created_at',[data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59'])->latest()->paginate($perPage);
-        }
+        $produtos = $produtos->relacaoProdutosEstoque(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59');
+        $estoques = EstoqueProduto::whereBetween('created_at',[data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59'])->latest()->paginate($perPage);
         // dd("Entrei aqui");
         return view('estoque-produtos.index',compact('produtos','users','estoques'));
     }
@@ -54,8 +42,9 @@ class EstoqueProdutosController extends Controller
      */
     public function create()
     {
-        $produtos = Produto::all();
-        return view('estoque-produtos.create',compact('produtos'));
+        $produtos = Produto::where('tipo_produto','=','e')->get();
+        $users = User::all();
+        return view('estoque-produtos.create',compact('produtos','users'));
     }
 
     /**
@@ -70,11 +59,12 @@ class EstoqueProdutosController extends Controller
         $this->validate($request, [
 			'tipo_estoque' => 'required',
 			'quantidade' => 'required',
-			'id_produto' => 'required'
+			'id_produto' => 'required',
+            'id_user_estoque' => 'required'
 		]);
         $requestData = $request->all();
 
-        Estoque::create($requestData);
+        EstoqueProduto::create($requestData);
 
         if(auth()->user()->type_user == 1){
             return redirect()->route('estoque-produtos.index')->with('success', 'Estoque adicionado!');
@@ -91,7 +81,7 @@ class EstoqueProdutosController extends Controller
      */
     public function show($id)
     {
-        $estoque = Estoque::findOrFail($id);
+        $estoque = EstoqueProduto::findOrFail($id);
 
         return view('estoque-produtos.show', compact('estoque'));
     }
@@ -105,9 +95,10 @@ class EstoqueProdutosController extends Controller
      */
     public function edit($id)
     {
-        $estoque = Estoque::findOrFail($id);
-
-        return view('estoque-produtos.edit', compact('estoque'));
+        $estoque = EstoqueProduto::findOrFail($id);
+        $produtos = Produto::where('tipo_produto','=','e')->get();
+        $users = User::all();
+        return view('estoque-produtos.edit', compact('estoque','produtos','users'));
     }
 
     /**
@@ -123,11 +114,12 @@ class EstoqueProdutosController extends Controller
         $this->validate($request, [
 			'tipo_estoque' => 'required',
 			'quantidade' => 'required',
-			'id_produto' => 'required'
+			'id_produto' => 'required',
+            'id_user_estoque' => 'required'
 		]);
         $requestData = $request->all();
 
-        $estoque = Estoque::findOrFail($id);
+        $estoque = EstoqueProduto::findOrFail($id);
         $estoque->update($requestData);
 
         return redirect()->route('estoques')->with('success', 'Estoque atualizado!');
@@ -142,7 +134,7 @@ class EstoqueProdutosController extends Controller
      */
     public function destroy($id)
     {
-        Estoque::destroy($id);
+        EstoqueProduto::destroy($id);
 
         return redirect()->route('estoques')->with('success', 'Estoque deletado!');
     }

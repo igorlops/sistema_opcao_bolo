@@ -36,11 +36,15 @@ class EstoquesController extends Controller
         if (auth()->user()->type_user == 2 || !empty($user_id)){
             $estoques = $estoques
                 ->where('user_id','=',auth()->user()->type_user == 2 ? auth()->user()->id : $user_id)
-                ->whereBetween('created_at',[data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59'])->latest()->paginate($perPage);
-            $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59', auth()->user()->type_user == 2 ? auth()->user()->id : $user_id);
+                ->whereBetween('created_at',[data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59'])
+                ->latest()
+                ->paginate($perPage);
+
+            $produtos = $produtos
+                ->relacaoProdutosProducao(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59', auth()->user()->type_user == 2 ? auth()->user()->id : $user_id);
         }
         else if(auth()->user()->type_user == 1){
-            $produtos = $produtos->relacaoProdutos(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59');
+            $produtos = $produtos->relacaoProdutosProducao(data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59');
             $estoques = $estoques->whereBetween('created_at',[data_br_to_iso($request->data_ini). ' 00:00:00',data_br_to_iso($request->data_fin).' 23:59:59'])->latest()->paginate($perPage);
         }
         // dd("Entrei aqui");
@@ -54,7 +58,7 @@ class EstoquesController extends Controller
      */
     public function create()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::where('tipo_produto','=','p')->get();
         return view('estoques.create',compact('produtos'));
     }
 

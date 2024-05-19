@@ -26,6 +26,18 @@
         {!! $errors->first('id_produto', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group row {{ $errors->has('id_user_estoque') ? 'has-error' : ''}}">
+    <label for="id_user_estoque" class="col-form-label col-sm-2 required">{{ 'Loja' }}</label>
+    <div class="col-sm-10">
+        <select name="id_user_estoque" class="form-control" id="id_user_estoque" required>
+            <option value="" selected>Selecione a loja</option>
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('id_user_estoque', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
 <input class="form-control" name="user_id" type="hidden" id="user_id" value="{{auth()->user()->id}}" >
 
 <div class="form-group">

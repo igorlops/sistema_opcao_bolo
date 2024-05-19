@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportEntrada;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
@@ -45,7 +46,7 @@ class EntradasController extends Controller
     public function create()
     {
         $tipo_pagamentos = TipoPagamento::all();
-        $produtos = Produto::all();
+        $produtos = Produto::where('tipo_produto','=','p')->get();
         return view('entradas.create',compact('tipo_pagamentos','produtos'));
     }
 
@@ -125,5 +126,9 @@ class EntradasController extends Controller
         Entrada::destroy($id);
 
         return redirect()->route('entradas.index')->with('success', 'Entrada deletada!');
+    }
+    public function exportEntradas(Request $request)
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download( new ExportEntrada, 'entradas.xlsx');
     }
 }

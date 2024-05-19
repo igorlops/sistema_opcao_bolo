@@ -2,12 +2,13 @@
 
 namespace App\Exports;
 
+use App\Models\Entrada;
 use Illuminate\Support\Collection;
 use App\Models\Fechamento;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class RelatoryDataExportLucro implements FromCollection,WithHeadings
+class RelatoryDataExportSistema implements FromCollection,WithHeadings
 {
     protected $data_ini;
     protected $data_fin;
@@ -19,16 +20,21 @@ class RelatoryDataExportLucro implements FromCollection,WithHeadings
     }
     public function collection(): Collection
     {
-        return collect(Fechamento::exportLucroRelatory($this->data_ini, $this->data_fin));
+        return collect(Entrada::exportSistemaRelatory($this->data_ini, $this->data_fin));
     }
 
     public function headings() : array
     {
         return [
-            'Receita',
-            'Saídas Variáveis',
-            'Saídas Fixas',
-            'Lucro final'
+            'Dinheiro',
+            'Pix',
+            'Cartão de crédito',
+            'Cartão de débito',
+            'Saídas variáveis',
+            'Saídas fixas',
+            'Total Saídas',
+            'Total Receita',
+            'Lucro'
         ];
     }
 }
