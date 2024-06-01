@@ -63,12 +63,60 @@ class FechamentosController extends Controller
         $data = new \DateTime();
         $data_atual = $data->format('Y-m-d');
         $produtos = new Produto();
-        $produtos = $produtos->relacaoProdutosProducao($data_atual,$data_atual, auth()->user()->id);
+        $fechamento_recente = Fechamento::whereDate('created_at', $data_atual)->exists();
 
-        $cartaoCredito = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento', '=', CARTAO_CRED)->where('user_id','=',auth()->user()->id)->sum('valor');
-        $cartaoDebito = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento','=',CARTAO_DEB)->where('user_id','=',auth()->user()->id)->sum('valor');
-        $pix = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento','=',PIX)->where('user_id','=',auth()->user()->id)->sum('valor');
-        $dinheiro = Entrada::whereBetween('created_at',["$data_atual 00:00:00", "$data_atual 23:59:59"])->where('id_tipo_pagamento','=',DINHEIRO)->where('user_id','=',auth()->user()->id)->sum('valor');
+        // Se houve fechamento, pegue as entradas desde o último fechamento até agora
+        if ($fechamento_recente) {
+
+            $ultimo_fechamento = Fechamento::whereDate('created_at', $data_atual)->latest()->first();
+            $ultima_data_fechamento = $ultimo_fechamento->created_at;
+            $produtos = $produtos->relacaoProdutosProducao($ultima_data_fechamento,now()->timezone('America/Sao_Paulo'), auth()->user()->id);
+
+            $cartaoCredito = Entrada::whereBetween('created_at',[$ultima_data_fechamento, now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento', '=', CARTAO_CRED)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+            $cartaoDebito = Entrada::whereBetween('created_at',[$ultima_data_fechamento, now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento','=',CARTAO_DEB)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+            $pix = Entrada::whereBetween('created_at',[$ultima_data_fechamento, now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento','=',PIX)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+            $dinheiro = Entrada::whereBetween('created_at',[$ultima_data_fechamento, now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento','=',DINHEIRO)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+        } else {
+            $produtos = $produtos->relacaoProdutosProducao("$data_atual 00:00:00",now()->timezone('America/Sao_Paulo'), auth()->user()->id);
+
+            $cartaoCredito = Entrada::whereBetween('created_at',["$data_atual 00:00:00", now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento', '=', CARTAO_CRED)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+            $cartaoDebito = Entrada::whereBetween('created_at',["$data_atual 00:00:00", now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento','=',CARTAO_DEB)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+            $pix = Entrada::whereBetween('created_at',["$data_atual 00:00:00", now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento','=',PIX)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+            $dinheiro = Entrada::whereBetween('created_at',["$data_atual 00:00:00", now()->timezone('America/Sao_Paulo')])
+            ->where('id_tipo_pagamento','=',DINHEIRO)
+            ->where('user_id','=',auth()->user()->id)
+            ->sum('valor');
+
+        }
+
         $venda_total = $cartaoCredito+$cartaoDebito+$pix+$dinheiro;
         return view('fechamentos.create', compact('produtos','cartaoCredito','cartaoDebito','pix','dinheiro','venda_total'));
     }
